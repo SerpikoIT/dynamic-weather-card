@@ -83,12 +83,12 @@ export const TIME_THRESHOLDS = {
 // Default configuration
 export const DEFAULT_CONFIG = {
   showFeelsLike: true,
-  showWind: true,
-  showWindGust: true,
-  showWindDirection: true,
-  showHumidity: true,
+  showWind: false,
+  showWindGust: false,
+  showWindDirection: false,
+  showHumidity: false,
   showMinTemp: true,
   showForecast: false,
-  showSunriseSunset: true,
+  showSunriseSunset: false,
   height: null
 };

@@ -159,16 +159,16 @@ export class AnimatedWeatherCard extends LitElement {
     return {
       condition: attrs.condition || 'sunny',
       temperature: attrs.temperature || this.getState(entityId) || 20,
-      apparentTemperature: attrs.apparent_temperature || attrs.temperature || null,
-      humidity: attrs.humidity || 50,
-      windSpeed: attrs.wind_speed || 0,
+      apparentTemperature: attrs.apparent_temperature || null,
+      humidity: attrs.humidity != null ? attrs.humidity : null,
+      windSpeed: attrs.wind_speed != null ? attrs.wind_speed : null,
       windGust: attrs.wind_gust_speed || attrs.wind_gust || null,
-      windBearing: attrs.wind_bearing || null,
+      windBearing: attrs.wind_bearing != null ? attrs.wind_bearing : null,
       windDirection: attrs.wind_direction || null,
-      pressure: attrs.pressure || 1013,
-      forecast: attrs.forecast || [],
+      pressure: attrs.pressure || null,
+      forecast: attrs.forecast || attrs.forecast_hourly || [],
       friendlyName: attrs.friendly_name || 'Weather',
-      templow: attrs.templow || (attrs.forecast && attrs.forecast[0] ? attrs.forecast[0].templow : null)
+      templow: attrs.templow || (attrs.forecast && attrs.forecast[0] ? attrs.forecast[0].templow : null) || (attrs.forecast_hourly && attrs.forecast_hourly[0] ? attrs.forecast_hourly[0].native_templow : null)
     };
   }
 
@@ -278,7 +278,7 @@ export class AnimatedWeatherCard extends LitElement {
           <div class="forecast-item">
             <div class="forecast-time">${formatForecastTime(item.datetime)}</div>
             <div class="forecast-icon">${getConditionEmoji(item.condition)}</div>
-            <div class="forecast-temp">${Math.round(item.temperature || item.temp || 0)}°</div>
+            <div class="forecast-temp">${Math.round(item.temperature || item.temp || item.native_temperature || 0)}°</div>
           </div>
         `)}
       </div>
@@ -313,9 +313,10 @@ export class AnimatedWeatherCard extends LitElement {
           <div class="canvas-container"></div>
           <div class="content">
             <div class="header">
-              <div class="location">${this.getConditionName(weather.condition)}</div>
+              <div class="location">${this.config.name || weather.friendlyName}</div>
             </div>
             <div>
+              <div class="condition">${this.getConditionName(weather.condition)}</div>
               <div class="temperature">${Math.round(weather.temperature)}°</div>
               ${this.config.showMinTemp && weather.templow ? html`
                 <div class="temp-range">
@@ -328,7 +329,7 @@ export class AnimatedWeatherCard extends LitElement {
             </div>
             <div class="details">
               <div class="info-grid">
-                ${this.config.showHumidity ? html`
+                ${this.config.showHumidity && weather.humidity != null ? html`
                   <div class="info-item">
                     <span class="info-icon">${getIcon('humidity-icon.svg')}</span>
                     <span>${weather.humidity} %</span>
@@ -340,8 +341,8 @@ export class AnimatedWeatherCard extends LitElement {
                     <span>${formatTime(sunData.sunrise)}</span>
                   </div>
                 ` : ''}
-                ${this.config.showWind ? html`
-                  ${this.config.showWindDirection && weather.windBearing !== null ? html`
+                ${this.config.showWind && weather.windSpeed != null ? html`
+                  ${this.config.showWindDirection && weather.windBearing != null ? html`
                     <div class="info-item">
                       <span class="info-icon">${getIcon(getWindDirectionIcon(weather.windBearing))}</span>
                       <span>${weather.windSpeed} м/с${this.config.showWindGust && weather.windGust ? ` / ${weather.windGust} м/с` : ''}</span>
@@ -395,9 +396,5 @@ export class AnimatedWeatherCard extends LitElement {
 
   getCardSize() {
     return 1;
-  }
-
-  static getConfigElement() {
-    return document.createElement('dynamic-weather-card-editor');
   }
 }

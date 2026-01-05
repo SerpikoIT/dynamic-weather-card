@@ -1,11 +1,10 @@
 import { AnimatedWeatherCard } from './components/card.js';
-import { AnimatedWeatherCardEditor } from './components/editor.js';
 import { VERSION } from './constants.js';
 
 // Register custom elements
 try {
-  customElements.define('dynamic-weather-card-editor', AnimatedWeatherCardEditor);
   customElements.define('dynamic-weather-card', AnimatedWeatherCard);
+  console.log('✅ Registered dynamic-weather-card');
 
   // Log version info
   console.log(

@@ -1,6 +1,6 @@
 # Dynamic Weather Card
 
-[English](README.en.md) | **Русский**
+**English** | [Русский](README.ru.md)
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/hacs/integration)
 [![GitHub release](https://img.shields.io/github/release/teuchezh/dynamic-weather-card.svg)](https://github.com/teuchezh/dynamic-weather-card/releases)
@@ -9,50 +9,50 @@
 [![HACS Validation](https://github.com/teuchezh/dynamic-weather-card/workflows/HACS%20Validation/badge.svg)](https://github.com/teuchezh/dynamic-weather-card/actions/workflows/hacs-validate.yml)
 [![License](https://img.shields.io/github/license/teuchezh/dynamic-weather-card.svg)](LICENSE)
 
-Динамическая карточка погоды для Home Assistant с реалистичными анимациями.  
+Dynamic weather card for Home Assistant with realistic animations.
 ![demo](/docs/demo.gif)
 
-## Возможности
+## Features
 
-- 🎨 Анимированные эффекты погоды на Canvas
-- ☀️ Динамический фон в зависимости от времени суток (восход, день, закат, ночь)
-- 🌧️ Реалистичные анимации: дождь, снег, град, туман, гроза
-- 📊 Почасовой прогноз на сегодня
-- 🌍 Автоматическое определение языка из настроек Home Assistant (русский/английский)
-- ⚙️ Полная настройка отображаемых элементов
-- 📱 Адаптивный дизайн
+- 🎨 Animated weather effects on Canvas
+- ☀️ Dynamic background based on time of day (sunrise, day, sunset, night)
+- 🌧️ Realistic animations: rain, snow, hail, fog, thunderstorm
+- 📊 Hourly forecast for today
+- 🌍 Automatic language detection from Home Assistant settings (Russian/English)
+- ⚙️ Full customization of displayed elements
+- 📱 Responsive design
 
-## Структура проекта
+## Project Structure
 
 ```
 dynamic-weather-card/
-├── src/                     # Исходный код
-│   ├── animations/          # Модули анимаций погоды
-│   ├── components/          # UI компоненты
-│   ├── constants.js         # Константы и маппинги
-│   ├── utils.js            # Утилиты
-│   └── index.js            # Точка входа
-├── dynamic-weather-card.js  # Скомпилированный файл для HACS
-├── test.html               # Страница для локального тестирования
-├── hacs.json               # Конфигурация HACS
-├── info.md                 # Описание для HACS Store
+├── src/                     # Source code
+│   ├── animations/          # Weather animation modules
+│   ├── components/          # UI components
+│   ├── constants.js         # Constants and mappings
+│   ├── utils.js            # Utilities
+│   └── index.js            # Entry point
+├── dynamic-weather-card.js  # Compiled file for HACS
+├── test.html               # Page for local testing
+├── hacs.json               # HACS configuration
+├── info.md                 # Description for HACS Store
 └── package.json
 ```
 
-## Установка
+## Installation
 
-### HACS (рекомендуется)
+### HACS (recommended)
 
-1. Откройте HACS в Home Assistant
-2. Перейдите в "Frontend"
-3. Нажмите кнопку "+" внизу справа
-4. Найдите "Dynamic Weather Card"
-5. Установите карточку
+1. Open HACS in Home Assistant
+2. Go to "Frontend"
+3. Click the "+" button in the bottom right
+4. Search for "Dynamic Weather Card"
+5. Install the card
 
-### Вручную
+### Manual
 
-1. Скопируйте файл `dynamic-weather-card.js` из папки `dist/` в директорию `config/www/`
-2. Добавьте ссылку на ресурс в Home Assistant:
+1. Copy the `dynamic-weather-card.js` file from the `dist/` folder to the `config/www/` directory
+2. Add resource link in Home Assistant:
 
 ```yaml
 resources:
@@ -60,26 +60,26 @@ resources:
     type: module
 ```
 
-## Конфигурация
+## Configuration
 
-> **Примечание:** Карточка настраивается только через YAML. Визуальный редактор не поддерживается.
+> **Note:** The card is configured only through YAML. Visual editor is not supported.
 
-### Базовая конфигурация
+### Basic configuration
 
 ```yaml
 type: custom:dynamic-weather-card
 entity: weather.home
-# Язык определяется автоматически из настроек Home Assistant
+# Language is automatically detected from Home Assistant settings
 ```
 
-### Полная конфигурация
+### Full configuration
 
 ```yaml
 type: custom:dynamic-weather-card
 entity: weather.home
-name: Моя погода
+name: My Weather
 height: 250
-language: auto  # 'auto' (по умолчанию), 'ru' или 'en'
+language: auto  # 'auto' (default), 'ru' or 'en'
 show_feels_like: true
 show_min_temp: true
 show_humidity: true
@@ -88,106 +88,106 @@ show_wind_direction: true
 show_wind_gust: true
 show_forecast: true
 show_sunrise_sunset: true
-sunrise_entity: sensor.yandex_pogoda_next_sunrise  # Опционально
-sunset_entity: sensor.yandex_pogoda_next_sunset    # Опционально
+sunrise_entity: sensor.yandex_pogoda_next_sunrise  # Optional
+sunset_entity: sensor.yandex_pogoda_next_sunset    # Optional
 ```
 
-### Пример с фиксированным языком
+### Example with fixed language
 
 ```yaml
 type: custom:dynamic-weather-card
 entity: weather.home
 name: My Weather
-language: en  # Принудительно использовать английский
+language: en  # Force English
 ```
 
-### Пример для Яндекс.Погоды
+### Example for Yandex Weather
 
 ```yaml
 type: custom:dynamic-weather-card
 entity: weather.yandex_pogoda
-name: Краснодар
+name: Krasnodar
 show_sunrise_sunset: true
 sunrise_entity: sensor.yandex_pogoda_next_sunrise
 sunset_entity: sensor.yandex_pogoda_next_sunset
 ```
 
-> **Примечание:** Яндекс.Погода не предоставляет данные восхода/заката в weather entity, поэтому необходимо указать отдельные сенсоры.
+> **Note:** Yandex Weather does not provide sunrise/sunset data in the weather entity, so separate sensors must be specified.
 
-## Параметры конфигурации
+## Configuration Parameters
 
-| Параметр | Тип | По умолчанию | Описание |
-|----------|-----|--------------|----------|
-| `entity` | string | **обязательно** | ID сущности погоды |
-| `name` | string | - | Название (необязательно) |
-| `height` | number | 200 | Высота карточки в пикселях |
-| `language` | string | `auto` | Язык интерфейса (`auto`, `ru` или `en`). `auto` определяет язык из настроек Home Assistant |
-| `show_feels_like` | boolean | true | Показывать ощущаемую температуру |
-| `show_min_temp` | boolean | true | Показывать минимальную температуру |
-| `show_humidity` | boolean | false | Показывать влажность |
-| `show_wind` | boolean | false | Показывать скорость ветра |
-| `show_wind_direction` | boolean | false | Показывать направление ветра |
-| `show_wind_gust` | boolean | false | Показывать порывы ветра |
-| `show_forecast` | boolean | false | Показывать прогноз на сегодня |
-| `show_sunrise_sunset` | boolean | false | Показывать время восхода и заката |
-| `sunrise_entity` | string | - | ID сенсора восхода солнца (опционально) |
-| `sunset_entity` | string | - | ID сенсора заката солнца (опционально) |
+| Parameter | Type | Default | Description |
+|----------|-----|--------------|-------------|
+| `entity` | string | **required** | Weather entity ID |
+| `name` | string | - | Name (optional) |
+| `height` | number | 200 | Card height in pixels |
+| `language` | string | `auto` | Interface language (`auto`, `ru` or `en`). `auto` detects language from Home Assistant settings |
+| `show_feels_like` | boolean | true | Show feels like temperature |
+| `show_min_temp` | boolean | true | Show minimum temperature |
+| `show_humidity` | boolean | false | Show humidity |
+| `show_wind` | boolean | false | Show wind speed |
+| `show_wind_direction` | boolean | false | Show wind direction |
+| `show_wind_gust` | boolean | false | Show wind gusts |
+| `show_forecast` | boolean | false | Show today's forecast |
+| `show_sunrise_sunset` | boolean | false | Show sunrise and sunset times |
+| `sunrise_entity` | string | - | Sunrise sensor entity ID (optional) |
+| `sunset_entity` | string | - | Sunset sensor entity ID (optional) |
 
-## Поддерживаемые погодные условия
+## Supported Weather Conditions
 
-- ☀️ Солнечно / Ясно
-- 🌙 Ясная ночь
-- ⛅ Переменная облачность
-- ☁️ Облачно
-- 🌧️ Дождь / Сильный дождь
-- ❄️ Снег
-- 🌨️ Мокрый снег / Град
-- 🌫️ Туман
-- ⛈️ Гроза (с дождём и без)
+- ☀️ Sunny / Clear
+- 🌙 Clear Night
+- ⛅ Partly Cloudy
+- ☁️ Cloudy
+- 🌧️ Rainy / Heavy Rain
+- ❄️ Snowy
+- 🌨️ Sleet / Hail
+- 🌫️ Foggy
+- ⛈️ Thunderstorm (with and without rain)
 
-## Время суток
+## Time of Day
 
-Карточка автоматически меняет фон и анимации в зависимости от времени суток:
+The card automatically changes background and animations based on time of day:
 
-- **6:00 - 8:00** - Восход солнца 🌅
-- **8:00 - 18:00** - День ☀️
-- **18:00 - 20:00** - Закат 🌇
-- **20:00 - 6:00** - Ночь 🌙
+- **6:00 - 8:00** - Sunrise 🌅
+- **8:00 - 18:00** - Day ☀️
+- **18:00 - 20:00** - Sunset 🌇
+- **20:00 - 6:00** - Night 🌙
 
-## Разработка
+## Development
 
-### Установка зависимостей
+### Install dependencies
 
 ```bash
 yarn install
 ```
 
-### Сборка
+### Build
 
 ```bash
-# Продакшн сборка
+# Production build
 yarn build
 
-# Режим разработки с автоматической пересборкой
+# Development mode with automatic rebuild
 yarn dev
 ```
 
-### Тестирование
+### Testing
 
-Откройте файл `test.html` в браузере для локального тестирования карточки с различными погодными условиями и настройками.
+Open the `test.html` file in a browser for local testing of the card with various weather conditions and settings.
 
-## Совместимость
+## Compatibility
 
-Работает со всеми стандартными интеграциями погоды Home Assistant:
+Works with all standard Home Assistant weather integrations:
 - OpenWeatherMap
 - Met.no
 - AccuWeather
-- И другие...
+- And others...
 
-## Лицензия
+## License
 
 MIT
 
-## Поддержка
+## Support
 
-Если у вас возникли проблемы или есть предложения, создайте issue на GitHub.
+If you have problems or suggestions, create an issue on GitHub.

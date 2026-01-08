@@ -336,7 +336,7 @@ export class AnimatedWeatherCard extends LitElement {
       return 'en';
     }
 
-    return 'ru'; // Default fallback
+    return 'en'; // Default fallback
   }
 
   getConditionName(condition) {

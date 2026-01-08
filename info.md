@@ -1,44 +1,44 @@
 # 🌤️ Dynamic Weather Card
 
-Динамическая карточка погоды для Home Assistant с реалистичными анимациями.
+Dynamic weather card for Home Assistant with realistic animations.
 ![demo](docs/demo.gif)
 
-## Возможности
+## Features
 
-- 🎨 Анимированные эффекты погоды на Canvas
-- ☀️ Динамический фон в зависимости от времени суток (восход, день, закат, ночь)
-- 🌧️ Реалистичные анимации: дождь, снег, град, туман, гроза
-- 📊 Почасовой прогноз на сегодня
-- 🌍 Автоматическое определение языка из настроек Home Assistant (русский/английский)
-- ⚙️ Полная настройка отображаемых элементов
-- 📱 Адаптивный дизайн
+- 🎨 Animated weather effects on Canvas
+- ☀️ Dynamic background based on time of day (sunrise, day, sunset, night)
+- 🌧️ Realistic animations: rain, snow, hail, fog, thunderstorm
+- 📊 Hourly forecast for today
+- 🌍 Automatic language detection from Home Assistant settings (Russian/English)
+- ⚙️ Full customization of displayed elements
+- 📱 Responsive design
 
-## Быстрый старт
+## Quick Start
 
-### Базовая конфигурация
+### Basic configuration
 
 ```yaml
 type: custom:dynamic-weather-card
 entity: weather.home
 ```
 
-Карточка автоматически определит язык из настроек Home Assistant.
+The card will automatically detect the language from Home Assistant settings.
 
-### Расширенная конфигурация
+### Extended configuration
 
 ```yaml
 type: custom:dynamic-weather-card
 entity: weather.home
-name: Моя погода
-language: auto  # 'auto', 'ru' или 'en'
+name: My Weather
+language: auto  # 'auto', 'ru' or 'en'
 show_feels_like: true
 show_min_temp: true
 show_forecast: true
 show_sunrise_sunset: true
 ```
 
-## Документация
+## Documentation
 
-Полная документация доступна в [README](https://github.com/teuchezh/dynamic-weather-card#readme)
+Full documentation is available in [README](https://github.com/teuchezh/dynamic-weather-card#readme)
 
-[English documentation](https://github.com/teuchezh/dynamic-weather-card/blob/main/README.en.md)
+[Russian documentation](https://github.com/teuchezh/dynamic-weather-card/blob/main/README.ru.md)

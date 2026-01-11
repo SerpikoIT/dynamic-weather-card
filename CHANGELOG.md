@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.2.3] - 2026-01-11
+
+## What's Changed
+
+### 🐛 Bug Fixes
+- fix: auto-tag workflow now triggers release workflow (537fd1f)
+- fix: prevent weather card elements from overlapping modals (e8c4ca6)
+
+### 📚 Documentation
+- docs: update CHANGELOG.md for v0.2.2 (067d104)
+
+### 🔧 Chores & Maintenance
+- chore: bump version to v0.2.3 (e08e677)
+
+**Full Changelog**: https://github.com/teuchezh/dynamic-weather-card/compare/v0.2.2...v0.2.3
+
+
 ## [v0.2.2] - 2026-01-08
 
 ## What's Changed

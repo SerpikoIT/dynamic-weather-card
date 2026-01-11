@@ -1,107 +1,302 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Weather Card - Test</title>
+    <title>Dynamic Weather Card - Demo</title>
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5568d3;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --success: #48bb78;
+            --danger: #f56565;
+            --warning: #ed8936;
+            --bg-dark: #1a202c;
+            --bg-card: #2d3748;
+            --text-primary: #e2e8f0;
+            --text-secondary: #a0aec0;
+            --border: #4a5568;
         }
 
         body {
-            margin: 0;
-            padding: 20px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
             min-height: 100vh;
+            color: var(--text-primary);
+            padding: 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 450px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card-preview {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .test-container {
-            width: 100%;
-            max-width: 450px;
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        h1 {
-            margin: 0 0 24px 0;
-            color: #1a1a1a;
-            font-size: 24px;
+        .preview-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
             font-weight: 600;
         }
 
         #card-container {
-            margin-bottom: 24px;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 450px;
+            width: 100%;
         }
 
-        .controls {
+        .controls-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            position: sticky;
+            top: 20px;
+        }
+
+        .controls-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .controls-panel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        .controls-panel::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .controls-panel::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .panel-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
             display: flex;
-            flex-direction: column;
-            gap: 16px;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-section {
+            margin-bottom: 28px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .control-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-header {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+            margin-bottom: 16px;
         }
 
         .control-label {
+            display: block;
             font-size: 13px;
             font-weight: 500;
-            color: #4a5568;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         select, input[type="number"], input[type="text"] {
-            padding: 10px 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
             font-size: 14px;
+            color: var(--text-primary);
             transition: all 0.2s;
-            background: white;
+            font-family: inherit;
         }
 
         select:focus, input[type="number"]:focus, input[type="text"]:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        select option {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-demo {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        .btn-demo.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+
+        .btn-preset {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-primary);
+        }
+
+        .btn-preset:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary);
         }
 
         .time-controls {
-            background: #f7fafc;
-            padding: 16px;
-            border-radius: 8px;
-            margin-top: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 12px;
+        }
+
+        .time-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .time-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Courier New', monospace;
         }
 
         .time-slider {
             width: 100%;
             height: 6px;
             border-radius: 3px;
-            background: #e2e8f0;
+            background: rgba(255, 255, 255, 0.1);
             outline: none;
             -webkit-appearance: none;
+            margin-bottom: 16px;
         }
 
         .time-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: #667eea;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
         .time-slider::-webkit-slider-thumb:hover {
@@ -109,268 +304,321 @@
         }
 
         .time-slider::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: #667eea;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             cursor: pointer;
             border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        .time-display {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .time-value {
-            font-size: 18px;
-            font-weight: 600;
-            color: #667eea;
-        }
-
-        .time-presets {
+        .preset-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 8px;
-            margin-top: 12px;
-        }
-
-        .preset-btn {
-            padding: 8px;
-            background: white;
-            border: 2px solid #e2e8f0;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 500;
-            color: #4a5568;
-        }
-
-        .preset-btn:hover {
-            border-color: #667eea;
-            color: #667eea;
-            background: #f7fafc;
-        }
-
-        .section-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e2e8f0;
         }
 
         .checkbox-group {
-            display: flex;
-            flex-direction: column;
+            display: grid;
             gap: 10px;
         }
 
-        .checkbox-label {
+        .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
             cursor: pointer;
-            padding: 8px;
-            border-radius: 6px;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            border: 1px solid transparent;
         }
 
-        .checkbox-label:hover {
-            background: #f7fafc;
+        .checkbox-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
-            accent-color: #667eea;
+            accent-color: var(--primary);
         }
 
         .checkbox-text {
             font-size: 14px;
-            color: #2d3748;
+            color: var(--text-primary);
             user-select: none;
+            flex: 1;
         }
 
-        .update-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 8px;
-        }
-
-        .update-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .update-btn:active {
-            transform: translateY(0);
+        .message {
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 16px;
         }
 
         .error-message {
-            padding: 16px;
-            background: #fff5f5;
-            border: 2px solid #fc8181;
-            border-radius: 8px;
-            color: #c53030;
-            font-size: 14px;
+            background: rgba(245, 101, 101, 0.15);
+            border: 1px solid var(--danger);
+            color: #fc8181;
         }
 
         .loading-message {
-            padding: 16px;
+            background: rgba(102, 126, 234, 0.15);
+            border: 1px solid var(--primary);
+            color: var(--text-secondary);
             text-align: center;
-            color: #718096;
+        }
+
+        .quick-presets {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .preset-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .preset-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .preset-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .preset-name {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            padding: 24px;
+            color: var(--text-secondary);
             font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 32px;
+            }
+
+            .main-container {
+                padding: 0 10px;
+            }
+
+            .controls-panel {
+                position: static;
+                max-height: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="test-container">
-        <h1>🌤️ Dynamic Weather Card</h1>
+    <div class="page-header">
+        <h1 class="page-title">🌤️ Dynamic Weather Card</h1>
+        <p class="page-subtitle">Interactive Demo & Configuration Tool</p>
+    </div>
 
-        <div id="card-container"></div>
+    <div class="main-container">
+        <!-- Card Preview -->
+        <div class="card-preview">
+            <div class="preview-label">Live Preview</div>
+            <div id="card-container"></div>
+        </div>
 
-        <div class="controls">
-            <!-- Weather Condition -->
-            <div class="control-group">
-                <label class="control-label">Погодное условие</label>
-                <select id="condition-select">
-                    <option value="sunny">☀️ Солнечно</option>
-                    <option value="clear">☀️ Ясно</option>
-                    <option value="clear-night">🌙 Ясная ночь</option>
-                    <option value="partlycloudy">⛅ Переменная облачность</option>
-                    <option value="cloudy">☁️ Облачно</option>
-                    <option value="rainy">🌧️ Дождь</option>
-                    <option value="pouring">⛈️ Сильный дождь</option>
-                    <option value="snowy">❄️ Снег</option>
-                    <option value="snowy-rainy">🌨️ Мокрый снег</option>
-                    <option value="hail">🧊 Град</option>
-                    <option value="foggy">🌫️ Туман</option>
-                    <option value="lightning">⚡ Гроза</option>
-                    <option value="lightning-rainy">⛈️ Гроза с дождем</option>
-                </select>
-            </div>
+        <!-- Controls Panel -->
+        <div class="controls-panel">
+            <h2 class="panel-title">⚙️ Configuration</h2>
 
-            <!-- Card Name -->
-            <div class="control-group">
-                <label class="control-label">Название карточки</label>
-                <input type="text" id="name-input" value="Тестовая погода" placeholder="Оставьте пустым, чтобы скрыть">
-            </div>
-
-            <!-- Temperature -->
-            <div class="control-group">
-                <label class="control-label">Температура (°C)</label>
-                <input type="number" id="temperature-input" value="20" min="-50" max="50">
-            </div>
-
-            <!-- Humidity -->
-            <div class="control-group">
-                <label class="control-label">Влажность (%)</label>
-                <input type="number" id="humidity-input" value="65" min="0" max="100">
-            </div>
-
-            <!-- Wind Speed -->
-            <div class="control-group">
-                <label class="control-label">Скорость ветра (km/h)</label>
-                <input type="number" id="wind-input" value="15" min="0" max="150">
-            </div>
-
-            <!-- Time of Day -->
-            <div class="control-group">
-                <label class="control-label">Время суток</label>
-                <select id="time-select">
-                    <option value="auto">🕐 Автоматически</option>
-                    <option value="manual">⏱️ Ручное управление</option>
-                    <option value="sunrise">🌅 Восход</option>
-                    <option value="day">☀️ День</option>
-                    <option value="sunset">🌇 Закат</option>
-                    <option value="night">🌙 Ночь</option>
-                </select>
-
-                <div id="time-slider-container" class="time-controls" style="display: none;">
-                    <div class="time-display">
-                        <span class="control-label">Текущее время</span>
-                        <span id="time-display" class="time-value">12:00</span>
+            <!-- Quick Presets -->
+            <div class="control-section">
+                <div class="section-header">🎨 Quick Presets</div>
+                <div class="quick-presets">
+                    <div class="preset-card" onclick="applyPreset('sunny')">
+                        <div class="preset-icon">☀️</div>
+                        <div class="preset-name">Sunny Day</div>
                     </div>
-                    <input type="range" id="time-slider" class="time-slider" min="0" max="1439" value="720">
-                    <div class="time-presets">
-                        <button class="preset-btn" onclick="setTime(360)">🌅 6:00</button>
-                        <button class="preset-btn" onclick="setTime(720)">☀️ 12:00</button>
-                        <button class="preset-btn" onclick="setTime(1080)">🌇 18:00</button>
-                        <button class="preset-btn" onclick="setTime(0)">🌙 0:00</button>
+                    <div class="preset-card" onclick="applyPreset('rainy')">
+                        <div class="preset-icon">🌧️</div>
+                        <div class="preset-name">Rainy</div>
+                    </div>
+                    <div class="preset-card" onclick="applyPreset('snowy')">
+                        <div class="preset-icon">❄️</div>
+                        <div class="preset-name">Snowy</div>
+                    </div>
+                    <div class="preset-card" onclick="applyPreset('night')">
+                        <div class="preset-icon">🌙</div>
+                        <div class="preset-name">Clear Night</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Card Height -->
-            <div class="control-group">
-                <label class="control-label">Высота карточки (px)</label>
-                <input type="number" id="height-input" value="200" min="150" max="400" step="10">
+            <!-- Weather Settings -->
+            <div class="control-section">
+                <div class="section-header">🌦️ Weather Condition</div>
+
+                <div class="control-group">
+                    <label class="control-label">Condition</label>
+                    <select id="condition-select">
+                        <option value="sunny">☀️ Sunny</option>
+                        <option value="clear">☀️ Clear</option>
+                        <option value="clear-night">🌙 Clear Night</option>
+                        <option value="partlycloudy">⛅ Partly Cloudy</option>
+                        <option value="cloudy">☁️ Cloudy</option>
+                        <option value="rainy">🌧️ Rainy</option>
+                        <option value="pouring">⛈️ Pouring</option>
+                        <option value="snowy">❄️ Snowy</option>
+                        <option value="snowy-rainy">🌨️ Sleet</option>
+                        <option value="hail">🧊 Hail</option>
+                        <option value="foggy">🌫️ Foggy</option>
+                        <option value="lightning">⚡ Lightning</option>
+                        <option value="lightning-rainy">⛈️ Thunderstorm</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Temperature (°C)</label>
+                    <input type="number" id="temperature-input" value="20" min="-50" max="50">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Humidity (%)</label>
+                    <input type="number" id="humidity-input" value="65" min="0" max="100">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Wind Speed (km/h)</label>
+                    <input type="number" id="wind-input" value="15" min="0" max="150">
+                </div>
+            </div>
+
+            <!-- Time Settings -->
+            <div class="control-section">
+                <div class="section-header">🕐 Time of Day</div>
+
+                <div class="control-group">
+                    <label class="control-label">Time Mode</label>
+                    <select id="time-select">
+                        <option value="auto">🕐 Auto (Current Time)</option>
+                        <option value="manual">⏱️ Manual Control</option>
+                        <option value="sunrise">🌅 Sunrise</option>
+                        <option value="day">☀️ Day</option>
+                        <option value="sunset">🌇 Sunset</option>
+                        <option value="night">🌙 Night</option>
+                    </select>
+
+                    <div id="time-slider-container" class="time-controls" style="display: none;">
+                        <div class="time-display">
+                            <span class="control-label">Current Time</span>
+                            <span id="time-display" class="time-value">12:00</span>
+                        </div>
+                        <input type="range" id="time-slider" class="time-slider" min="0" max="1439" value="720">
+                        <div class="preset-grid">
+                            <button class="btn btn-preset" onclick="setTime(360)">🌅 6:00</button>
+                            <button class="btn btn-preset" onclick="setTime(720)">☀️ 12:00</button>
+                            <button class="btn btn-preset" onclick="setTime(1080)">🌇 18:00</button>
+                            <button class="btn btn-preset" onclick="setTime(0)">🌙 0:00</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Display Options -->
-            <div class="control-group">
-                <div class="section-title">Опции отображения</div>
+            <div class="control-section">
+                <div class="section-header">👁️ Display Options</div>
+
+                <div class="control-group">
+                    <label class="control-label">Card Name</label>
+                    <input type="text" id="name-input" value="" placeholder="Leave empty to hide">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Height (px)</label>
+                    <input type="number" id="height-input" value="200" min="150" max="400" step="10">
+                </div>
+
                 <div class="checkbox-group">
-                    <label class="checkbox-label">
+                    <label class="checkbox-item">
                         <input type="checkbox" id="show-feels-like" checked>
-                        <span class="checkbox-text">Ощущается как</span>
+                        <span class="checkbox-text">Feels Like Temperature</span>
                     </label>
-                    <label class="checkbox-label">
+                    <label class="checkbox-item">
                         <input type="checkbox" id="show-min-temp" checked>
-                        <span class="checkbox-text">Минимальная температура</span>
+                        <span class="checkbox-text">Min Temperature</span>
                     </label>
-                    <label class="checkbox-label">
+                    <label class="checkbox-item">
                         <input type="checkbox" id="show-humidity">
-                        <span class="checkbox-text">Влажность</span>
+                        <span class="checkbox-text">Humidity</span>
                     </label>
-                    <label class="checkbox-label">
+                    <label class="checkbox-item">
                         <input type="checkbox" id="show-wind">
-                        <span class="checkbox-text">Скорость ветра</span>
+                        <span class="checkbox-text">Wind Speed</span>
                     </label>
-                    <label class="checkbox-label">
+                    <label class="checkbox-item">
                         <input type="checkbox" id="show-wind-direction">
-                        <span class="checkbox-text">Направление ветра</span>
+                        <span class="checkbox-text">Wind Direction</span>
                     </label>
-                    <label class="checkbox-label">
+                    <label class="checkbox-item">
                         <input type="checkbox" id="show-wind-gust">
-                        <span class="checkbox-text">Порывы ветра</span>
+                        <span class="checkbox-text">Wind Gust</span>
                     </label>
-                    <label class="checkbox-label">
+                    <label class="checkbox-item">
                         <input type="checkbox" id="show-forecast">
-                        <span class="checkbox-text">Почасовой прогноз</span>
+                        <span class="checkbox-text">Hourly Forecast</span>
                     </label>
-                    <label class="checkbox-label">
+                    <label class="checkbox-item">
                         <input type="checkbox" id="show-sunrise-sunset">
-                        <span class="checkbox-text">Восход/Закат</span>
+                        <span class="checkbox-text">Sunrise/Sunset</span>
                     </label>
                 </div>
             </div>
 
-            <button class="update-btn" onclick="updateCard()">Обновить карточку</button>
-
-            <!-- Demo Mode -->
-            <div class="control-group">
-                <button class="update-btn" id="demo-btn" onclick="toggleDemoMode()" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                    🎬 Запустить режим демо
+            <!-- Action Buttons -->
+            <div class="control-section">
+                <button class="btn btn-primary" onclick="updateCard()">
+                    🔄 Update Card
+                </button>
+                <div style="height: 12px;"></div>
+                <button class="btn btn-demo" id="demo-btn" onclick="toggleDemoMode()">
+                    🎬 Start Demo Mode
                 </button>
             </div>
         </div>
+    </div>
+
+    <div class="footer">
+        Made with ❤️ for Home Assistant |
+        <a href="https://github.com/teuchezh/dynamic-weather-card" target="_blank">GitHub</a>
     </div>
 
     <!-- Import map for Lit dependencies -->
@@ -391,6 +639,24 @@
 
     <!-- Load card module -->
     <script type="module">
+        // Detect browser language early
+        let currentLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        currentLang = currentLang.startsWith('ru') ? 'ru' : 'en';
+
+        // Mini translations for error messages
+        const errorMessages = {
+            en: {
+                title: '⚠️ Failed to load card',
+                details: 'Check the browser console (F12) for details',
+                server: 'Make sure the file is served via a local server (not file://)'
+            },
+            ru: {
+                title: '⚠️ Не удалось загрузить карточку',
+                details: 'Проверьте консоль браузера (F12) для деталей',
+                server: 'Убедитесь, что файл открыт через локальный сервер (не file://)'
+            }
+        };
+
         // Mock ha-card element
         if (!customElements.get('ha-card')) {
             customElements.define('ha-card', class extends HTMLElement {
@@ -408,11 +674,12 @@
         }).catch(err => {
             console.error('Failed to load card:', err);
             const container = document.getElementById('card-container');
+            const msgs = errorMessages[currentLang];
             container.innerHTML = `
                 <div class="error-message">
-                    <strong>Ошибка загрузки карточки</strong><br>
-                    Проверьте консоль браузера (F12)<br>
-                    <small>Убедитесь, что файл открыт через локальный сервер (не file://)</small>
+                    <strong>${msgs.title}</strong><br>
+                    ${msgs.details}<br>
+                    <small>${msgs.server}</small>
                 </div>
             `;
         });
@@ -421,35 +688,255 @@
     <!-- Main application logic -->
     <script>
         // ============================================================================
+        // TRANSLATIONS
+        // ============================================================================
+
+        const TRANSLATIONS = {
+            en: {
+                pageTitle: '🌤️ Dynamic Weather Card',
+                pageSubtitle: 'Interactive Demo & Configuration Tool',
+                livePreview: 'Live Preview',
+                configuration: '⚙️ Configuration',
+                quickPresets: '🎨 Quick Presets',
+                sunnyDay: 'Sunny Day',
+                rainy: 'Rainy',
+                snowy: 'Snowy',
+                clearNight: 'Clear Night',
+                weatherCondition: '🌦️ Weather Condition',
+                condition: 'Condition',
+                temperature: 'Temperature (°C)',
+                humidity: 'Humidity (%)',
+                windSpeed: 'Wind Speed (km/h)',
+                timeOfDay: '🕐 Time of Day',
+                timeMode: 'Time Mode',
+                autoTime: '🕐 Auto (Current Time)',
+                manualControl: '⏱️ Manual Control',
+                sunrise: '🌅 Sunrise',
+                day: '☀️ Day',
+                sunset: '🌇 Sunset',
+                night: '🌙 Night',
+                currentTime: 'Current Time',
+                displayOptions: '👁️ Display Options',
+                cardName: 'Card Name',
+                height: 'Height (px)',
+                feelsLike: 'Feels Like Temperature',
+                minTemp: 'Min Temperature',
+                windDirection: 'Wind Direction',
+                windGust: 'Wind Gust',
+                hourlyForecast: 'Hourly Forecast',
+                sunriseSunset: 'Sunrise/Sunset',
+                updateCard: '🔄 Update Card',
+                startDemo: '🎬 Start Demo Mode',
+                stopDemo: '⏹️ Stop Demo',
+                madeWith: 'Made with ❤️ for Home Assistant',
+                loading: '⏳ Loading card...',
+                errorTitle: '⚠️ Failed to load card',
+                errorDetails: 'Check the browser console (F12) for details',
+                errorServer: 'Make sure the file is served via a local server (not file://)',
+                placeholderEmpty: 'Leave empty to hide',
+                weatherConditions: {
+                    sunny: '☀️ Sunny',
+                    clear: '☀️ Clear',
+                    clearNight: '🌙 Clear Night',
+                    partlycloudy: '⛅ Partly Cloudy',
+                    cloudy: '☁️ Cloudy',
+                    rainy: '🌧️ Rainy',
+                    pouring: '⛈️ Pouring',
+                    snowy: '❄️ Snowy',
+                    sleet: '🌨️ Sleet',
+                    hail: '🧊 Hail',
+                    foggy: '🌫️ Foggy',
+                    lightning: '⚡ Lightning',
+                    thunderstorm: '⛈️ Thunderstorm'
+                }
+            },
+            ru: {
+                pageTitle: '🌤️ Динамическая карточка погоды',
+                pageSubtitle: 'Интерактивная демонстрация и настройка',
+                livePreview: 'Предпросмотр',
+                configuration: '⚙️ Конфигурация',
+                quickPresets: '🎨 Быстрые пресеты',
+                sunnyDay: 'Солнечный день',
+                rainy: 'Дождь',
+                snowy: 'Снег',
+                clearNight: 'Ясная ночь',
+                weatherCondition: '🌦️ Погодные условия',
+                condition: 'Состояние',
+                temperature: 'Температура (°C)',
+                humidity: 'Влажность (%)',
+                windSpeed: 'Скорость ветра (км/ч)',
+                timeOfDay: '🕐 Время суток',
+                timeMode: 'Режим времени',
+                autoTime: '🕐 Авто (текущее время)',
+                manualControl: '⏱️ Ручное управление',
+                sunrise: '🌅 Восход',
+                day: '☀️ День',
+                sunset: '🌇 Закат',
+                night: '🌙 Ночь',
+                currentTime: 'Текущее время',
+                displayOptions: '👁️ Опции отображения',
+                cardName: 'Название карточки',
+                height: 'Высота (px)',
+                feelsLike: 'Ощущается как',
+                minTemp: 'Мин. температура',
+                windDirection: 'Направление ветра',
+                windGust: 'Порывы ветра',
+                hourlyForecast: 'Почасовой прогноз',
+                sunriseSunset: 'Восход/Закат',
+                updateCard: '🔄 Обновить карточку',
+                startDemo: '🎬 Запустить демо',
+                stopDemo: '⏹️ Остановить демо',
+                madeWith: 'Сделано с ❤️ для Home Assistant',
+                loading: '⏳ Загрузка карточки...',
+                errorTitle: '⚠️ Не удалось загрузить карточку',
+                errorDetails: 'Проверьте консоль браузера (F12) для деталей',
+                errorServer: 'Убедитесь, что файл открыт через локальный сервер (не file://)',
+                placeholderEmpty: 'Оставьте пустым, чтобы скрыть',
+                weatherConditions: {
+                    sunny: '☀️ Солнечно',
+                    clear: '☀️ Ясно',
+                    clearNight: '🌙 Ясная ночь',
+                    partlycloudy: '⛅ Переменная облачность',
+                    cloudy: '☁️ Облачно',
+                    rainy: '🌧️ Дождь',
+                    pouring: '⛈️ Ливень',
+                    snowy: '❄️ Снег',
+                    sleet: '🌨️ Мокрый снег',
+                    hail: '🧊 Град',
+                    foggy: '🌫️ Туман',
+                    lightning: '⚡ Гроза',
+                    thunderstorm: '⛈️ Гроза с дождем'
+                }
+            }
+        };
+
+        // Detect browser language
+        let currentLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        if (currentLang.startsWith('ru')) {
+            currentLang = 'ru';
+        } else {
+            currentLang = 'en';
+        }
+
+        function t(key) {
+            const keys = key.split('.');
+            let value = TRANSLATIONS[currentLang];
+            for (const k of keys) {
+                value = value?.[k];
+            }
+            return value || key;
+        }
+
+        function updatePageLanguage() {
+            document.querySelector('.page-title').textContent = t('pageTitle');
+            document.querySelector('.page-subtitle').textContent = t('pageSubtitle');
+            document.querySelector('.preview-label').textContent = t('livePreview');
+            document.querySelector('.panel-title').textContent = t('configuration');
+
+            // Quick presets section
+            document.querySelectorAll('.section-header')[0].textContent = t('quickPresets');
+            document.querySelectorAll('.preset-name')[0].textContent = t('sunnyDay');
+            document.querySelectorAll('.preset-name')[1].textContent = t('rainy');
+            document.querySelectorAll('.preset-name')[2].textContent = t('snowy');
+            document.querySelectorAll('.preset-name')[3].textContent = t('clearNight');
+
+            // Weather section
+            document.querySelectorAll('.section-header')[1].textContent = t('weatherCondition');
+            document.querySelectorAll('.control-label')[0].textContent = t('condition');
+            document.querySelectorAll('.control-label')[1].textContent = t('temperature');
+            document.querySelectorAll('.control-label')[2].textContent = t('humidity');
+            document.querySelectorAll('.control-label')[3].textContent = t('windSpeed');
+
+            // Time section
+            document.querySelectorAll('.section-header')[2].textContent = t('timeOfDay');
+            document.querySelectorAll('.control-label')[4].textContent = t('timeMode');
+            document.querySelectorAll('.control-label')[5].textContent = t('currentTime');
+
+            // Display options section
+            document.querySelectorAll('.section-header')[3].textContent = t('displayOptions');
+            document.querySelectorAll('.control-label')[6].textContent = t('cardName');
+            document.querySelectorAll('.control-label')[7].textContent = t('height');
+
+            // Weather condition options
+            const conditionSelect = document.getElementById('condition-select');
+            conditionSelect.options[0].text = t('weatherConditions.sunny');
+            conditionSelect.options[1].text = t('weatherConditions.clear');
+            conditionSelect.options[2].text = t('weatherConditions.clearNight');
+            conditionSelect.options[3].text = t('weatherConditions.partlycloudy');
+            conditionSelect.options[4].text = t('weatherConditions.cloudy');
+            conditionSelect.options[5].text = t('weatherConditions.rainy');
+            conditionSelect.options[6].text = t('weatherConditions.pouring');
+            conditionSelect.options[7].text = t('weatherConditions.snowy');
+            conditionSelect.options[8].text = t('weatherConditions.sleet');
+            conditionSelect.options[9].text = t('weatherConditions.hail');
+            conditionSelect.options[10].text = t('weatherConditions.foggy');
+            conditionSelect.options[11].text = t('weatherConditions.lightning');
+            conditionSelect.options[12].text = t('weatherConditions.thunderstorm');
+
+            // Time mode options
+            const timeSelect = document.getElementById('time-select');
+            timeSelect.options[0].text = t('autoTime');
+            timeSelect.options[1].text = t('manualControl');
+            timeSelect.options[2].text = t('sunrise');
+            timeSelect.options[3].text = t('day');
+            timeSelect.options[4].text = t('sunset');
+            timeSelect.options[5].text = t('night');
+
+            // Checkboxes
+            document.querySelectorAll('.checkbox-text')[0].textContent = t('feelsLike');
+            document.querySelectorAll('.checkbox-text')[1].textContent = t('minTemp');
+            document.querySelectorAll('.checkbox-text')[2].textContent = t('humidity');
+            document.querySelectorAll('.checkbox-text')[3].textContent = t('windSpeed');
+            document.querySelectorAll('.checkbox-text')[4].textContent = t('windDirection');
+            document.querySelectorAll('.checkbox-text')[5].textContent = t('windGust');
+            document.querySelectorAll('.checkbox-text')[6].textContent = t('hourlyForecast');
+            document.querySelectorAll('.checkbox-text')[7].textContent = t('sunriseSunset');
+
+            // Buttons
+            document.querySelector('.btn-primary').innerHTML = t('updateCard');
+            document.getElementById('demo-btn').textContent = t('startDemo');
+
+            // Placeholder
+            document.getElementById('name-input').placeholder = t('placeholderEmpty');
+
+            // Footer
+            const footerText = document.querySelector('.footer');
+            const githubLink = footerText.querySelector('a');
+            footerText.innerHTML = `${t('madeWith')} | `;
+            footerText.appendChild(githubLink);
+        }
+
+        // ============================================================================
         // STATE & CONFIGURATION
         // ============================================================================
 
         let card = null;
         let mockHass = null;
-        let currentManualTime = 720; // 12:00 default
+        let currentManualTime = 720; // 12:00
         let demoModeActive = false;
         let demoInterval = null;
         let demoStep = 0;
 
         const WEATHER_CONDITIONS = [
-            'sunny', 'clear', 'partlycloudy', 'cloudy', 'rainy', 'pouring', 'snowy'
+            'sunny', 'clear', 'partlycloudy', 'cloudy', 'rainy', 'pouring', 'snowy', 'foggy'
         ];
 
-        // Demo sequence with different weather conditions and times
         const DEMO_SEQUENCE = [
-            { condition: 'sunny', temp: 25, time: 'day', humidity: 45, wind: 10, name: '' },
-            { condition: 'partlycloudy', temp: 22, time: 'day', humidity: 55, wind: 15, name: '' },
-            { condition: 'cloudy', temp: 18, time: 'day', humidity: 65, wind: 20, name: '' },
-            { condition: 'rainy', temp: 15, time: 'day', humidity: 80, wind: 25, name: '' },
-            { condition: 'lightning-rainy', temp: 14, time: 'sunset', humidity: 85, wind: 30, name: '' },
-            { condition: 'snowy', temp: -5, time: 'day', humidity: 70, wind: 15, name: '' },
-            { condition: 'foggy', temp: 8, time: 'sunrise', humidity: 90, wind: 5, name: '' },
-            { condition: 'clear-night', temp: 12, time: 'night', humidity: 60, wind: 8, name: '' }
+            { condition: 'sunny', temp: 25, time: 'day', humidity: 45, wind: 10 },
+            { condition: 'partlycloudy', temp: 22, time: 'day', humidity: 55, wind: 15 },
+            { condition: 'rainy', temp: 15, time: 'day', humidity: 80, wind: 25 },
+            { condition: 'lightning-rainy', temp: 14, time: 'sunset', humidity: 85, wind: 30 },
+            { condition: 'snowy', temp: -5, time: 'day', humidity: 70, wind: 15 },
+            { condition: 'foggy', temp: 8, time: 'sunrise', humidity: 90, wind: 5 },
+            { condition: 'clear-night', temp: 12, time: 'night', humidity: 60, wind: 8 }
         ];
 
-        // ============================================================================
-        // UTILITY FUNCTIONS
-        // ============================================================================
+        const PRESETS = {
+            sunny: { condition: 'sunny', temp: 25, time: 'day', humidity: 45, wind: 10 },
+            rainy: { condition: 'rainy', temp: 15, time: 'day', humidity: 80, wind: 25 },
+            snowy: { condition: 'snowy', temp: -5, time: 'day', humidity: 70, wind: 15 },
+            night: { condition: 'clear-night', temp: 12, time: 'night', humidity: 60, wind: 8 }
+        };
 
         function formatTime(minutes) {
             const hours = Math.floor(minutes / 60);
@@ -465,7 +952,6 @@
                 const forecastTime = new Date(now.getTime() + i * 60 * 60 * 1000);
                 const hour = forecastTime.getHours();
 
-                // Temperature variation based on time of day
                 let temp = baseTemp;
                 if (hour >= 6 && hour < 12) temp += Math.floor(Math.random() * 3);
                 else if (hour >= 12 && hour < 18) temp += 2 + Math.floor(Math.random() * 4);
@@ -484,7 +970,6 @@
         }
 
         function createMockHass(condition, temperature, humidity, windSpeed) {
-            // Create mock sunrise/sunset times (today at 6:30 and 18:45)
             const now = new Date();
             const sunrise = new Date(now);
             sunrise.setHours(6, 30, 0, 0);
@@ -494,7 +979,7 @@
             return {
                 states: {
                     'weather.test': {
-                        state: temperature.toString(),
+                        state: condition,
                         attributes: {
                             condition: condition,
                             temperature: temperature,
@@ -505,7 +990,7 @@
                             apparent_temperature: temperature - 3,
                             templow: temperature - 5,
                             pressure: 1013,
-                            friendly_name: 'Тестовая погода',
+                            friendly_name: 'Demo Weather',
                             forecast: generateForecast(temperature),
                             sunrise: sunrise.toISOString(),
                             sunset: sunset.toISOString()
@@ -515,9 +1000,18 @@
             };
         }
 
-        // ============================================================================
-        // DEMO MODE FUNCTIONS
-        // ============================================================================
+        function applyPreset(presetName) {
+            const preset = PRESETS[presetName];
+            if (!preset) return;
+
+            document.getElementById('condition-select').value = preset.condition;
+            document.getElementById('temperature-input').value = preset.temp;
+            document.getElementById('humidity-input').value = preset.humidity;
+            document.getElementById('wind-input').value = preset.wind;
+            document.getElementById('time-select').value = preset.time;
+
+            updateCard();
+        }
 
         function toggleDemoMode() {
             const demoBtn = document.getElementById('demo-btn');
@@ -533,13 +1027,10 @@
             demoModeActive = true;
             demoStep = 0;
             const demoBtn = document.getElementById('demo-btn');
-            demoBtn.textContent = '⏹️ Остановить демо';
-            demoBtn.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)';
+            demoBtn.textContent = t('stopDemo');
+            demoBtn.classList.add('active');
 
-            // Run demo immediately
             runDemoStep();
-
-            // Then cycle every 3 seconds
             demoInterval = setInterval(runDemoStep, 3000);
         }
 
@@ -550,31 +1041,22 @@
                 demoInterval = null;
             }
             const demoBtn = document.getElementById('demo-btn');
-            demoBtn.textContent = '🎬 Запустить режим демо';
-            demoBtn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+            demoBtn.textContent = t('startDemo');
+            demoBtn.classList.remove('active');
         }
 
         function runDemoStep() {
             const demo = DEMO_SEQUENCE[demoStep];
 
-            // Update controls
             document.getElementById('condition-select').value = demo.condition;
-            document.getElementById('name-input').value = demo.name;
             document.getElementById('temperature-input').value = demo.temp;
             document.getElementById('humidity-input').value = demo.humidity;
             document.getElementById('wind-input').value = demo.wind;
             document.getElementById('time-select').value = demo.time;
 
-            // Update card
             updateCard();
-
-            // Move to next step
             demoStep = (demoStep + 1) % DEMO_SEQUENCE.length;
         }
-
-        // ============================================================================
-        // TIME CONTROL FUNCTIONS
-        // ============================================================================
 
         function setTime(minutes) {
             currentManualTime = minutes;
@@ -586,42 +1068,30 @@
         }
 
         function getTimeOfDayFromMinutes(totalMinutes) {
-            // Sunrise: 6:00 - 8:00 (360-480 minutes)
             if (totalMinutes >= 360 && totalMinutes < 480) {
                 const progress = (totalMinutes - 360) / 120;
                 return { type: 'sunrise', progress };
             }
-
-            // Day: 8:00 - 18:00 (480-1080 minutes)
             if (totalMinutes >= 480 && totalMinutes < 1080) {
                 const progress = (totalMinutes - 480) / 600;
                 return { type: 'day', progress };
             }
-
-            // Sunset: 18:00 - 20:00 (1080-1200 minutes)
             if (totalMinutes >= 1080 && totalMinutes < 1200) {
                 const progress = (totalMinutes - 1080) / 120;
                 return { type: 'sunset', progress };
             }
-
-            // Night
             return { type: 'night', progress: 0 };
         }
-
-        // ============================================================================
-        // CARD UPDATE FUNCTION
-        // ============================================================================
 
         function updateCard() {
             const container = document.getElementById('card-container');
             container.innerHTML = '';
 
             if (!window.cardLoaded) {
-                container.innerHTML = '<div class="loading-message">Загрузка карточки...</div>';
+                container.innerHTML = `<div class="loading-message">${t('loading')}</div>`;
                 return;
             }
 
-            // Get control values
             const config = {
                 condition: document.getElementById('condition-select').value,
                 name: document.getElementById('name-input').value.trim(),
@@ -640,10 +1110,8 @@
                 showSunriseSunset: document.getElementById('show-sunrise-sunset').checked
             };
 
-            // Create card element
             card = document.createElement('dynamic-weather-card');
 
-            // Override time of day if needed
             if (config.timeSelect === 'manual') {
                 card._testTimeOfDay = getTimeOfDayFromMinutes(currentManualTime);
             } else if (config.timeSelect !== 'auto') {
@@ -653,15 +1121,8 @@
                 card._testTimeOfDay = null;
             }
 
-            // Create mock HASS object
-            mockHass = createMockHass(
-                config.condition,
-                config.temperature,
-                config.humidity,
-                config.windSpeed
-            );
+            mockHass = createMockHass(config.condition, config.temperature, config.humidity, config.windSpeed);
 
-            // Set card configuration
             const cardConfig = {
                 entity: 'weather.test',
                 height: config.height,
@@ -675,28 +1136,24 @@
                 show_sunrise_sunset: config.showSunriseSunset
             };
 
-            // Add name only if not empty
             if (config.name) {
                 cardConfig.name = config.name;
             }
 
             card.setConfig(cardConfig);
-
             card.hass = mockHass;
             container.appendChild(card);
         }
 
-        // ============================================================================
-        // EVENT LISTENERS & INITIALIZATION
-        // ============================================================================
-
         document.addEventListener('DOMContentLoaded', () => {
+            // Apply translations
+            updatePageLanguage();
+
             const timeSlider = document.getElementById('time-slider');
             const timeDisplay = document.getElementById('time-display');
             const timeSelect = document.getElementById('time-select');
             const sliderContainer = document.getElementById('time-slider-container');
 
-            // Time slider input handler
             timeSlider.addEventListener('input', () => {
                 currentManualTime = parseInt(timeSlider.value);
                 timeDisplay.textContent = formatTime(currentManualTime);
@@ -705,16 +1162,15 @@
                 }
             });
 
-            // Time mode selector handler
             timeSelect.addEventListener('change', () => {
                 sliderContainer.style.display = timeSelect.value === 'manual' ? 'block' : 'none';
                 updateCard();
             });
 
-            // Auto-update on checkbox changes
             const checkboxIds = [
                 'show-feels-like', 'show-min-temp', 'show-humidity',
-                'show-wind', 'show-wind-direction', 'show-wind-gust', 'show-forecast', 'show-sunrise-sunset'
+                'show-wind', 'show-wind-direction', 'show-wind-gust',
+                'show-forecast', 'show-sunrise-sunset'
             ];
 
             checkboxIds.forEach(id => {
@@ -724,14 +1180,11 @@
                 });
             });
 
-            // Initialize time display
             timeDisplay.textContent = formatTime(currentManualTime);
         });
 
-        // Initialize card when loaded
         window.initCard = () => updateCard();
 
-        // Auto-refresh every minute when in auto mode
         setInterval(() => {
             if (card && document.getElementById('time-select').value === 'auto') {
                 updateCard();

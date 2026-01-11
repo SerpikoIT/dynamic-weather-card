@@ -148,6 +148,13 @@ export const cardStyles = css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    color: white;
+  }
+
+  .info-icon svg {
+    width: 20px;
+    height: 20px;
+    display: block;
   }
 
   .forecast-container {

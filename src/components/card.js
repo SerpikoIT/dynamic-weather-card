@@ -20,6 +20,7 @@ import { FoggyAnimation } from '../animations/foggy.js';
 import { HailAnimation } from '../animations/hail.js';
 import { ThunderstormAnimation } from '../animations/thunderstorm.js';
 import { cardStyles } from './styles.js';
+import { getSVGIcon } from '../icons/svg-icons.js';
 
 export class AnimatedWeatherCard extends LitElement {
   static get properties() {
@@ -404,32 +405,32 @@ export class AnimatedWeatherCard extends LitElement {
               <div class="info-grid">
                 ${this.config.showHumidity && weather.humidity != null ? html`
                   <div class="info-item">
-                    <span class="info-icon">${getIcon('humidity-icon.svg')}</span>
+                    <span class="info-icon">${getSVGIcon('humidity')}</span>
                     <span>${weather.humidity} %</span>
                   </div>
                 ` : ''}
                 ${this.config.showSunriseSunset && sunData.hasSunData ? html`
                   <div class="info-item">
-                    <span class="info-icon">🌅</span>
+                    <span class="info-icon">${getSVGIcon('sunrise')}</span>
                     <span>${formatTime(sunData.sunrise)}</span>
                   </div>
                 ` : ''}
                 ${this.config.showWind && weather.windSpeed != null ? html`
                   ${this.config.showWindDirection && weather.windBearing != null ? html`
                     <div class="info-item">
-                      <span class="info-icon">${getIcon(getWindDirectionIcon(weather.windBearing))}</span>
+                      <span class="info-icon">${getSVGIcon('windDirection', weather.windBearing)}</span>
                       <span>${weather.windSpeed} м/с${this.config.showWindGust && weather.windGust ? ` / ${weather.windGust} м/с` : ''}</span>
                     </div>
                   ` : html`
                     <div class="info-item">
-                      <span class="info-icon">${getIcon('wind-icon.svg')}</span>
+                      <span class="info-icon">${getSVGIcon('wind')}</span>
                       <span>${weather.windSpeed} м/с${this.config.showWindGust && weather.windGust ? ` / ${weather.windGust} м/с` : ''}</span>
                     </div>
                   `}
                 ` : ''}
                 ${this.config.showSunriseSunset && sunData.hasSunData ? html`
                   <div class="info-item">
-                    <span class="info-icon">🌇</span>
+                    <span class="info-icon">${getSVGIcon('sunset')}</span>
                     <span>${formatTime(sunData.sunset)}</span>
                   </div>
                 ` : ''}

@@ -184,6 +184,10 @@ Works with all standard Home Assistant weather integrations:
 - AccuWeather
 - And others...
 
+## Credits
+
+Weather icons are provided by [Basmilius Weather Icons](https://github.com/basmilius/weather-icons) by [@basmilius](https://github.com/basmilius), licensed under MIT.
+
 ## License
 
 MIT

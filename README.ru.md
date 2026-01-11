@@ -184,6 +184,10 @@ yarn dev
 - AccuWeather
 - И другие...
 
+## Благодарности
+
+Иконки погоды предоставлены [Basmilius Weather Icons](https://github.com/basmilius/weather-icons) от [@basmilius](https://github.com/basmilius), лицензия MIT.
+
 ## Лицензия
 
 MIT

@@ -1,6 +1,6 @@
 # 🌤️ Dynamic Weather Card
 
-Dynamic weather card for Home Assistant with realistic animations.
+Dynamic weather card for Home Assistant with realistic animations.  
 ![demo](docs/demo.gif)
 
 ## Features

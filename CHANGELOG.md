@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.3.1] - 2026-01-12
+
+## What's Changed
+
+### ✨ Features
+- feat: add ESLint configuration and improve animations (88550d3)
+
+### 🐛 Bug Fixes
+- fix: info.md formatting (1f5b24a)
+
+### 📚 Documentation
+- docs: update CHANGELOG.md for v0.3.0 (ffa50bd)
+
+**Full Changelog**: https://github.com/teuchezh/dynamic-weather-card/compare/v0.3.0...v0.3.1
+
+
 ## [v0.3.0] - 2026-01-11
 
 ## What's Changed

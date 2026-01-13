@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v0.3.2] - 2026-01-13
+
+## What's Changed
+
+### 🐛 Bug Fixes
+- fix: smooth animation timing in rain and snow (e1bb12c)
+
+### 📚 Documentation
+- docs: update CHANGELOG.md for v0.3.1 (544d7ed)
+
+**Full Changelog**: https://github.com/teuchezh/dynamic-weather-card/compare/v0.3.1...v0.3.2
+
+
 ## [v0.3.1] - 2026-01-12
 
 ## What's Changed

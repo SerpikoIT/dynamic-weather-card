@@ -567,6 +567,19 @@
                     <input type="number" id="height-input" value="200" min="150" max="400" step="10">
                 </div>
 
+                <div class="control-group">
+                    <label class="control-label">Overlay Opacity (0-1)</label>
+                    <input type="number" id="overlay-opacity-input" value="0.1" min="0" max="1" step="0.05">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Wind Speed Unit</label>
+                    <select id="wind-speed-unit-select">
+                        <option value="ms">m/s</option>
+                        <option value="kmh">km/h</option>
+                    </select>
+                </div>
+
                 <div class="checkbox-group">
                     <label class="checkbox-item">
                         <input type="checkbox" id="show-feels-like" checked>
@@ -599,6 +612,10 @@
                     <label class="checkbox-item">
                         <input type="checkbox" id="show-sunrise-sunset">
                         <span class="checkbox-text">Sunrise/Sunset</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="show-clock">
+                        <span class="checkbox-text">Clock</span>
                     </label>
                 </div>
             </div>
@@ -719,12 +736,17 @@
                 displayOptions: '👁️ Display Options',
                 cardName: 'Card Name',
                 height: 'Height (px)',
+                overlayOpacity: 'Overlay Opacity (0-1)',
+                windSpeedUnit: 'Wind Speed Unit',
+                windUnitMs: 'm/s',
+                windUnitKmh: 'km/h',
                 feelsLike: 'Feels Like Temperature',
                 minTemp: 'Min Temperature',
                 windDirection: 'Wind Direction',
                 windGust: 'Wind Gust',
                 hourlyForecast: 'Hourly Forecast',
                 sunriseSunset: 'Sunrise/Sunset',
+                clock: 'Clock',
                 updateCard: '🔄 Update Card',
                 startDemo: '🎬 Start Demo Mode',
                 stopDemo: '⏹️ Stop Demo',
@@ -777,12 +799,17 @@
                 displayOptions: '👁️ Опции отображения',
                 cardName: 'Название карточки',
                 height: 'Высота (px)',
+                overlayOpacity: 'Прозрачность затемнения (0-1)',
+                windSpeedUnit: 'Единицы скорости ветра',
+                windUnitMs: 'м/с',
+                windUnitKmh: 'км/ч',
                 feelsLike: 'Ощущается как',
                 minTemp: 'Мин. температура',
                 windDirection: 'Направление ветра',
                 windGust: 'Порывы ветра',
                 hourlyForecast: 'Почасовой прогноз',
                 sunriseSunset: 'Восход/Закат',
+                clock: 'Часы',
                 updateCard: '🔄 Обновить карточку',
                 startDemo: '🎬 Запустить демо',
                 stopDemo: '⏹️ Остановить демо',
@@ -856,6 +883,13 @@
             document.querySelectorAll('.section-header')[3].textContent = t('displayOptions');
             document.querySelectorAll('.control-label')[6].textContent = t('cardName');
             document.querySelectorAll('.control-label')[7].textContent = t('height');
+            document.querySelectorAll('.control-label')[8].textContent = t('overlayOpacity');
+            document.querySelectorAll('.control-label')[9].textContent = t('windSpeedUnit');
+
+            // Wind speed unit options
+            const windSpeedUnitSelect = document.getElementById('wind-speed-unit-select');
+            windSpeedUnitSelect.options[0].text = t('windUnitMs');
+            windSpeedUnitSelect.options[1].text = t('windUnitKmh');
 
             // Weather condition options
             const conditionSelect = document.getElementById('condition-select');
@@ -891,6 +925,7 @@
             document.querySelectorAll('.checkbox-text')[5].textContent = t('windGust');
             document.querySelectorAll('.checkbox-text')[6].textContent = t('hourlyForecast');
             document.querySelectorAll('.checkbox-text')[7].textContent = t('sunriseSunset');
+            document.querySelectorAll('.checkbox-text')[8].textContent = t('clock');
 
             // Buttons
             document.querySelector('.btn-primary').innerHTML = t('updateCard');
@@ -1100,6 +1135,8 @@
                 humidity: parseInt(document.getElementById('humidity-input').value),
                 windSpeed: parseInt(document.getElementById('wind-input').value),
                 height: parseInt(document.getElementById('height-input').value),
+                overlayOpacity: parseFloat(document.getElementById('overlay-opacity-input').value),
+                windSpeedUnit: document.getElementById('wind-speed-unit-select').value,
                 timeSelect: document.getElementById('time-select').value,
                 showFeelsLike: document.getElementById('show-feels-like').checked,
                 showMinTemp: document.getElementById('show-min-temp').checked,
@@ -1108,7 +1145,8 @@
                 showWindDirection: document.getElementById('show-wind-direction').checked,
                 showWindGust: document.getElementById('show-wind-gust').checked,
                 showForecast: document.getElementById('show-forecast').checked,
-                showSunriseSunset: document.getElementById('show-sunrise-sunset').checked
+                showSunriseSunset: document.getElementById('show-sunrise-sunset').checked,
+                showClock: document.getElementById('show-clock').checked
             };
 
             card = document.createElement('dynamic-weather-card');
@@ -1127,6 +1165,8 @@
             const cardConfig = {
                 entity: 'weather.test',
                 height: config.height,
+                overlay_opacity: config.overlayOpacity,
+                wind_speed_unit: config.windSpeedUnit,
                 show_feels_like: config.showFeelsLike,
                 show_wind: config.showWind,
                 show_wind_direction: config.showWindDirection,
@@ -1134,7 +1174,8 @@
                 show_humidity: config.showHumidity,
                 show_min_temp: config.showMinTemp,
                 show_forecast: config.showForecast,
-                show_sunrise_sunset: config.showSunriseSunset
+                show_sunrise_sunset: config.showSunriseSunset,
+                show_clock: config.showClock
             };
 
             if (config.name) {
@@ -1171,7 +1212,7 @@
             const checkboxIds = [
                 'show-feels-like', 'show-min-temp', 'show-humidity',
                 'show-wind', 'show-wind-direction', 'show-wind-gust',
-                'show-forecast', 'show-sunrise-sunset'
+                'show-forecast', 'show-sunrise-sunset', 'show-clock'
             ];
 
             checkboxIds.forEach(id => {

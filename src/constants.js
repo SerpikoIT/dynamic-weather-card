@@ -50,14 +50,18 @@ export const TRANSLATIONS = {
     'forecast_title': 'Today\'s Forecast',
     'no_data': 'No data',
     'forecast_unavailable': 'Forecast unavailable',
-    'weather': 'Weather'
+    'weather': 'Weather',
+    'wind_unit_ms': 'm/s',
+    'wind_unit_kmh': 'km/h'
   },
   ru: {
     'feels_like': 'Ощущается как',
     'forecast_title': 'Прогноз на сегодня',
     'no_data': 'Нет данных',
     'forecast_unavailable': 'Прогноз недоступен',
-    'weather': 'Погода'
+    'weather': 'Погода',
+    'wind_unit_ms': 'м/с',
+    'wind_unit_kmh': 'км/ч'
   }
 };
 
@@ -88,6 +92,9 @@ export const DEFAULT_CONFIG = {
   showMinTemp: true,
   showForecast: false,
   showSunriseSunset: false,
+  showClock: false,
+  overlayOpacity: 0.1,
   language: 'auto',
-  height: null
+  height: null,
+  windSpeedUnit: 'ms' // 'ms' or 'kmh'
 };

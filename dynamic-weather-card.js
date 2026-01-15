@@ -1,4 +1,2229 @@
-const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,i=Symbol(),s=new WeakMap;let n=class{constructor(t,e,s){if(this._$cssResult$=!0,s!==i)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const i=this.t;if(e&&void 0===t){const e=void 0!==i&&1===i.length;e&&(t=s.get(i)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&s.set(i,t))}return t}toString(){return this.cssText}};const a=e?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const i of t.cssRules)e+=i.cssText;return(t=>new n("string"==typeof t?t:t+"",void 0,i))(e)})(t):t,{is:r,defineProperty:o,getOwnPropertyDescriptor:l,getOwnPropertyNames:h,getOwnPropertySymbols:d,getPrototypeOf:c}=Object,u=globalThis,p=u.trustedTypes,m=p?p.emptyScript:"",g=u.reactiveElementPolyfillSupport,f=(t,e)=>t,w={toAttribute(t,e){switch(e){case Boolean:t=t?m:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t)}return t},fromAttribute(t,e){let i=t;switch(e){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t)}catch(t){i=null}}return i}},v=(t,e)=>!r(t,e),y={attribute:!0,type:String,converter:w,reflect:!1,useDefault:!1,hasChanged:v};Symbol.metadata??=Symbol("metadata"),u.litPropertyMetadata??=new WeakMap;let b=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,e=y){if(e.state&&(e.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((e=Object.create(e)).wrapped=!0),this.elementProperties.set(t,e),!e.noAccessor){const i=Symbol(),s=this.getPropertyDescriptor(t,i,e);void 0!==s&&o(this.prototype,t,s)}}static getPropertyDescriptor(t,e,i){const{get:s,set:n}=l(this.prototype,t)??{get(){return this[e]},set(t){this[e]=t}};return{get:s,set(e){const a=s?.call(this);n?.call(this,e),this.requestUpdate(t,a,i)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??y}static _$Ei(){if(this.hasOwnProperty(f("elementProperties")))return;const t=c(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(f("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(f("properties"))){const t=this.properties,e=[...h(t),...d(t)];for(const i of e)this.createProperty(i,t[i])}const t=this[Symbol.metadata];if(null!==t){const e=litPropertyMetadata.get(t);if(void 0!==e)for(const[t,i]of e)this.elementProperties.set(t,i)}this._$Eh=new Map;for(const[t,e]of this.elementProperties){const i=this._$Eu(t,e);void 0!==i&&this._$Eh.set(i,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const i=new Set(t.flat(1/0).reverse());for(const t of i)e.unshift(a(t))}else void 0!==t&&e.push(a(t));return e}static _$Eu(t,e){const i=e.attribute;return!1===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,e=this.constructor.elementProperties;for(const i of e.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const i=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return((i,s)=>{if(e)i.adoptedStyleSheets=s.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const e of s){const s=document.createElement("style"),n=t.litNonce;void 0!==n&&s.setAttribute("nonce",n),s.textContent=e.cssText,i.appendChild(s)}})(i,this.constructor.elementStyles),i}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,e,i){this._$AK(t,i)}_$ET(t,e){const i=this.constructor.elementProperties.get(t),s=this.constructor._$Eu(t,i);if(void 0!==s&&!0===i.reflect){const n=(void 0!==i.converter?.toAttribute?i.converter:w).toAttribute(e,i.type);this._$Em=t,null==n?this.removeAttribute(s):this.setAttribute(s,n),this._$Em=null}}_$AK(t,e){const i=this.constructor,s=i._$Eh.get(t);if(void 0!==s&&this._$Em!==s){const t=i.getPropertyOptions(s),n="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:w;this._$Em=s;const a=n.fromAttribute(e,t.type);this[s]=a??this._$Ej?.get(s)??a,this._$Em=null}}requestUpdate(t,e,i,s=!1,n){if(void 0!==t){const a=this.constructor;if(!1===s&&(n=this[t]),i??=a.getPropertyOptions(t),!((i.hasChanged??v)(n,e)||i.useDefault&&i.reflect&&n===this._$Ej?.get(t)&&!this.hasAttribute(a._$Eu(t,i))))return;this.C(t,e,i)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(t,e,{useDefault:i,reflect:s,wrapped:n},a){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,a??e??this[t]),!0!==n||void 0!==a)||(this._$AL.has(t)||(this.hasUpdated||i||(e=void 0),this._$AL.set(t,e)),!0===s&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,e]of this._$Ep)this[t]=e;this._$Ep=void 0}const t=this.constructor.elementProperties;if(t.size>0)for(const[e,i]of t){const{wrapped:t}=i,s=this[e];!0!==t||this._$AL.has(e)||void 0===s||this.C(e,void 0,i,s)}}let t=!1;const e=this._$AL;try{t=this.shouldUpdate(e),t?(this.willUpdate(e),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(e)):this._$EM()}catch(e){throw t=!1,this._$EM(),e}t&&this._$AE(e)}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(t){}firstUpdated(t){}};b.elementStyles=[],b.shadowRootOptions={mode:"open"},b[f("elementProperties")]=new Map,b[f("finalized")]=new Map,g?.({ReactiveElement:b}),(u.reactiveElementVersions??=[]).push("2.1.2");const x=globalThis,k=t=>t,_=x.trustedTypes,$=_?_.createPolicy("lit-html",{createHTML:t=>t}):void 0,C="$lit$",M=`lit$${Math.random().toFixed(9).slice(2)}$`,S="?"+M,A=`<${S}>`,T=document,N=()=>T.createComment(""),E=t=>null===t||"object"!=typeof t&&"function"!=typeof t,P=Array.isArray,D="[ \t\n\f\r]",z=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,F=/-->/g,H=/>/g,R=RegExp(`>|${D}(?:([^\\s"'>=/]+)(${D}*=${D}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),O=/'/g,U=/"/g,B=/^(?:script|style|textarea|title)$/i,j=t=>(e,...i)=>({_$litType$:t,strings:e,values:i}),L=j(1),W=j(2),I=Symbol.for("lit-noChange"),q=Symbol.for("lit-nothing"),G=new WeakMap,V=T.createTreeWalker(T,129);function Y(t,e){if(!P(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==$?$.createHTML(e):e}const X=(t,e)=>{const i=t.length-1,s=[];let n,a=2===e?"<svg>":3===e?"<math>":"",r=z;for(let e=0;e<i;e++){const i=t[e];let o,l,h=-1,d=0;for(;d<i.length&&(r.lastIndex=d,l=r.exec(i),null!==l);)d=r.lastIndex,r===z?"!--"===l[1]?r=F:void 0!==l[1]?r=H:void 0!==l[2]?(B.test(l[2])&&(n=RegExp("</"+l[2],"g")),r=R):void 0!==l[3]&&(r=R):r===R?">"===l[0]?(r=n??z,h=-1):void 0===l[1]?h=-2:(h=r.lastIndex-l[2].length,o=l[1],r=void 0===l[3]?R:'"'===l[3]?U:O):r===U||r===O?r=R:r===F||r===H?r=z:(r=R,n=void 0);const c=r===R&&t[e+1].startsWith("/>")?" ":"";a+=r===z?i+A:h>=0?(s.push(o),i.slice(0,h)+C+i.slice(h)+M+c):i+M+(-2===h?e:c)}return[Y(t,a+(t[i]||"<?>")+(2===e?"</svg>":3===e?"</math>":"")),s]};class Z{constructor({strings:t,_$litType$:e},i){let s;this.parts=[];let n=0,a=0;const r=t.length-1,o=this.parts,[l,h]=X(t,e);if(this.el=Z.createElement(l,i),V.currentNode=this.el.content,2===e||3===e){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes)}for(;null!==(s=V.nextNode())&&o.length<r;){if(1===s.nodeType){if(s.hasAttributes())for(const t of s.getAttributeNames())if(t.endsWith(C)){const e=h[a++],i=s.getAttribute(t).split(M),r=/([.?@])?(.*)/.exec(e);o.push({type:1,index:n,name:r[2],strings:i,ctor:"."===r[1]?et:"?"===r[1]?it:"@"===r[1]?st:tt}),s.removeAttribute(t)}else t.startsWith(M)&&(o.push({type:6,index:n}),s.removeAttribute(t));if(B.test(s.tagName)){const t=s.textContent.split(M),e=t.length-1;if(e>0){s.textContent=_?_.emptyScript:"";for(let i=0;i<e;i++)s.append(t[i],N()),V.nextNode(),o.push({type:2,index:++n});s.append(t[e],N())}}}else if(8===s.nodeType)if(s.data===S)o.push({type:2,index:n});else{let t=-1;for(;-1!==(t=s.data.indexOf(M,t+1));)o.push({type:7,index:n}),t+=M.length-1}n++}}static createElement(t,e){const i=T.createElement("template");return i.innerHTML=t,i}}function J(t,e,i=t,s){if(e===I)return e;let n=void 0!==s?i._$Co?.[s]:i._$Cl;const a=E(e)?void 0:e._$litDirective$;return n?.constructor!==a&&(n?._$AO?.(!1),void 0===a?n=void 0:(n=new a(t),n._$AT(t,i,s)),void 0!==s?(i._$Co??=[])[s]=n:i._$Cl=n),void 0!==n&&(e=J(t,n._$AS(t,e.values),n,s)),e}class K{constructor(t,e){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:e},parts:i}=this._$AD,s=(t?.creationScope??T).importNode(e,!0);V.currentNode=s;let n=V.nextNode(),a=0,r=0,o=i[0];for(;void 0!==o;){if(a===o.index){let e;2===o.type?e=new Q(n,n.nextSibling,this,t):1===o.type?e=new o.ctor(n,o.name,o.strings,this,t):6===o.type&&(e=new nt(n,this,t)),this._$AV.push(e),o=i[++r]}a!==o?.index&&(n=V.nextNode(),a++)}return V.currentNode=T,s}p(t){let e=0;for(const i of this._$AV)void 0!==i&&(void 0!==i.strings?(i._$AI(t,i,e),e+=i.strings.length-2):i._$AI(t[e])),e++}}class Q{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,e,i,s){this.type=2,this._$AH=q,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=i,this.options=s,this._$Cv=s?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return void 0!==e&&11===t?.nodeType&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=J(this,t,e),E(t)?t===q||null==t||""===t?(this._$AH!==q&&this._$AR(),this._$AH=q):t!==this._$AH&&t!==I&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):(t=>P(t)||"function"==typeof t?.[Symbol.iterator])(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==q&&E(this._$AH)?this._$AA.nextSibling.data=t:this.T(T.createTextNode(t)),this._$AH=t}$(t){const{values:e,_$litType$:i}=t,s="number"==typeof i?this._$AC(t):(void 0===i.el&&(i.el=Z.createElement(Y(i.h,i.h[0]),this.options)),i);if(this._$AH?._$AD===s)this._$AH.p(e);else{const t=new K(s,this),i=t.u(this.options);t.p(e),this.T(i),this._$AH=t}}_$AC(t){let e=G.get(t.strings);return void 0===e&&G.set(t.strings,e=new Z(t)),e}k(t){P(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let i,s=0;for(const n of t)s===e.length?e.push(i=new Q(this.O(N()),this.O(N()),this,this.options)):i=e[s],i._$AI(n),s++;s<e.length&&(this._$AR(i&&i._$AB.nextSibling,s),e.length=s)}_$AR(t=this._$AA.nextSibling,e){for(this._$AP?.(!1,!0,e);t!==this._$AB;){const e=k(t).nextSibling;k(t).remove(),t=e}}setConnected(t){void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t))}}class tt{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,e,i,s,n){this.type=1,this._$AH=q,this._$AN=void 0,this.element=t,this.name=e,this._$AM=s,this.options=n,i.length>2||""!==i[0]||""!==i[1]?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=q}_$AI(t,e=this,i,s){const n=this.strings;let a=!1;if(void 0===n)t=J(this,t,e,0),a=!E(t)||t!==this._$AH&&t!==I,a&&(this._$AH=t);else{const s=t;let r,o;for(t=n[0],r=0;r<n.length-1;r++)o=J(this,s[i+r],e,r),o===I&&(o=this._$AH[r]),a||=!E(o)||o!==this._$AH[r],o===q?t=q:t!==q&&(t+=(o??"")+n[r+1]),this._$AH[r]=o}a&&!s&&this.j(t)}j(t){t===q?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class et extends tt{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===q?void 0:t}}class it extends tt{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==q)}}class st extends tt{constructor(t,e,i,s,n){super(t,e,i,s,n),this.type=5}_$AI(t,e=this){if((t=J(this,t,e,0)??q)===I)return;const i=this._$AH,s=t===q&&i!==q||t.capture!==i.capture||t.once!==i.once||t.passive!==i.passive,n=t!==q&&(i===q||s);s&&this.element.removeEventListener(this.name,this,i),n&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class nt{constructor(t,e,i){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(t){J(this,t)}}const at=x.litHtmlPolyfillSupport;at?.(Z,Q),(x.litHtmlVersions??=[]).push("3.3.2");const rt=globalThis;class ot extends b{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=((t,e,i)=>{const s=i?.renderBefore??e;let n=s._$litPart$;if(void 0===n){const t=i?.renderBefore??null;s._$litPart$=n=new Q(e.insertBefore(N(),t),t,void 0,i??{})}return n._$AI(t),n})(e,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return I}}ot._$litElement$=!0,ot.finalized=!0,rt.litElementHydrateSupport?.({LitElement:ot});const lt=rt.litElementPolyfillSupport;lt?.({LitElement:ot}),(rt.litElementVersions??=[]).push("4.2.2");const ht={en:{sunny:"Sunny",clear:"Clear",overcast:"Overcast",cloudy:"Cloudy",partlycloudy:"Partly Cloudy",rainy:"Rainy",rain:"Rain",snowy:"Snowy",snow:"Snow",foggy:"Foggy",fog:"Fog",lightning:"Lightning","lightning-rainy":"Thunderstorm",pouring:"Heavy Rain","snowy-rainy":"Sleet",hail:"Hail","clear-night":"Clear Night"},ru:{sunny:"Солнечно",clear:"Ясно",overcast:"Пасмурно",cloudy:"Облачно",partlycloudy:"Переменная облачность",rainy:"Дождь",rain:"Дождь",snowy:"Снег",snow:"Снег",foggy:"Туман",fog:"Туман",lightning:"Гроза","lightning-rainy":"Гроза с дождем",pouring:"Сильный дождь","snowy-rainy":"Мокрый снег",hail:"Град","clear-night":"Ясная ночь"}},dt={en:{feels_like:"Feels like",forecast_title:"Today's Forecast",no_data:"No data",forecast_unavailable:"Forecast unavailable",weather:"Weather",wind_unit_ms:"m/s",wind_unit_kmh:"km/h"},ru:{feels_like:"Ощущается как",forecast_title:"Прогноз на сегодня",no_data:"Нет данных",forecast_unavailable:"Прогноз недоступен",weather:"Погода",wind_unit_ms:"м/с",wind_unit_kmh:"км/ч"}},ct=360,ut=480,pt=1080,mt=1200,gt=["templow","temperature_low","temp_low","min_temp","yandex_pogoda_minimal_forecast_temperature"],ft=.1,wt="auto",vt=null,yt="ms";function bt(t){if(!t)return"";const e="string"==typeof t?new Date(t):t,i=e.getHours(),s=e.getMinutes();return`${i.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`}function xt(t,e=null,i=null,s=null){let n=null,a=null;if(e&&s&&s.states[e]){const t=s.states[e];n=new Date(t.state)}if(i&&s&&s.states[i]){const t=s.states[i];a=new Date(t.state)}if((!n||!a)&&t&&t.attributes){const e=t.attributes;n||!e.forecast_sunrise&&!e.sunrise||(n=new Date(e.forecast_sunrise||e.sunrise)),a||!e.forecast_sunset&&!e.sunset||(a=new Date(e.forecast_sunset||e.sunset))}return{sunrise:n,sunset:a,hasSunData:!(!n||!a)}}function kt(t){const e=new Date;if(t.hasSunData&&t.sunrise&&t.sunset){const i=e.getTime();let s=t.sunrise.getTime(),n=t.sunset.getTime();s-i>432e5&&(s-=864e5),n-i>432e5&&(n-=864e5);const a=s-36e5,r=s+36e5,o=n-36e5,l=n+36e5;if(i>=a&&i<r){return{type:"sunrise",progress:(i-a)/(r-a)}}if(i>=r&&i<o){return{type:"day",progress:(i-r)/(o-r)}}if(i>=o&&i<l){return{type:"sunset",progress:(i-o)/(l-o)}}return{type:"night",progress:0}}return function(){const t=new Date,e=60*t.getHours()+t.getMinutes();if(e>=ct&&e<ut)return{type:"sunrise",progress:(e-ct)/120};if(e>=ut&&e<pt)return{type:"day",progress:(e-ut)/600};if(e>=pt&&e<mt)return{type:"sunset",progress:(e-pt)/120};return{type:"night",progress:0}}()}class _t{constructor(t){this.ctx=t}drawCloud(t,e,i,s){const n=this.ctx.shadowBlur,a=this.ctx.shadowColor,r=this.ctx.globalAlpha;this.ctx.shadowBlur=.25*i,this.ctx.shadowColor=`rgba(255, 255, 255, ${.4*s})`,this.ctx.globalAlpha=.85*s,this.ctx.fillStyle="rgba(255, 255, 255, 1)";[{x:t,y:e,r:.4*i},{x:t+.35*i,y:e,r:.5*i},{x:t+.65*i,y:e,r:.48*i},{x:t+.92*i,y:e,r:.38*i},{x:t+.18*i,y:e-.28*i,r:.38*i},{x:t+.52*i,y:e-.32*i,r:.42*i},{x:t+.78*i,y:e-.28*i,r:.38*i},{x:t+.32*i,y:e-.42*i,r:.32*i},{x:t+.62*i,y:e-.48*i,r:.36*i},{x:t+.82*i,y:e-.42*i,r:.32*i}].forEach(t=>{this.ctx.beginPath(),this.ctx.arc(t.x,t.y,t.r,0,2*Math.PI),this.ctx.fill()}),this.ctx.shadowBlur=n,this.ctx.shadowColor=a,this.ctx.globalAlpha=r}drawClouds(t,e,i,s=.5){const n=Math.max(2,Math.floor(e/150*s));for(let s=0;s<n;s++){const n=(3*t+150*s)%(e+200)-100,a=i*(.2+s%3*.15)+8*Math.sin(.2*t+s),r=40+s%3*15,o=.6+s%2*.2;this.drawCloud(n,a,r,o)}}}class $t extends _t{draw(t,e,i){const s=.001*Date.now(),n=function(t,e,i){if("sunrise"===t.type){const s=t.progress;return{x:e*(.3+.4*s),y:i*(.85-.55*s)}}if("sunset"===t.type){const s=t.progress;return{x:e*(.5+.3*s),y:i*(.3+.55*s)}}if("day"===t.type){const s=t.progress*Math.PI;return{x:e*(.5+.25*Math.sin(s)),y:i*(.25-.1*Math.sin(s))}}return{x:.75*e,y:.3*i}}(t,e,i),a=n.x,r=n.y;"day"===t.type||"sunrise"===t.type||"sunset"===t.type?(this.drawSun(a,r,s),"sunrise"!==t.type&&"sunset"!==t.type||this.drawHorizonReflection(a,r,i,s)):"night"===t.type&&this.drawNightSky(e,i,s),this.drawClouds(s,e,i,.3)}drawSun(t,e,i){const s=48+1.5*Math.sin(.15*i),n=this.ctx.createRadialGradient(t,e,.3*s,t,e,3.5*s);n.addColorStop(0,"rgba(255, 248, 230, 0.25)"),n.addColorStop(.15,"rgba(255, 240, 200, 0.2)"),n.addColorStop(.3,"rgba(255, 230, 170, 0.15)"),n.addColorStop(.5,"rgba(255, 220, 140, 0.1)"),n.addColorStop(.7,"rgba(255, 210, 120, 0.06)"),n.addColorStop(.85,"rgba(255, 200, 100, 0.03)"),n.addColorStop(1,"rgba(255, 190, 90, 0)"),this.ctx.fillStyle=n,this.ctx.beginPath(),this.ctx.arc(t,e,3.5*s,0,2*Math.PI),this.ctx.fill();const a=this.ctx.createRadialGradient(t,e,.5*s,t,e,2.2*s);a.addColorStop(0,"rgba(255, 250, 220, 0.35)"),a.addColorStop(.3,"rgba(255, 240, 190, 0.25)"),a.addColorStop(.6,"rgba(255, 230, 160, 0.15)"),a.addColorStop(.85,"rgba(255, 220, 140, 0.08)"),a.addColorStop(1,"rgba(255, 210, 120, 0)"),this.ctx.fillStyle=a,this.ctx.beginPath(),this.ctx.arc(t,e,2.2*s,0,2*Math.PI),this.ctx.fill();const r=this.ctx.createRadialGradient(t,e,.6*s,t,e,1.6*s);r.addColorStop(0,"rgba(255, 252, 240, 0.5)"),r.addColorStop(.4,"rgba(255, 245, 210, 0.35)"),r.addColorStop(.7,"rgba(255, 235, 180, 0.2)"),r.addColorStop(1,"rgba(255, 225, 150, 0)"),this.ctx.fillStyle=r,this.ctx.beginPath(),this.ctx.arc(t,e,1.6*s,0,2*Math.PI),this.ctx.fill();const o=this.ctx.createRadialGradient(t-.1*s,e-.1*s,0,t,e,s);o.addColorStop(0,"#FFFEF5"),o.addColorStop(.15,"#FFF9E6"),o.addColorStop(.3,"#FFF4D6"),o.addColorStop(.5,"#FFEDC0"),o.addColorStop(.7,"#FFE4A8"),o.addColorStop(.85,"#FFDC95"),o.addColorStop(1,"#FFD37F"),this.ctx.fillStyle=o,this.ctx.beginPath(),this.ctx.arc(t,e,s,0,2*Math.PI),this.ctx.fill()}drawHorizonReflection(t,e,i,s){const n=48+1.5*Math.sin(.15*s),a=.85*i;if(e>=a-50){const i=.3*Math.max(0,(a-e)/50);this.ctx.fillStyle=`rgba(255, 140, 0, ${i})`,this.ctx.beginPath(),this.ctx.ellipse(t,a,1.5*n,.5*n,0,0,2*Math.PI),this.ctx.fill()}}drawNightSky(t,e,i){this.ctx.fillStyle="#FFFFFF";for(let s=0;s<20;s++){const n=(.2*t+47*s)%t,a=(.2*e+23*s)%(.6*e),r=.5*Math.sin(.8*i+s)+.5;this.ctx.globalAlpha=.8*r,this.ctx.beginPath(),this.ctx.arc(n,a,1.5,0,2*Math.PI),this.ctx.fill()}const s=.75*t,n=.3*e;this.ctx.globalAlpha=.9,this.ctx.fillStyle="#F0F0F0",this.ctx.beginPath(),this.ctx.arc(s,n,25,0,2*Math.PI),this.ctx.fill(),this.ctx.fillStyle="#1a1a2e",this.ctx.beginPath(),this.ctx.arc(s-8,n-5,22,0,2*Math.PI),this.ctx.fill(),this.ctx.globalAlpha=1}}class Ct extends _t{constructor(t){super(t),this.rainDrops=[],this.lastTime=0}draw(t,e,i,s=!1){const n=.001*Date.now();this.drawClouds(n,e,i,s?1:.8),this.drawRain(e,i,s)}drawRain(t,e,i){const s=i?130:90;if(this.rainDrops.length!==s){this.rainDrops=[];for(let n=0;n<s;n++)this.rainDrops.push({x:Math.random()*t,y:Math.random()*e-200*Math.random(),speed:i?80+100*Math.random():60+80*Math.random(),windOffset:30*(Math.random()-.5),width:i?1.2+1*Math.random():.8+.7*Math.random(),length:i?8+10*Math.random():6+8*Math.random(),alpha:i?.75+.15*Math.random():.65+.2*Math.random(),phase:Math.random()*Math.PI*2})}const n=.001*Date.now(),a=this.lastTime>0?Math.min(n-this.lastTime,.1):1/60;this.lastTime=n;const r=n;for(let i=0;i<this.rainDrops.length;i++){const s=this.rainDrops[i];s.y+=s.speed*a,s.y>e+50&&(s.y=-50-100*Math.random(),s.x=Math.random()*t);const n=s.windOffset*(1+.2*Math.sin(.5*r+s.phase)),o=s.x+n;o<-10?s.x=t+10:o>t+10&&(s.x=-10),this.drawRainDrop(o,s.y,s)}}drawRainDrop(t,e,i){this.ctx.save(),this.ctx.globalAlpha=i.alpha;const s=e-.5*i.length,n=e+.5*i.length;this.ctx.fillStyle=`rgba(220, 240, 255, ${i.alpha})`,this.ctx.strokeStyle=`rgba(240, 250, 255, ${.5*i.alpha})`,this.ctx.lineWidth=.4,this.ctx.beginPath(),this.ctx.moveTo(t,s),this.ctx.quadraticCurveTo(t-.3*i.width,e,t-i.width,n-.3*i.width),this.ctx.arc(t,n,i.width,Math.PI,0,!1),this.ctx.quadraticCurveTo(t+.3*i.width,e,t,s),this.ctx.closePath(),this.ctx.fill(),this.ctx.stroke(),this.ctx.restore()}}class Mt extends _t{constructor(t){super(t),this.snowflakes=[],this.lastTime=0}draw(t,e,i){const s=.001*Date.now();this.drawClouds(s,e,i,.7),this.drawSnowflakes(e,i)}drawSnowflakes(t,e){const i=Math.floor(t*e/5e3),s=Math.max(30,Math.min(i,80));if(this.snowflakes.length!==s){this.snowflakes=[];for(let i=0;i<s;i++)this.snowflakes.push({x:Math.random()*t,y:Math.random()*e-100*Math.random(),speedY:15+10*Math.random(),speedX:8*(Math.random()-.5),size:1.5+1.5*Math.random(),alpha:.6+.3*Math.random(),rotation:Math.random()*Math.PI*2,rotationSpeed:.3*(Math.random()-.5),swayPhase:Math.random()*Math.PI*2,swaySpeed:.5+.5*Math.random()})}const n=.001*Date.now(),a=this.lastTime>0?Math.min(n-this.lastTime,.1):1/60;this.lastTime=n;const r=n;this.ctx.lineCap="round";for(let i=0;i<this.snowflakes.length;i++){const s=this.snowflakes[i],n=2*Math.sin(r*s.swaySpeed+s.swayPhase);s.y+=s.speedY*a,s.x+=(s.speedX+n)*a,s.rotation+=s.rotationSpeed*a,s.y>e+20&&(s.y=-20-50*Math.random(),s.x=Math.random()*t),s.x<-10?s.x=t+10:s.x>t+10&&(s.x=-10),this.drawSnowflake(s.x,s.y,s.size,s.alpha,s.rotation)}}drawSnowflake(t,e,i,s,n){this.ctx.save(),this.ctx.translate(t,e),this.ctx.rotate(n),this.ctx.strokeStyle=`rgba(255, 255, 255, ${s})`,this.ctx.lineWidth=1,this.ctx.beginPath();for(let t=0;t<6;t++){const e=Math.PI/3*t,s=Math.cos(e),n=Math.sin(e);this.ctx.moveTo(0,0),this.ctx.lineTo(n*i*2.5,s*i*2.5);const a=n*i*1.5+s*i*.5,r=s*i*1.5-n*i*.5,o=n*i*1.8+s*i*1.2,l=s*i*1.8-n*i*1.2;this.ctx.moveTo(a,r),this.ctx.lineTo(o,l);const h=n*i*1.5-s*i*.5,d=s*i*1.5+n*i*.5,c=n*i*1.8-s*i*1.2,u=s*i*1.8+n*i*1.2;this.ctx.moveTo(h,d),this.ctx.lineTo(c,u)}this.ctx.stroke(),this.ctx.restore()}}class St extends _t{draw(t,e,i){const s=.001*Date.now();this.drawClouds(s,e,i,.7)}}class At extends _t{draw(t,e,i){const s=3e-4*Date.now();this.ctx.fillStyle="rgba(200, 200, 200, 0.4)";for(let t=0;t<3;t++){const n=i*(.4+.2*t),a=20*Math.sin(s+t);this.ctx.beginPath(),this.ctx.moveTo(0,n);for(let i=0;i<=e;i+=5){const r=15*Math.sin((i/e+s)*Math.PI*4+t);this.ctx.lineTo(i,n+r+a)}this.ctx.lineTo(e,i),this.ctx.lineTo(0,i),this.ctx.closePath(),this.ctx.fill()}}}class Tt extends _t{constructor(t){super(t),this.hailStones=[]}draw(t,e,i){const s=.001*Date.now();this.drawClouds(s,e,i,1),this.drawHailStones(e,i)}drawHailStones(t,e){if(60!==this.hailStones.length){this.hailStones=[];for(let i=0;i<60;i++)this.hailStones.push({startX:Math.random()*t,startY:Math.random()*(e+150)-75,speed:120+80*Math.random(),windOffset:20*(Math.random()-.5),size:2+3*Math.random(),alpha:.8+.15*Math.random(),phase:Math.random()*Math.PI*2})}const i=.002*Date.now();this.ctx.fillStyle="rgba(240, 250, 255, 1)",this.ctx.strokeStyle="rgba(255, 255, 255, 0.9)",this.ctx.lineWidth=.5;for(let s=0;s<this.hailStones.length;s++){const n=this.hailStones[s],a=(n.startY+i*n.speed)%(e+150);a>e+30&&(n.startY=-30-30*Math.random(),n.startX=Math.random()*t);const r=n.windOffset*(1+.15*Math.sin(.6*i+n.phase)),o=(n.startX+r+20*i%t)%t;o<-5?n.startX=t+5:o>t+5&&(n.startX=-5),this.drawHailStone(o,a,n)}}drawHailStone(t,e,i){this.ctx.save(),this.ctx.globalAlpha=i.alpha,this.ctx.beginPath(),this.ctx.ellipse(t,e,i.size,.9*i.size,0,0,2*Math.PI),this.ctx.fill(),this.ctx.stroke(),this.ctx.fillStyle="rgba(255, 255, 255, 0.6)",this.ctx.beginPath(),this.ctx.ellipse(t-.3*i.size,e-.3*i.size,.3*i.size,.25*i.size,0,0,2*Math.PI),this.ctx.fill(),this.ctx.fillStyle="rgba(240, 250, 255, 1)",this.ctx.restore()}}class Nt extends _t{constructor(t){super(t),this.rainyAnimation=new Ct(t)}draw(t,e,i,s=!0){const n=.001*Date.now();this.drawClouds(n,e,i,1),s&&this.rainyAnimation.draw(t,e,i,!1),this.drawLightning(e,i,n)}drawLightning(t,e,i){const s=Math.sin(2.5*i)*Math.sin(5.3*i)*Math.sin(7.1*i),n=Math.max(0,s);if(n>.4){const i=(n-.4)/.6,s=.6*i,a=Math.min(s,.6*Math.sin(i*Math.PI));this.ctx.fillStyle=`rgba(255, 255, 255, ${a})`,this.ctx.fillRect(0,0,t,e)}}}const Et=((t,...e)=>{const s=1===t.length?t[0]:e.reduce((e,i,s)=>e+(t=>{if(!0===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+t[s+1],t[0]);return new n(s,t,i)})`
+var __legacyDecorateClassTS = function(decorators, target, key, desc) {
+  var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+  if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+    r = Reflect.decorate(decorators, target, key, desc);
+  else
+    for (var i = decorators.length - 1;i >= 0; i--)
+      if (d = decorators[i])
+        r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+  return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+// node_modules/@lit/reactive-element/development/css-tag.js
+var NODE_MODE = false;
+var global = globalThis;
+var supportsAdoptingStyleSheets = global.ShadowRoot && (global.ShadyCSS === undefined || global.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
+var constructionToken = Symbol();
+var cssTagCache = new WeakMap;
+
+class CSSResult {
+  constructor(cssText, strings, safeToken) {
+    this["_$cssResult$"] = true;
+    if (safeToken !== constructionToken) {
+      throw new Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+    }
+    this.cssText = cssText;
+    this._strings = strings;
+  }
+  get styleSheet() {
+    let styleSheet = this._styleSheet;
+    const strings = this._strings;
+    if (supportsAdoptingStyleSheets && styleSheet === undefined) {
+      const cacheable = strings !== undefined && strings.length === 1;
+      if (cacheable) {
+        styleSheet = cssTagCache.get(strings);
+      }
+      if (styleSheet === undefined) {
+        (this._styleSheet = styleSheet = new CSSStyleSheet).replaceSync(this.cssText);
+        if (cacheable) {
+          cssTagCache.set(strings, styleSheet);
+        }
+      }
+    }
+    return styleSheet;
+  }
+  toString() {
+    return this.cssText;
+  }
+}
+var textFromCSSResult = (value) => {
+  if (value["_$cssResult$"] === true) {
+    return value.cssText;
+  } else if (typeof value === "number") {
+    return value;
+  } else {
+    throw new Error(`Value passed to 'css' function must be a 'css' function result: ` + `${value}. Use 'unsafeCSS' to pass non-literal values, but take care ` + `to ensure page security.`);
+  }
+};
+var unsafeCSS = (value) => new CSSResult(typeof value === "string" ? value : String(value), undefined, constructionToken);
+var css = (strings, ...values) => {
+  const cssText = strings.length === 1 ? strings[0] : values.reduce((acc, v, idx) => acc + textFromCSSResult(v) + strings[idx + 1], strings[0]);
+  return new CSSResult(cssText, strings, constructionToken);
+};
+var adoptStyles = (renderRoot, styles) => {
+  if (supportsAdoptingStyleSheets) {
+    renderRoot.adoptedStyleSheets = styles.map((s) => s instanceof CSSStyleSheet ? s : s.styleSheet);
+  } else {
+    for (const s of styles) {
+      const style = document.createElement("style");
+      const nonce = global["litNonce"];
+      if (nonce !== undefined) {
+        style.setAttribute("nonce", nonce);
+      }
+      style.textContent = s.cssText;
+      renderRoot.appendChild(style);
+    }
+  }
+};
+var cssResultFromStyleSheet = (sheet) => {
+  let cssText = "";
+  for (const rule of sheet.cssRules) {
+    cssText += rule.cssText;
+  }
+  return unsafeCSS(cssText);
+};
+var getCompatibleStyle = supportsAdoptingStyleSheets || NODE_MODE && global.CSSStyleSheet === undefined ? (s) => s : (s) => s instanceof CSSStyleSheet ? cssResultFromStyleSheet(s) : s;
+
+// node_modules/@lit/reactive-element/development/reactive-element.js
+var { is, defineProperty, getOwnPropertyDescriptor, getOwnPropertyNames, getOwnPropertySymbols, getPrototypeOf } = Object;
+var NODE_MODE2 = false;
+var global2 = globalThis;
+if (NODE_MODE2) {
+  global2.customElements ??= customElements;
+}
+var DEV_MODE = true;
+var issueWarning;
+var trustedTypes = global2.trustedTypes;
+var emptyStringForBooleanAttribute = trustedTypes ? trustedTypes.emptyScript : "";
+var polyfillSupport = DEV_MODE ? global2.reactiveElementPolyfillSupportDevMode : global2.reactiveElementPolyfillSupport;
+if (DEV_MODE) {
+  global2.litIssuedWarnings ??= new Set;
+  issueWarning = (code, warning) => {
+    warning += ` See https://lit.dev/msg/${code} for more information.`;
+    if (!global2.litIssuedWarnings.has(warning) && !global2.litIssuedWarnings.has(code)) {
+      console.warn(warning);
+      global2.litIssuedWarnings.add(warning);
+    }
+  };
+  queueMicrotask(() => {
+    issueWarning("dev-mode", `Lit is in dev mode. Not recommended for production!`);
+    if (global2.ShadyDOM?.inUse && polyfillSupport === undefined) {
+      issueWarning("polyfill-support-missing", `Shadow DOM is being polyfilled via \`ShadyDOM\` but ` + `the \`polyfill-support\` module has not been loaded.`);
+    }
+  });
+}
+var debugLogEvent = DEV_MODE ? (event) => {
+  const shouldEmit = global2.emitLitDebugLogEvents;
+  if (!shouldEmit) {
+    return;
+  }
+  global2.dispatchEvent(new CustomEvent("lit-debug", {
+    detail: event
+  }));
+} : undefined;
+var JSCompiler_renameProperty = (prop, _obj) => prop;
+var defaultConverter = {
+  toAttribute(value, type) {
+    switch (type) {
+      case Boolean:
+        value = value ? emptyStringForBooleanAttribute : null;
+        break;
+      case Object:
+      case Array:
+        value = value == null ? value : JSON.stringify(value);
+        break;
+    }
+    return value;
+  },
+  fromAttribute(value, type) {
+    let fromValue = value;
+    switch (type) {
+      case Boolean:
+        fromValue = value !== null;
+        break;
+      case Number:
+        fromValue = value === null ? null : Number(value);
+        break;
+      case Object:
+      case Array:
+        try {
+          fromValue = JSON.parse(value);
+        } catch (e) {
+          fromValue = null;
+        }
+        break;
+    }
+    return fromValue;
+  }
+};
+var notEqual = (value, old) => !is(value, old);
+var defaultPropertyDeclaration = {
+  attribute: true,
+  type: String,
+  converter: defaultConverter,
+  reflect: false,
+  useDefault: false,
+  hasChanged: notEqual
+};
+Symbol.metadata ??= Symbol("metadata");
+global2.litPropertyMetadata ??= new WeakMap;
+
+class ReactiveElement extends HTMLElement {
+  static addInitializer(initializer) {
+    this.__prepare();
+    (this._initializers ??= []).push(initializer);
+  }
+  static get observedAttributes() {
+    this.finalize();
+    return this.__attributeToPropertyMap && [...this.__attributeToPropertyMap.keys()];
+  }
+  static createProperty(name, options = defaultPropertyDeclaration) {
+    if (options.state) {
+      options.attribute = false;
+    }
+    this.__prepare();
+    if (this.prototype.hasOwnProperty(name)) {
+      options = Object.create(options);
+      options.wrapped = true;
+    }
+    this.elementProperties.set(name, options);
+    if (!options.noAccessor) {
+      const key = DEV_MODE ? Symbol.for(`${String(name)} (@property() cache)`) : Symbol();
+      const descriptor = this.getPropertyDescriptor(name, key, options);
+      if (descriptor !== undefined) {
+        defineProperty(this.prototype, name, descriptor);
+      }
+    }
+  }
+  static getPropertyDescriptor(name, key, options) {
+    const { get, set } = getOwnPropertyDescriptor(this.prototype, name) ?? {
+      get() {
+        return this[key];
+      },
+      set(v) {
+        this[key] = v;
+      }
+    };
+    if (DEV_MODE && get == null) {
+      if ("value" in (getOwnPropertyDescriptor(this.prototype, name) ?? {})) {
+        throw new Error(`Field ${JSON.stringify(String(name))} on ` + `${this.name} was declared as a reactive property ` + `but it's actually declared as a value on the prototype. ` + `Usually this is due to using @property or @state on a method.`);
+      }
+      issueWarning("reactive-property-without-getter", `Field ${JSON.stringify(String(name))} on ` + `${this.name} was declared as a reactive property ` + `but it does not have a getter. This will be an error in a ` + `future version of Lit.`);
+    }
+    return {
+      get,
+      set(value) {
+        const oldValue = get?.call(this);
+        set?.call(this, value);
+        this.requestUpdate(name, oldValue, options);
+      },
+      configurable: true,
+      enumerable: true
+    };
+  }
+  static getPropertyOptions(name) {
+    return this.elementProperties.get(name) ?? defaultPropertyDeclaration;
+  }
+  static __prepare() {
+    if (this.hasOwnProperty(JSCompiler_renameProperty("elementProperties", this))) {
+      return;
+    }
+    const superCtor = getPrototypeOf(this);
+    superCtor.finalize();
+    if (superCtor._initializers !== undefined) {
+      this._initializers = [...superCtor._initializers];
+    }
+    this.elementProperties = new Map(superCtor.elementProperties);
+  }
+  static finalize() {
+    if (this.hasOwnProperty(JSCompiler_renameProperty("finalized", this))) {
+      return;
+    }
+    this.finalized = true;
+    this.__prepare();
+    if (this.hasOwnProperty(JSCompiler_renameProperty("properties", this))) {
+      const props = this.properties;
+      const propKeys = [
+        ...getOwnPropertyNames(props),
+        ...getOwnPropertySymbols(props)
+      ];
+      for (const p of propKeys) {
+        this.createProperty(p, props[p]);
+      }
+    }
+    const metadata = this[Symbol.metadata];
+    if (metadata !== null) {
+      const properties = litPropertyMetadata.get(metadata);
+      if (properties !== undefined) {
+        for (const [p, options] of properties) {
+          this.elementProperties.set(p, options);
+        }
+      }
+    }
+    this.__attributeToPropertyMap = new Map;
+    for (const [p, options] of this.elementProperties) {
+      const attr = this.__attributeNameForProperty(p, options);
+      if (attr !== undefined) {
+        this.__attributeToPropertyMap.set(attr, p);
+      }
+    }
+    this.elementStyles = this.finalizeStyles(this.styles);
+    if (DEV_MODE) {
+      if (this.hasOwnProperty("createProperty")) {
+        issueWarning("no-override-create-property", "Overriding ReactiveElement.createProperty() is deprecated. " + "The override will not be called with standard decorators");
+      }
+      if (this.hasOwnProperty("getPropertyDescriptor")) {
+        issueWarning("no-override-get-property-descriptor", "Overriding ReactiveElement.getPropertyDescriptor() is deprecated. " + "The override will not be called with standard decorators");
+      }
+    }
+  }
+  static finalizeStyles(styles) {
+    const elementStyles = [];
+    if (Array.isArray(styles)) {
+      const set = new Set(styles.flat(Infinity).reverse());
+      for (const s of set) {
+        elementStyles.unshift(getCompatibleStyle(s));
+      }
+    } else if (styles !== undefined) {
+      elementStyles.push(getCompatibleStyle(styles));
+    }
+    return elementStyles;
+  }
+  static __attributeNameForProperty(name, options) {
+    const attribute = options.attribute;
+    return attribute === false ? undefined : typeof attribute === "string" ? attribute : typeof name === "string" ? name.toLowerCase() : undefined;
+  }
+  constructor() {
+    super();
+    this.__instanceProperties = undefined;
+    this.isUpdatePending = false;
+    this.hasUpdated = false;
+    this.__reflectingProperty = null;
+    this.__initialize();
+  }
+  __initialize() {
+    this.__updatePromise = new Promise((res) => this.enableUpdating = res);
+    this._$changedProperties = new Map;
+    this.__saveInstanceProperties();
+    this.requestUpdate();
+    this.constructor._initializers?.forEach((i) => i(this));
+  }
+  addController(controller) {
+    (this.__controllers ??= new Set).add(controller);
+    if (this.renderRoot !== undefined && this.isConnected) {
+      controller.hostConnected?.();
+    }
+  }
+  removeController(controller) {
+    this.__controllers?.delete(controller);
+  }
+  __saveInstanceProperties() {
+    const instanceProperties = new Map;
+    const elementProperties = this.constructor.elementProperties;
+    for (const p of elementProperties.keys()) {
+      if (this.hasOwnProperty(p)) {
+        instanceProperties.set(p, this[p]);
+        delete this[p];
+      }
+    }
+    if (instanceProperties.size > 0) {
+      this.__instanceProperties = instanceProperties;
+    }
+  }
+  createRenderRoot() {
+    const renderRoot = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
+    adoptStyles(renderRoot, this.constructor.elementStyles);
+    return renderRoot;
+  }
+  connectedCallback() {
+    this.renderRoot ??= this.createRenderRoot();
+    this.enableUpdating(true);
+    this.__controllers?.forEach((c) => c.hostConnected?.());
+  }
+  enableUpdating(_requestedUpdate) {}
+  disconnectedCallback() {
+    this.__controllers?.forEach((c) => c.hostDisconnected?.());
+  }
+  attributeChangedCallback(name, _old, value) {
+    this._$attributeToProperty(name, value);
+  }
+  __propertyToAttribute(name, value) {
+    const elemProperties = this.constructor.elementProperties;
+    const options = elemProperties.get(name);
+    const attr = this.constructor.__attributeNameForProperty(name, options);
+    if (attr !== undefined && options.reflect === true) {
+      const converter = options.converter?.toAttribute !== undefined ? options.converter : defaultConverter;
+      const attrValue = converter.toAttribute(value, options.type);
+      if (DEV_MODE && this.constructor.enabledWarnings.includes("migration") && attrValue === undefined) {
+        issueWarning("undefined-attribute-value", `The attribute value for the ${name} property is ` + `undefined on element ${this.localName}. The attribute will be ` + `removed, but in the previous version of \`ReactiveElement\`, ` + `the attribute would not have changed.`);
+      }
+      this.__reflectingProperty = name;
+      if (attrValue == null) {
+        this.removeAttribute(attr);
+      } else {
+        this.setAttribute(attr, attrValue);
+      }
+      this.__reflectingProperty = null;
+    }
+  }
+  _$attributeToProperty(name, value) {
+    const ctor = this.constructor;
+    const propName = ctor.__attributeToPropertyMap.get(name);
+    if (propName !== undefined && this.__reflectingProperty !== propName) {
+      const options = ctor.getPropertyOptions(propName);
+      const converter = typeof options.converter === "function" ? { fromAttribute: options.converter } : options.converter?.fromAttribute !== undefined ? options.converter : defaultConverter;
+      this.__reflectingProperty = propName;
+      const convertedValue = converter.fromAttribute(value, options.type);
+      this[propName] = convertedValue ?? this.__defaultValues?.get(propName) ?? convertedValue;
+      this.__reflectingProperty = null;
+    }
+  }
+  requestUpdate(name, oldValue, options, useNewValue = false, newValue) {
+    if (name !== undefined) {
+      if (DEV_MODE && name instanceof Event) {
+        issueWarning(``, `The requestUpdate() method was called with an Event as the property name. This is probably a mistake caused by binding this.requestUpdate as an event listener. Instead bind a function that will call it with no arguments: () => this.requestUpdate()`);
+      }
+      const ctor = this.constructor;
+      if (useNewValue === false) {
+        newValue = this[name];
+      }
+      options ??= ctor.getPropertyOptions(name);
+      const changed = (options.hasChanged ?? notEqual)(newValue, oldValue) || options.useDefault && options.reflect && newValue === this.__defaultValues?.get(name) && !this.hasAttribute(ctor.__attributeNameForProperty(name, options));
+      if (changed) {
+        this._$changeProperty(name, oldValue, options);
+      } else {
+        return;
+      }
+    }
+    if (this.isUpdatePending === false) {
+      this.__updatePromise = this.__enqueueUpdate();
+    }
+  }
+  _$changeProperty(name, oldValue, { useDefault, reflect, wrapped }, initializeValue) {
+    if (useDefault && !(this.__defaultValues ??= new Map).has(name)) {
+      this.__defaultValues.set(name, initializeValue ?? oldValue ?? this[name]);
+      if (wrapped !== true || initializeValue !== undefined) {
+        return;
+      }
+    }
+    if (!this._$changedProperties.has(name)) {
+      if (!this.hasUpdated && !useDefault) {
+        oldValue = undefined;
+      }
+      this._$changedProperties.set(name, oldValue);
+    }
+    if (reflect === true && this.__reflectingProperty !== name) {
+      (this.__reflectingProperties ??= new Set).add(name);
+    }
+  }
+  async __enqueueUpdate() {
+    this.isUpdatePending = true;
+    try {
+      await this.__updatePromise;
+    } catch (e) {
+      Promise.reject(e);
+    }
+    const result = this.scheduleUpdate();
+    if (result != null) {
+      await result;
+    }
+    return !this.isUpdatePending;
+  }
+  scheduleUpdate() {
+    const result = this.performUpdate();
+    if (DEV_MODE && this.constructor.enabledWarnings.includes("async-perform-update") && typeof result?.then === "function") {
+      issueWarning("async-perform-update", `Element ${this.localName} returned a Promise from performUpdate(). ` + `This behavior is deprecated and will be removed in a future ` + `version of ReactiveElement.`);
+    }
+    return result;
+  }
+  performUpdate() {
+    if (!this.isUpdatePending) {
+      return;
+    }
+    debugLogEvent?.({ kind: "update" });
+    if (!this.hasUpdated) {
+      this.renderRoot ??= this.createRenderRoot();
+      if (DEV_MODE) {
+        const ctor = this.constructor;
+        const shadowedProperties = [...ctor.elementProperties.keys()].filter((p) => this.hasOwnProperty(p) && (p in getPrototypeOf(this)));
+        if (shadowedProperties.length) {
+          throw new Error(`The following properties on element ${this.localName} will not ` + `trigger updates as expected because they are set using class ` + `fields: ${shadowedProperties.join(", ")}. ` + `Native class fields and some compiled output will overwrite ` + `accessors used for detecting changes. See ` + `https://lit.dev/msg/class-field-shadowing ` + `for more information.`);
+        }
+      }
+      if (this.__instanceProperties) {
+        for (const [p, value] of this.__instanceProperties) {
+          this[p] = value;
+        }
+        this.__instanceProperties = undefined;
+      }
+      const elementProperties = this.constructor.elementProperties;
+      if (elementProperties.size > 0) {
+        for (const [p, options] of elementProperties) {
+          const { wrapped } = options;
+          const value = this[p];
+          if (wrapped === true && !this._$changedProperties.has(p) && value !== undefined) {
+            this._$changeProperty(p, undefined, options, value);
+          }
+        }
+      }
+    }
+    let shouldUpdate = false;
+    const changedProperties = this._$changedProperties;
+    try {
+      shouldUpdate = this.shouldUpdate(changedProperties);
+      if (shouldUpdate) {
+        this.willUpdate(changedProperties);
+        this.__controllers?.forEach((c) => c.hostUpdate?.());
+        this.update(changedProperties);
+      } else {
+        this.__markUpdated();
+      }
+    } catch (e) {
+      shouldUpdate = false;
+      this.__markUpdated();
+      throw e;
+    }
+    if (shouldUpdate) {
+      this._$didUpdate(changedProperties);
+    }
+  }
+  willUpdate(_changedProperties) {}
+  _$didUpdate(changedProperties) {
+    this.__controllers?.forEach((c) => c.hostUpdated?.());
+    if (!this.hasUpdated) {
+      this.hasUpdated = true;
+      this.firstUpdated(changedProperties);
+    }
+    this.updated(changedProperties);
+    if (DEV_MODE && this.isUpdatePending && this.constructor.enabledWarnings.includes("change-in-update")) {
+      issueWarning("change-in-update", `Element ${this.localName} scheduled an update ` + `(generally because a property was set) ` + `after an update completed, causing a new update to be scheduled. ` + `This is inefficient and should be avoided unless the next update ` + `can only be scheduled as a side effect of the previous update.`);
+    }
+  }
+  __markUpdated() {
+    this._$changedProperties = new Map;
+    this.isUpdatePending = false;
+  }
+  get updateComplete() {
+    return this.getUpdateComplete();
+  }
+  getUpdateComplete() {
+    return this.__updatePromise;
+  }
+  shouldUpdate(_changedProperties) {
+    return true;
+  }
+  update(_changedProperties) {
+    this.__reflectingProperties &&= this.__reflectingProperties.forEach((p) => this.__propertyToAttribute(p, this[p]));
+    this.__markUpdated();
+  }
+  updated(_changedProperties) {}
+  firstUpdated(_changedProperties) {}
+}
+ReactiveElement.elementStyles = [];
+ReactiveElement.shadowRootOptions = { mode: "open" };
+ReactiveElement[JSCompiler_renameProperty("elementProperties", ReactiveElement)] = new Map;
+ReactiveElement[JSCompiler_renameProperty("finalized", ReactiveElement)] = new Map;
+polyfillSupport?.({ ReactiveElement });
+if (DEV_MODE) {
+  ReactiveElement.enabledWarnings = [
+    "change-in-update",
+    "async-perform-update"
+  ];
+  const ensureOwnWarnings = function(ctor) {
+    if (!ctor.hasOwnProperty(JSCompiler_renameProperty("enabledWarnings", ctor))) {
+      ctor.enabledWarnings = ctor.enabledWarnings.slice();
+    }
+  };
+  ReactiveElement.enableWarning = function(warning) {
+    ensureOwnWarnings(this);
+    if (!this.enabledWarnings.includes(warning)) {
+      this.enabledWarnings.push(warning);
+    }
+  };
+  ReactiveElement.disableWarning = function(warning) {
+    ensureOwnWarnings(this);
+    const i = this.enabledWarnings.indexOf(warning);
+    if (i >= 0) {
+      this.enabledWarnings.splice(i, 1);
+    }
+  };
+}
+(global2.reactiveElementVersions ??= []).push("2.1.2");
+if (DEV_MODE && global2.reactiveElementVersions.length > 1) {
+  queueMicrotask(() => {
+    issueWarning("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions ` + `is not recommended.`);
+  });
+}
+
+// node_modules/lit-html/development/lit-html.js
+var DEV_MODE2 = true;
+var ENABLE_EXTRA_SECURITY_HOOKS = true;
+var ENABLE_SHADYDOM_NOPATCH = true;
+var NODE_MODE3 = false;
+var global3 = globalThis;
+var debugLogEvent2 = DEV_MODE2 ? (event) => {
+  const shouldEmit = global3.emitLitDebugLogEvents;
+  if (!shouldEmit) {
+    return;
+  }
+  global3.dispatchEvent(new CustomEvent("lit-debug", {
+    detail: event
+  }));
+} : undefined;
+var debugLogRenderId = 0;
+var issueWarning2;
+if (DEV_MODE2) {
+  global3.litIssuedWarnings ??= new Set;
+  issueWarning2 = (code, warning) => {
+    warning += code ? ` See https://lit.dev/msg/${code} for more information.` : "";
+    if (!global3.litIssuedWarnings.has(warning) && !global3.litIssuedWarnings.has(code)) {
+      console.warn(warning);
+      global3.litIssuedWarnings.add(warning);
+    }
+  };
+  queueMicrotask(() => {
+    issueWarning2("dev-mode", `Lit is in dev mode. Not recommended for production!`);
+  });
+}
+var wrap = ENABLE_SHADYDOM_NOPATCH && global3.ShadyDOM?.inUse && global3.ShadyDOM?.noPatch === true ? global3.ShadyDOM.wrap : (node) => node;
+var trustedTypes2 = global3.trustedTypes;
+var policy = trustedTypes2 ? trustedTypes2.createPolicy("lit-html", {
+  createHTML: (s) => s
+}) : undefined;
+var identityFunction = (value) => value;
+var noopSanitizer = (_node, _name, _type) => identityFunction;
+var setSanitizer = (newSanitizer) => {
+  if (!ENABLE_EXTRA_SECURITY_HOOKS) {
+    return;
+  }
+  if (sanitizerFactoryInternal !== noopSanitizer) {
+    throw new Error(`Attempted to overwrite existing lit-html security policy.` + ` setSanitizeDOMValueFactory should be called at most once.`);
+  }
+  sanitizerFactoryInternal = newSanitizer;
+};
+var _testOnlyClearSanitizerFactoryDoNotCallOrElse = () => {
+  sanitizerFactoryInternal = noopSanitizer;
+};
+var createSanitizer = (node, name, type) => {
+  return sanitizerFactoryInternal(node, name, type);
+};
+var boundAttributeSuffix = "$lit$";
+var marker = `lit$${Math.random().toFixed(9).slice(2)}$`;
+var markerMatch = "?" + marker;
+var nodeMarker = `<${markerMatch}>`;
+var d = NODE_MODE3 && global3.document === undefined ? {
+  createTreeWalker() {
+    return {};
+  }
+} : document;
+var createMarker = () => d.createComment("");
+var isPrimitive = (value) => value === null || typeof value != "object" && typeof value != "function";
+var isArray = Array.isArray;
+var isIterable = (value) => isArray(value) || typeof value?.[Symbol.iterator] === "function";
+var SPACE_CHAR = `[ 	
+\f\r]`;
+var ATTR_VALUE_CHAR = `[^ 	
+\f\r"'\`<>=]`;
+var NAME_CHAR = `[^\\s"'>=/]`;
+var textEndRegex = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g;
+var COMMENT_START = 1;
+var TAG_NAME = 2;
+var DYNAMIC_TAG_NAME = 3;
+var commentEndRegex = /-->/g;
+var comment2EndRegex = />/g;
+var tagEndRegex = new RegExp(`>|${SPACE_CHAR}(?:(${NAME_CHAR}+)(${SPACE_CHAR}*=${SPACE_CHAR}*(?:${ATTR_VALUE_CHAR}|("|')|))|$)`, "g");
+var ENTIRE_MATCH = 0;
+var ATTRIBUTE_NAME = 1;
+var SPACES_AND_EQUALS = 2;
+var QUOTE_CHAR = 3;
+var singleQuoteAttrEndRegex = /'/g;
+var doubleQuoteAttrEndRegex = /"/g;
+var rawTextElement = /^(?:script|style|textarea|title)$/i;
+var HTML_RESULT = 1;
+var SVG_RESULT = 2;
+var MATHML_RESULT = 3;
+var ATTRIBUTE_PART = 1;
+var CHILD_PART = 2;
+var PROPERTY_PART = 3;
+var BOOLEAN_ATTRIBUTE_PART = 4;
+var EVENT_PART = 5;
+var ELEMENT_PART = 6;
+var COMMENT_PART = 7;
+var tag = (type) => (strings, ...values) => {
+  if (DEV_MODE2 && strings.some((s) => s === undefined)) {
+    console.warn(`Some template strings are undefined.
+` + "This is probably caused by illegal octal escape sequences.");
+  }
+  if (DEV_MODE2) {
+    if (values.some((val) => val?.["_$litStatic$"])) {
+      issueWarning2("", `Static values 'literal' or 'unsafeStatic' cannot be used as values to non-static templates.
+` + `Please use the static 'html' tag function. See https://lit.dev/docs/templates/expressions/#static-expressions`);
+    }
+  }
+  return {
+    ["_$litType$"]: type,
+    strings,
+    values
+  };
+};
+var html = tag(HTML_RESULT);
+var svg = tag(SVG_RESULT);
+var mathml = tag(MATHML_RESULT);
+var noChange = Symbol.for("lit-noChange");
+var nothing = Symbol.for("lit-nothing");
+var templateCache = new WeakMap;
+var walker = d.createTreeWalker(d, 129);
+var sanitizerFactoryInternal = noopSanitizer;
+function trustFromTemplateString(tsa, stringFromTSA) {
+  if (!isArray(tsa) || !tsa.hasOwnProperty("raw")) {
+    let message = "invalid template strings array";
+    if (DEV_MODE2) {
+      message = `
+          Internal Error: expected template strings to be an array
+          with a 'raw' field. Faking a template strings array by
+          calling html or svg like an ordinary function is effectively
+          the same as calling unsafeHtml and can lead to major security
+          issues, e.g. opening your code up to XSS attacks.
+          If you're using the html or svg tagged template functions normally
+          and still seeing this error, please file a bug at
+          https://github.com/lit/lit/issues/new?template=bug_report.md
+          and include information about your build tooling, if any.
+        `.trim().replace(/\n */g, `
+`);
+    }
+    throw new Error(message);
+  }
+  return policy !== undefined ? policy.createHTML(stringFromTSA) : stringFromTSA;
+}
+var getTemplateHtml = (strings, type) => {
+  const l = strings.length - 1;
+  const attrNames = [];
+  let html2 = type === SVG_RESULT ? "<svg>" : type === MATHML_RESULT ? "<math>" : "";
+  let rawTextEndRegex;
+  let regex = textEndRegex;
+  for (let i = 0;i < l; i++) {
+    const s = strings[i];
+    let attrNameEndIndex = -1;
+    let attrName;
+    let lastIndex = 0;
+    let match;
+    while (lastIndex < s.length) {
+      regex.lastIndex = lastIndex;
+      match = regex.exec(s);
+      if (match === null) {
+        break;
+      }
+      lastIndex = regex.lastIndex;
+      if (regex === textEndRegex) {
+        if (match[COMMENT_START] === "!--") {
+          regex = commentEndRegex;
+        } else if (match[COMMENT_START] !== undefined) {
+          regex = comment2EndRegex;
+        } else if (match[TAG_NAME] !== undefined) {
+          if (rawTextElement.test(match[TAG_NAME])) {
+            rawTextEndRegex = new RegExp(`</${match[TAG_NAME]}`, "g");
+          }
+          regex = tagEndRegex;
+        } else if (match[DYNAMIC_TAG_NAME] !== undefined) {
+          if (DEV_MODE2) {
+            throw new Error("Bindings in tag names are not supported. Please use static templates instead. " + "See https://lit.dev/docs/templates/expressions/#static-expressions");
+          }
+          regex = tagEndRegex;
+        }
+      } else if (regex === tagEndRegex) {
+        if (match[ENTIRE_MATCH] === ">") {
+          regex = rawTextEndRegex ?? textEndRegex;
+          attrNameEndIndex = -1;
+        } else if (match[ATTRIBUTE_NAME] === undefined) {
+          attrNameEndIndex = -2;
+        } else {
+          attrNameEndIndex = regex.lastIndex - match[SPACES_AND_EQUALS].length;
+          attrName = match[ATTRIBUTE_NAME];
+          regex = match[QUOTE_CHAR] === undefined ? tagEndRegex : match[QUOTE_CHAR] === '"' ? doubleQuoteAttrEndRegex : singleQuoteAttrEndRegex;
+        }
+      } else if (regex === doubleQuoteAttrEndRegex || regex === singleQuoteAttrEndRegex) {
+        regex = tagEndRegex;
+      } else if (regex === commentEndRegex || regex === comment2EndRegex) {
+        regex = textEndRegex;
+      } else {
+        regex = tagEndRegex;
+        rawTextEndRegex = undefined;
+      }
+    }
+    if (DEV_MODE2) {
+      console.assert(attrNameEndIndex === -1 || regex === tagEndRegex || regex === singleQuoteAttrEndRegex || regex === doubleQuoteAttrEndRegex, "unexpected parse state B");
+    }
+    const end = regex === tagEndRegex && strings[i + 1].startsWith("/>") ? " " : "";
+    html2 += regex === textEndRegex ? s + nodeMarker : attrNameEndIndex >= 0 ? (attrNames.push(attrName), s.slice(0, attrNameEndIndex) + boundAttributeSuffix + s.slice(attrNameEndIndex)) + marker + end : s + marker + (attrNameEndIndex === -2 ? i : end);
+  }
+  const htmlResult = html2 + (strings[l] || "<?>") + (type === SVG_RESULT ? "</svg>" : type === MATHML_RESULT ? "</math>" : "");
+  return [trustFromTemplateString(strings, htmlResult), attrNames];
+};
+
+class Template {
+  constructor({ strings, ["_$litType$"]: type }, options) {
+    this.parts = [];
+    let node;
+    let nodeIndex = 0;
+    let attrNameIndex = 0;
+    const partCount = strings.length - 1;
+    const parts = this.parts;
+    const [html2, attrNames] = getTemplateHtml(strings, type);
+    this.el = Template.createElement(html2, options);
+    walker.currentNode = this.el.content;
+    if (type === SVG_RESULT || type === MATHML_RESULT) {
+      const wrapper = this.el.content.firstChild;
+      wrapper.replaceWith(...wrapper.childNodes);
+    }
+    while ((node = walker.nextNode()) !== null && parts.length < partCount) {
+      if (node.nodeType === 1) {
+        if (DEV_MODE2) {
+          const tag2 = node.localName;
+          if (/^(?:textarea|template)$/i.test(tag2) && node.innerHTML.includes(marker)) {
+            const m = `Expressions are not supported inside \`${tag2}\` ` + `elements. See https://lit.dev/msg/expression-in-${tag2} for more ` + `information.`;
+            if (tag2 === "template") {
+              throw new Error(m);
+            } else
+              issueWarning2("", m);
+          }
+        }
+        if (node.hasAttributes()) {
+          for (const name of node.getAttributeNames()) {
+            if (name.endsWith(boundAttributeSuffix)) {
+              const realName = attrNames[attrNameIndex++];
+              const value = node.getAttribute(name);
+              const statics = value.split(marker);
+              const m = /([.?@])?(.*)/.exec(realName);
+              parts.push({
+                type: ATTRIBUTE_PART,
+                index: nodeIndex,
+                name: m[2],
+                strings: statics,
+                ctor: m[1] === "." ? PropertyPart : m[1] === "?" ? BooleanAttributePart : m[1] === "@" ? EventPart : AttributePart
+              });
+              node.removeAttribute(name);
+            } else if (name.startsWith(marker)) {
+              parts.push({
+                type: ELEMENT_PART,
+                index: nodeIndex
+              });
+              node.removeAttribute(name);
+            }
+          }
+        }
+        if (rawTextElement.test(node.tagName)) {
+          const strings2 = node.textContent.split(marker);
+          const lastIndex = strings2.length - 1;
+          if (lastIndex > 0) {
+            node.textContent = trustedTypes2 ? trustedTypes2.emptyScript : "";
+            for (let i = 0;i < lastIndex; i++) {
+              node.append(strings2[i], createMarker());
+              walker.nextNode();
+              parts.push({ type: CHILD_PART, index: ++nodeIndex });
+            }
+            node.append(strings2[lastIndex], createMarker());
+          }
+        }
+      } else if (node.nodeType === 8) {
+        const data = node.data;
+        if (data === markerMatch) {
+          parts.push({ type: CHILD_PART, index: nodeIndex });
+        } else {
+          let i = -1;
+          while ((i = node.data.indexOf(marker, i + 1)) !== -1) {
+            parts.push({ type: COMMENT_PART, index: nodeIndex });
+            i += marker.length - 1;
+          }
+        }
+      }
+      nodeIndex++;
+    }
+    if (DEV_MODE2) {
+      if (attrNames.length !== attrNameIndex) {
+        throw new Error(`Detected duplicate attribute bindings. This occurs if your template ` + `has duplicate attributes on an element tag. For example ` + `"<input ?disabled=\${true} ?disabled=\${false}>" contains a ` + `duplicate "disabled" attribute. The error was detected in ` + `the following template: 
+` + "`" + strings.join("${...}") + "`");
+      }
+    }
+    debugLogEvent2 && debugLogEvent2({
+      kind: "template prep",
+      template: this,
+      clonableTemplate: this.el,
+      parts: this.parts,
+      strings
+    });
+  }
+  static createElement(html2, _options) {
+    const el = d.createElement("template");
+    el.innerHTML = html2;
+    return el;
+  }
+}
+function resolveDirective(part, value, parent = part, attributeIndex) {
+  if (value === noChange) {
+    return value;
+  }
+  let currentDirective = attributeIndex !== undefined ? parent.__directives?.[attributeIndex] : parent.__directive;
+  const nextDirectiveConstructor = isPrimitive(value) ? undefined : value["_$litDirective$"];
+  if (currentDirective?.constructor !== nextDirectiveConstructor) {
+    currentDirective?.["_$notifyDirectiveConnectionChanged"]?.(false);
+    if (nextDirectiveConstructor === undefined) {
+      currentDirective = undefined;
+    } else {
+      currentDirective = new nextDirectiveConstructor(part);
+      currentDirective._$initialize(part, parent, attributeIndex);
+    }
+    if (attributeIndex !== undefined) {
+      (parent.__directives ??= [])[attributeIndex] = currentDirective;
+    } else {
+      parent.__directive = currentDirective;
+    }
+  }
+  if (currentDirective !== undefined) {
+    value = resolveDirective(part, currentDirective._$resolve(part, value.values), currentDirective, attributeIndex);
+  }
+  return value;
+}
+
+class TemplateInstance {
+  constructor(template, parent) {
+    this._$parts = [];
+    this._$disconnectableChildren = undefined;
+    this._$template = template;
+    this._$parent = parent;
+  }
+  get parentNode() {
+    return this._$parent.parentNode;
+  }
+  get _$isConnected() {
+    return this._$parent._$isConnected;
+  }
+  _clone(options) {
+    const { el: { content }, parts } = this._$template;
+    const fragment = (options?.creationScope ?? d).importNode(content, true);
+    walker.currentNode = fragment;
+    let node = walker.nextNode();
+    let nodeIndex = 0;
+    let partIndex = 0;
+    let templatePart = parts[0];
+    while (templatePart !== undefined) {
+      if (nodeIndex === templatePart.index) {
+        let part;
+        if (templatePart.type === CHILD_PART) {
+          part = new ChildPart(node, node.nextSibling, this, options);
+        } else if (templatePart.type === ATTRIBUTE_PART) {
+          part = new templatePart.ctor(node, templatePart.name, templatePart.strings, this, options);
+        } else if (templatePart.type === ELEMENT_PART) {
+          part = new ElementPart(node, this, options);
+        }
+        this._$parts.push(part);
+        templatePart = parts[++partIndex];
+      }
+      if (nodeIndex !== templatePart?.index) {
+        node = walker.nextNode();
+        nodeIndex++;
+      }
+    }
+    walker.currentNode = d;
+    return fragment;
+  }
+  _update(values) {
+    let i = 0;
+    for (const part of this._$parts) {
+      if (part !== undefined) {
+        debugLogEvent2 && debugLogEvent2({
+          kind: "set part",
+          part,
+          value: values[i],
+          valueIndex: i,
+          values,
+          templateInstance: this
+        });
+        if (part.strings !== undefined) {
+          part._$setValue(values, part, i);
+          i += part.strings.length - 2;
+        } else {
+          part._$setValue(values[i]);
+        }
+      }
+      i++;
+    }
+  }
+}
+
+class ChildPart {
+  get _$isConnected() {
+    return this._$parent?._$isConnected ?? this.__isConnected;
+  }
+  constructor(startNode, endNode, parent, options) {
+    this.type = CHILD_PART;
+    this._$committedValue = nothing;
+    this._$disconnectableChildren = undefined;
+    this._$startNode = startNode;
+    this._$endNode = endNode;
+    this._$parent = parent;
+    this.options = options;
+    this.__isConnected = options?.isConnected ?? true;
+    if (ENABLE_EXTRA_SECURITY_HOOKS) {
+      this._textSanitizer = undefined;
+    }
+  }
+  get parentNode() {
+    let parentNode = wrap(this._$startNode).parentNode;
+    const parent = this._$parent;
+    if (parent !== undefined && parentNode?.nodeType === 11) {
+      parentNode = parent.parentNode;
+    }
+    return parentNode;
+  }
+  get startNode() {
+    return this._$startNode;
+  }
+  get endNode() {
+    return this._$endNode;
+  }
+  _$setValue(value, directiveParent = this) {
+    if (DEV_MODE2 && this.parentNode === null) {
+      throw new Error(`This \`ChildPart\` has no \`parentNode\` and therefore cannot accept a value. This likely means the element containing the part was manipulated in an unsupported way outside of Lit's control such that the part's marker nodes were ejected from DOM. For example, setting the element's \`innerHTML\` or \`textContent\` can do this.`);
+    }
+    value = resolveDirective(this, value, directiveParent);
+    if (isPrimitive(value)) {
+      if (value === nothing || value == null || value === "") {
+        if (this._$committedValue !== nothing) {
+          debugLogEvent2 && debugLogEvent2({
+            kind: "commit nothing to child",
+            start: this._$startNode,
+            end: this._$endNode,
+            parent: this._$parent,
+            options: this.options
+          });
+          this._$clear();
+        }
+        this._$committedValue = nothing;
+      } else if (value !== this._$committedValue && value !== noChange) {
+        this._commitText(value);
+      }
+    } else if (value["_$litType$"] !== undefined) {
+      this._commitTemplateResult(value);
+    } else if (value.nodeType !== undefined) {
+      if (DEV_MODE2 && this.options?.host === value) {
+        this._commitText(`[probable mistake: rendered a template's host in itself ` + `(commonly caused by writing \${this} in a template]`);
+        console.warn(`Attempted to render the template host`, value, `inside itself. This is almost always a mistake, and in dev mode `, `we render some warning text. In production however, we'll `, `render it, which will usually result in an error, and sometimes `, `in the element disappearing from the DOM.`);
+        return;
+      }
+      this._commitNode(value);
+    } else if (isIterable(value)) {
+      this._commitIterable(value);
+    } else {
+      this._commitText(value);
+    }
+  }
+  _insert(node) {
+    return wrap(wrap(this._$startNode).parentNode).insertBefore(node, this._$endNode);
+  }
+  _commitNode(value) {
+    if (this._$committedValue !== value) {
+      this._$clear();
+      if (ENABLE_EXTRA_SECURITY_HOOKS && sanitizerFactoryInternal !== noopSanitizer) {
+        const parentNodeName = this._$startNode.parentNode?.nodeName;
+        if (parentNodeName === "STYLE" || parentNodeName === "SCRIPT") {
+          let message = "Forbidden";
+          if (DEV_MODE2) {
+            if (parentNodeName === "STYLE") {
+              message = `Lit does not support binding inside style nodes. ` + `This is a security risk, as style injection attacks can ` + `exfiltrate data and spoof UIs. ` + `Consider instead using css\`...\` literals ` + `to compose styles, and do dynamic styling with ` + `css custom properties, ::parts, <slot>s, ` + `and by mutating the DOM rather than stylesheets.`;
+            } else {
+              message = `Lit does not support binding inside script nodes. ` + `This is a security risk, as it could allow arbitrary ` + `code execution.`;
+            }
+          }
+          throw new Error(message);
+        }
+      }
+      debugLogEvent2 && debugLogEvent2({
+        kind: "commit node",
+        start: this._$startNode,
+        parent: this._$parent,
+        value,
+        options: this.options
+      });
+      this._$committedValue = this._insert(value);
+    }
+  }
+  _commitText(value) {
+    if (this._$committedValue !== nothing && isPrimitive(this._$committedValue)) {
+      const node = wrap(this._$startNode).nextSibling;
+      if (ENABLE_EXTRA_SECURITY_HOOKS) {
+        if (this._textSanitizer === undefined) {
+          this._textSanitizer = createSanitizer(node, "data", "property");
+        }
+        value = this._textSanitizer(value);
+      }
+      debugLogEvent2 && debugLogEvent2({
+        kind: "commit text",
+        node,
+        value,
+        options: this.options
+      });
+      node.data = value;
+    } else {
+      if (ENABLE_EXTRA_SECURITY_HOOKS) {
+        const textNode = d.createTextNode("");
+        this._commitNode(textNode);
+        if (this._textSanitizer === undefined) {
+          this._textSanitizer = createSanitizer(textNode, "data", "property");
+        }
+        value = this._textSanitizer(value);
+        debugLogEvent2 && debugLogEvent2({
+          kind: "commit text",
+          node: textNode,
+          value,
+          options: this.options
+        });
+        textNode.data = value;
+      } else {
+        this._commitNode(d.createTextNode(value));
+        debugLogEvent2 && debugLogEvent2({
+          kind: "commit text",
+          node: wrap(this._$startNode).nextSibling,
+          value,
+          options: this.options
+        });
+      }
+    }
+    this._$committedValue = value;
+  }
+  _commitTemplateResult(result) {
+    const { values, ["_$litType$"]: type } = result;
+    const template = typeof type === "number" ? this._$getTemplate(result) : (type.el === undefined && (type.el = Template.createElement(trustFromTemplateString(type.h, type.h[0]), this.options)), type);
+    if (this._$committedValue?._$template === template) {
+      debugLogEvent2 && debugLogEvent2({
+        kind: "template updating",
+        template,
+        instance: this._$committedValue,
+        parts: this._$committedValue._$parts,
+        options: this.options,
+        values
+      });
+      this._$committedValue._update(values);
+    } else {
+      const instance = new TemplateInstance(template, this);
+      const fragment = instance._clone(this.options);
+      debugLogEvent2 && debugLogEvent2({
+        kind: "template instantiated",
+        template,
+        instance,
+        parts: instance._$parts,
+        options: this.options,
+        fragment,
+        values
+      });
+      instance._update(values);
+      debugLogEvent2 && debugLogEvent2({
+        kind: "template instantiated and updated",
+        template,
+        instance,
+        parts: instance._$parts,
+        options: this.options,
+        fragment,
+        values
+      });
+      this._commitNode(fragment);
+      this._$committedValue = instance;
+    }
+  }
+  _$getTemplate(result) {
+    let template = templateCache.get(result.strings);
+    if (template === undefined) {
+      templateCache.set(result.strings, template = new Template(result));
+    }
+    return template;
+  }
+  _commitIterable(value) {
+    if (!isArray(this._$committedValue)) {
+      this._$committedValue = [];
+      this._$clear();
+    }
+    const itemParts = this._$committedValue;
+    let partIndex = 0;
+    let itemPart;
+    for (const item of value) {
+      if (partIndex === itemParts.length) {
+        itemParts.push(itemPart = new ChildPart(this._insert(createMarker()), this._insert(createMarker()), this, this.options));
+      } else {
+        itemPart = itemParts[partIndex];
+      }
+      itemPart._$setValue(item);
+      partIndex++;
+    }
+    if (partIndex < itemParts.length) {
+      this._$clear(itemPart && wrap(itemPart._$endNode).nextSibling, partIndex);
+      itemParts.length = partIndex;
+    }
+  }
+  _$clear(start = wrap(this._$startNode).nextSibling, from) {
+    this._$notifyConnectionChanged?.(false, true, from);
+    while (start !== this._$endNode) {
+      const n = wrap(start).nextSibling;
+      wrap(start).remove();
+      start = n;
+    }
+  }
+  setConnected(isConnected) {
+    if (this._$parent === undefined) {
+      this.__isConnected = isConnected;
+      this._$notifyConnectionChanged?.(isConnected);
+    } else if (DEV_MODE2) {
+      throw new Error("part.setConnected() may only be called on a " + "RootPart returned from render().");
+    }
+  }
+}
+
+class AttributePart {
+  get tagName() {
+    return this.element.tagName;
+  }
+  get _$isConnected() {
+    return this._$parent._$isConnected;
+  }
+  constructor(element, name, strings, parent, options) {
+    this.type = ATTRIBUTE_PART;
+    this._$committedValue = nothing;
+    this._$disconnectableChildren = undefined;
+    this.element = element;
+    this.name = name;
+    this._$parent = parent;
+    this.options = options;
+    if (strings.length > 2 || strings[0] !== "" || strings[1] !== "") {
+      this._$committedValue = new Array(strings.length - 1).fill(new String);
+      this.strings = strings;
+    } else {
+      this._$committedValue = nothing;
+    }
+    if (ENABLE_EXTRA_SECURITY_HOOKS) {
+      this._sanitizer = undefined;
+    }
+  }
+  _$setValue(value, directiveParent = this, valueIndex, noCommit) {
+    const strings = this.strings;
+    let change = false;
+    if (strings === undefined) {
+      value = resolveDirective(this, value, directiveParent, 0);
+      change = !isPrimitive(value) || value !== this._$committedValue && value !== noChange;
+      if (change) {
+        this._$committedValue = value;
+      }
+    } else {
+      const values = value;
+      value = strings[0];
+      let i, v;
+      for (i = 0;i < strings.length - 1; i++) {
+        v = resolveDirective(this, values[valueIndex + i], directiveParent, i);
+        if (v === noChange) {
+          v = this._$committedValue[i];
+        }
+        change ||= !isPrimitive(v) || v !== this._$committedValue[i];
+        if (v === nothing) {
+          value = nothing;
+        } else if (value !== nothing) {
+          value += (v ?? "") + strings[i + 1];
+        }
+        this._$committedValue[i] = v;
+      }
+    }
+    if (change && !noCommit) {
+      this._commitValue(value);
+    }
+  }
+  _commitValue(value) {
+    if (value === nothing) {
+      wrap(this.element).removeAttribute(this.name);
+    } else {
+      if (ENABLE_EXTRA_SECURITY_HOOKS) {
+        if (this._sanitizer === undefined) {
+          this._sanitizer = sanitizerFactoryInternal(this.element, this.name, "attribute");
+        }
+        value = this._sanitizer(value ?? "");
+      }
+      debugLogEvent2 && debugLogEvent2({
+        kind: "commit attribute",
+        element: this.element,
+        name: this.name,
+        value,
+        options: this.options
+      });
+      wrap(this.element).setAttribute(this.name, value ?? "");
+    }
+  }
+}
+
+class PropertyPart extends AttributePart {
+  constructor() {
+    super(...arguments);
+    this.type = PROPERTY_PART;
+  }
+  _commitValue(value) {
+    if (ENABLE_EXTRA_SECURITY_HOOKS) {
+      if (this._sanitizer === undefined) {
+        this._sanitizer = sanitizerFactoryInternal(this.element, this.name, "property");
+      }
+      value = this._sanitizer(value);
+    }
+    debugLogEvent2 && debugLogEvent2({
+      kind: "commit property",
+      element: this.element,
+      name: this.name,
+      value,
+      options: this.options
+    });
+    this.element[this.name] = value === nothing ? undefined : value;
+  }
+}
+
+class BooleanAttributePart extends AttributePart {
+  constructor() {
+    super(...arguments);
+    this.type = BOOLEAN_ATTRIBUTE_PART;
+  }
+  _commitValue(value) {
+    debugLogEvent2 && debugLogEvent2({
+      kind: "commit boolean attribute",
+      element: this.element,
+      name: this.name,
+      value: !!(value && value !== nothing),
+      options: this.options
+    });
+    wrap(this.element).toggleAttribute(this.name, !!value && value !== nothing);
+  }
+}
+
+class EventPart extends AttributePart {
+  constructor(element, name, strings, parent, options) {
+    super(element, name, strings, parent, options);
+    this.type = EVENT_PART;
+    if (DEV_MODE2 && this.strings !== undefined) {
+      throw new Error(`A \`<${element.localName}>\` has a \`@${name}=...\` listener with ` + "invalid content. Event listeners in templates must have exactly " + "one expression and no surrounding text.");
+    }
+  }
+  _$setValue(newListener, directiveParent = this) {
+    newListener = resolveDirective(this, newListener, directiveParent, 0) ?? nothing;
+    if (newListener === noChange) {
+      return;
+    }
+    const oldListener = this._$committedValue;
+    const shouldRemoveListener = newListener === nothing && oldListener !== nothing || newListener.capture !== oldListener.capture || newListener.once !== oldListener.once || newListener.passive !== oldListener.passive;
+    const shouldAddListener = newListener !== nothing && (oldListener === nothing || shouldRemoveListener);
+    debugLogEvent2 && debugLogEvent2({
+      kind: "commit event listener",
+      element: this.element,
+      name: this.name,
+      value: newListener,
+      options: this.options,
+      removeListener: shouldRemoveListener,
+      addListener: shouldAddListener,
+      oldListener
+    });
+    if (shouldRemoveListener) {
+      this.element.removeEventListener(this.name, this, oldListener);
+    }
+    if (shouldAddListener) {
+      this.element.addEventListener(this.name, this, newListener);
+    }
+    this._$committedValue = newListener;
+  }
+  handleEvent(event) {
+    if (typeof this._$committedValue === "function") {
+      this._$committedValue.call(this.options?.host ?? this.element, event);
+    } else {
+      this._$committedValue.handleEvent(event);
+    }
+  }
+}
+
+class ElementPart {
+  constructor(element, parent, options) {
+    this.element = element;
+    this.type = ELEMENT_PART;
+    this._$disconnectableChildren = undefined;
+    this._$parent = parent;
+    this.options = options;
+  }
+  get _$isConnected() {
+    return this._$parent._$isConnected;
+  }
+  _$setValue(value) {
+    debugLogEvent2 && debugLogEvent2({
+      kind: "commit to element binding",
+      element: this.element,
+      value,
+      options: this.options
+    });
+    resolveDirective(this, value);
+  }
+}
+var polyfillSupport2 = DEV_MODE2 ? global3.litHtmlPolyfillSupportDevMode : global3.litHtmlPolyfillSupport;
+polyfillSupport2?.(Template, ChildPart);
+(global3.litHtmlVersions ??= []).push("3.3.2");
+if (DEV_MODE2 && global3.litHtmlVersions.length > 1) {
+  queueMicrotask(() => {
+    issueWarning2("multiple-versions", `Multiple versions of Lit loaded. ` + `Loading multiple versions is not recommended.`);
+  });
+}
+var render = (value, container, options) => {
+  if (DEV_MODE2 && container == null) {
+    throw new TypeError(`The container to render into may not be ${container}`);
+  }
+  const renderId = DEV_MODE2 ? debugLogRenderId++ : 0;
+  const partOwnerNode = options?.renderBefore ?? container;
+  let part = partOwnerNode["_$litPart$"];
+  debugLogEvent2 && debugLogEvent2({
+    kind: "begin render",
+    id: renderId,
+    value,
+    container,
+    options,
+    part
+  });
+  if (part === undefined) {
+    const endNode = options?.renderBefore ?? null;
+    partOwnerNode["_$litPart$"] = part = new ChildPart(container.insertBefore(createMarker(), endNode), endNode, undefined, options ?? {});
+  }
+  part._$setValue(value);
+  debugLogEvent2 && debugLogEvent2({
+    kind: "end render",
+    id: renderId,
+    value,
+    container,
+    options,
+    part
+  });
+  return part;
+};
+if (ENABLE_EXTRA_SECURITY_HOOKS) {
+  render.setSanitizer = setSanitizer;
+  render.createSanitizer = createSanitizer;
+  if (DEV_MODE2) {
+    render._testOnlyClearSanitizerFactoryDoNotCallOrElse = _testOnlyClearSanitizerFactoryDoNotCallOrElse;
+  }
+}
+
+// node_modules/lit-element/development/lit-element.js
+var JSCompiler_renameProperty2 = (prop, _obj) => prop;
+var DEV_MODE3 = true;
+var global4 = globalThis;
+var issueWarning3;
+if (DEV_MODE3) {
+  global4.litIssuedWarnings ??= new Set;
+  issueWarning3 = (code, warning) => {
+    warning += ` See https://lit.dev/msg/${code} for more information.`;
+    if (!global4.litIssuedWarnings.has(warning) && !global4.litIssuedWarnings.has(code)) {
+      console.warn(warning);
+      global4.litIssuedWarnings.add(warning);
+    }
+  };
+}
+
+class LitElement extends ReactiveElement {
+  constructor() {
+    super(...arguments);
+    this.renderOptions = { host: this };
+    this.__childPart = undefined;
+  }
+  createRenderRoot() {
+    const renderRoot = super.createRenderRoot();
+    this.renderOptions.renderBefore ??= renderRoot.firstChild;
+    return renderRoot;
+  }
+  update(changedProperties) {
+    const value = this.render();
+    if (!this.hasUpdated) {
+      this.renderOptions.isConnected = this.isConnected;
+    }
+    super.update(changedProperties);
+    this.__childPart = render(value, this.renderRoot, this.renderOptions);
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this.__childPart?.setConnected(true);
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.__childPart?.setConnected(false);
+  }
+  render() {
+    return noChange;
+  }
+}
+LitElement["_$litElement$"] = true;
+LitElement[JSCompiler_renameProperty2("finalized", LitElement)] = true;
+global4.litElementHydrateSupport?.({ LitElement });
+var polyfillSupport3 = DEV_MODE3 ? global4.litElementPolyfillSupportDevMode : global4.litElementPolyfillSupport;
+polyfillSupport3?.({ LitElement });
+(global4.litElementVersions ??= []).push("4.2.2");
+if (DEV_MODE3 && global4.litElementVersions.length > 1) {
+  queueMicrotask(() => {
+    issueWarning3("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions ` + `is not recommended.`);
+  });
+}
+// node_modules/@lit/reactive-element/development/decorators/property.js
+var DEV_MODE4 = true;
+var issueWarning4;
+if (DEV_MODE4) {
+  globalThis.litIssuedWarnings ??= new Set;
+  issueWarning4 = (code, warning) => {
+    warning += ` See https://lit.dev/msg/${code} for more information.`;
+    if (!globalThis.litIssuedWarnings.has(warning) && !globalThis.litIssuedWarnings.has(code)) {
+      console.warn(warning);
+      globalThis.litIssuedWarnings.add(warning);
+    }
+  };
+}
+var legacyProperty = (options, proto, name) => {
+  const hasOwnProperty = proto.hasOwnProperty(name);
+  proto.constructor.createProperty(name, options);
+  return hasOwnProperty ? Object.getOwnPropertyDescriptor(proto, name) : undefined;
+};
+var defaultPropertyDeclaration2 = {
+  attribute: true,
+  type: String,
+  converter: defaultConverter,
+  reflect: false,
+  hasChanged: notEqual
+};
+var standardProperty = (options = defaultPropertyDeclaration2, target, context) => {
+  const { kind, metadata } = context;
+  if (DEV_MODE4 && metadata == null) {
+    issueWarning4("missing-class-metadata", `The class ${target} is missing decorator metadata. This ` + `could mean that you're using a compiler that supports decorators ` + `but doesn't support decorator metadata, such as TypeScript 5.1. ` + `Please update your compiler.`);
+  }
+  let properties = globalThis.litPropertyMetadata.get(metadata);
+  if (properties === undefined) {
+    globalThis.litPropertyMetadata.set(metadata, properties = new Map);
+  }
+  if (kind === "setter") {
+    options = Object.create(options);
+    options.wrapped = true;
+  }
+  properties.set(context.name, options);
+  if (kind === "accessor") {
+    const { name } = context;
+    return {
+      set(v) {
+        const oldValue = target.get.call(this);
+        target.set.call(this, v);
+        this.requestUpdate(name, oldValue, options, true, v);
+      },
+      init(v) {
+        if (v !== undefined) {
+          this._$changeProperty(name, undefined, options, v);
+        }
+        return v;
+      }
+    };
+  } else if (kind === "setter") {
+    const { name } = context;
+    return function(value) {
+      const oldValue = this[name];
+      target.call(this, value);
+      this.requestUpdate(name, oldValue, options, true, value);
+    };
+  }
+  throw new Error(`Unsupported decorator location: ${kind}`);
+};
+function property(options) {
+  return (protoOrTarget, nameOrContext) => {
+    return typeof nameOrContext === "object" ? standardProperty(options, protoOrTarget, nameOrContext) : legacyProperty(options, protoOrTarget, nameOrContext);
+  };
+}
+// node_modules/@lit/reactive-element/development/decorators/state.js
+function state(options) {
+  return property({
+    ...options,
+    state: true,
+    attribute: false
+  });
+}
+// node_modules/@lit/reactive-element/development/decorators/query.js
+var DEV_MODE5 = true;
+var issueWarning5;
+if (DEV_MODE5) {
+  globalThis.litIssuedWarnings ??= new Set;
+  issueWarning5 = (code, warning) => {
+    warning += code ? ` See https://lit.dev/msg/${code} for more information.` : "";
+    if (!globalThis.litIssuedWarnings.has(warning) && !globalThis.litIssuedWarnings.has(code)) {
+      console.warn(warning);
+      globalThis.litIssuedWarnings.add(warning);
+    }
+  };
+}
+// src/constants.ts
+var VERSION = __VERSION__;
+var CONDITION_NAMES = {
+  en: {
+    sunny: "Sunny",
+    clear: "Clear",
+    overcast: "Overcast",
+    cloudy: "Cloudy",
+    partlycloudy: "Partly Cloudy",
+    rainy: "Rainy",
+    rain: "Rain",
+    snowy: "Snowy",
+    snow: "Snow",
+    foggy: "Foggy",
+    fog: "Fog",
+    lightning: "Lightning",
+    "lightning-rainy": "Thunderstorm",
+    pouring: "Heavy Rain",
+    "snowy-rainy": "Sleet",
+    hail: "Hail",
+    "clear-night": "Clear Night"
+  },
+  ru: {
+    sunny: "Солнечно",
+    clear: "Ясно",
+    overcast: "Пасмурно",
+    cloudy: "Облачно",
+    partlycloudy: "Переменная облачность",
+    rainy: "Дождь",
+    rain: "Дождь",
+    snowy: "Снег",
+    snow: "Снег",
+    foggy: "Туман",
+    fog: "Туман",
+    lightning: "Гроза",
+    "lightning-rainy": "Гроза с дождем",
+    pouring: "Сильный дождь",
+    "snowy-rainy": "Мокрый снег",
+    hail: "Град",
+    "clear-night": "Ясная ночь"
+  }
+};
+var TRANSLATIONS = {
+  en: {
+    feels_like: "Feels like",
+    forecast_title: "Today's Forecast",
+    no_data: "No data",
+    forecast_unavailable: "Forecast unavailable",
+    weather: "Weather",
+    wind_unit_ms: "m/s",
+    wind_unit_kmh: "km/h"
+  },
+  ru: {
+    feels_like: "Ощущается как",
+    forecast_title: "Прогноз на сегодня",
+    no_data: "Нет данных",
+    forecast_unavailable: "Прогноз недоступен",
+    weather: "Погода",
+    wind_unit_ms: "м/с",
+    wind_unit_kmh: "км/ч"
+  }
+};
+var TIME_THRESHOLDS = {
+  SUNRISE_START: 360,
+  SUNRISE_END: 480,
+  DAY_END: 1080,
+  SUNSET_END: 1200
+};
+var TEMPLOW_ATTRIBUTES = [
+  "templow",
+  "temperature_low",
+  "temp_low",
+  "min_temp",
+  "yandex_pogoda_minimal_forecast_temperature"
+];
+var DEFAULT_CONFIG = {
+  showFeelsLike: true,
+  showWind: false,
+  showWindGust: false,
+  showWindDirection: false,
+  showHumidity: false,
+  showMinTemp: true,
+  showForecast: false,
+  showSunriseSunset: false,
+  showClock: false,
+  overlayOpacity: 0.1,
+  language: "auto",
+  height: null,
+  windSpeedUnit: "ms"
+};
+
+// src/utils.ts
+function getTimeOfDay() {
+  const now = new Date;
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const totalMinutes = hour * 60 + minute;
+  if (totalMinutes >= TIME_THRESHOLDS.SUNRISE_START && totalMinutes < TIME_THRESHOLDS.SUNRISE_END) {
+    const progress = (totalMinutes - TIME_THRESHOLDS.SUNRISE_START) / 120;
+    return { type: "sunrise", progress };
+  }
+  if (totalMinutes >= TIME_THRESHOLDS.SUNRISE_END && totalMinutes < TIME_THRESHOLDS.DAY_END) {
+    const progress = (totalMinutes - TIME_THRESHOLDS.SUNRISE_END) / 600;
+    return { type: "day", progress };
+  }
+  if (totalMinutes >= TIME_THRESHOLDS.DAY_END && totalMinutes < TIME_THRESHOLDS.SUNSET_END) {
+    const progress = (totalMinutes - TIME_THRESHOLDS.DAY_END) / 120;
+    return { type: "sunset", progress };
+  }
+  return { type: "night", progress: 0 };
+}
+function getSunPosition(timeOfDay, width, height) {
+  if (timeOfDay.type === "sunrise") {
+    const progress = timeOfDay.progress;
+    return {
+      x: width * (0.3 + progress * 0.4),
+      y: height * (0.85 - progress * 0.55)
+    };
+  } else if (timeOfDay.type === "sunset") {
+    const progress = timeOfDay.progress;
+    return {
+      x: width * (0.5 + progress * 0.3),
+      y: height * (0.3 + progress * 0.55)
+    };
+  } else if (timeOfDay.type === "day") {
+    const progress = timeOfDay.progress;
+    const angle = progress * Math.PI;
+    return {
+      x: width * (0.5 + Math.sin(angle) * 0.25),
+      y: height * (0.25 - Math.sin(angle) * 0.1)
+    };
+  } else {
+    return {
+      x: width * 0.75,
+      y: height * 0.3
+    };
+  }
+}
+function getBackgroundGradient(timeOfDay) {
+  if (timeOfDay.type === "sunrise") {
+    const progress = timeOfDay.progress;
+    const nightStart = { r: 26, g: 26, b: 46 };
+    const dayStart = { r: 255, g: 160, b: 122 };
+    const dayEnd = { r: 255, g: 215, b: 0 };
+    return {
+      start: {
+        r: Math.round(nightStart.r + (dayStart.r - nightStart.r) * progress),
+        g: Math.round(nightStart.g + (dayStart.g - nightStart.g) * progress),
+        b: Math.round(nightStart.b + (dayStart.b - nightStart.b) * progress)
+      },
+      end: {
+        r: Math.round(nightStart.r + (dayEnd.r - nightStart.r) * progress),
+        g: Math.round(nightStart.g + (dayEnd.g - nightStart.g) * progress),
+        b: Math.round(nightStart.b + (dayEnd.b - nightStart.b) * progress)
+      }
+    };
+  } else if (timeOfDay.type === "sunset") {
+    const progress = timeOfDay.progress;
+    const dayStart = { r: 255, g: 107, b: 107 };
+    const dayEnd = { r: 255, g: 160, b: 122 };
+    const nightStart = { r: 26, g: 26, b: 46 };
+    return {
+      start: {
+        r: Math.round(dayStart.r + (nightStart.r - dayStart.r) * progress),
+        g: Math.round(dayStart.g + (nightStart.g - dayStart.g) * progress),
+        b: Math.round(dayStart.b + (nightStart.b - dayStart.b) * progress)
+      },
+      end: {
+        r: Math.round(dayEnd.r + (nightStart.r - dayEnd.r) * progress),
+        g: Math.round(dayEnd.g + (nightStart.g - dayEnd.g) * progress),
+        b: Math.round(dayEnd.b + (nightStart.b - dayEnd.b) * progress)
+      }
+    };
+  }
+  return null;
+}
+function formatForecastTime(datetime) {
+  if (!datetime)
+    return "";
+  const date = new Date(datetime);
+  const hours = date.getHours();
+  return `${hours.toString().padStart(2, "0")}:00`;
+}
+function formatTime(datetime) {
+  if (!datetime)
+    return "";
+  const date = typeof datetime === "string" ? new Date(datetime) : datetime;
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+}
+function getSunriseSunsetData(weatherState, sunriseEntity = null, sunsetEntity = null, hass = null) {
+  let sunrise = null;
+  let sunset = null;
+  if (sunriseEntity && hass && hass.states[sunriseEntity]) {
+    const sunriseState = hass.states[sunriseEntity];
+    sunrise = new Date(sunriseState.state);
+  }
+  if (sunsetEntity && hass && hass.states[sunsetEntity]) {
+    const sunsetState = hass.states[sunsetEntity];
+    sunset = new Date(sunsetState.state);
+  }
+  if (!sunrise || !sunset) {
+    if (weatherState && weatherState.attributes) {
+      const attrs = weatherState.attributes;
+      if (!sunrise && (attrs.forecast_sunrise || attrs.sunrise)) {
+        sunrise = new Date(attrs.forecast_sunrise || attrs.sunrise);
+      }
+      if (!sunset && (attrs.forecast_sunset || attrs.sunset)) {
+        sunset = new Date(attrs.forecast_sunset || attrs.sunset);
+      }
+    }
+  }
+  return {
+    sunrise,
+    sunset,
+    hasSunData: !!(sunrise && sunset)
+  };
+}
+function getTimeOfDayWithSunData(sunData) {
+  const now = new Date;
+  if (sunData.hasSunData && sunData.sunrise && sunData.sunset) {
+    const currentTime = now.getTime();
+    let sunriseTime = sunData.sunrise.getTime();
+    let sunsetTime = sunData.sunset.getTime();
+    if (sunriseTime - currentTime > 12 * 60 * 60 * 1000) {
+      sunriseTime -= 24 * 60 * 60 * 1000;
+    }
+    if (sunsetTime - currentTime > 12 * 60 * 60 * 1000) {
+      sunsetTime -= 24 * 60 * 60 * 1000;
+    }
+    const sunriseStart = sunriseTime - 60 * 60 * 1000;
+    const sunriseEnd = sunriseTime + 60 * 60 * 1000;
+    const sunsetStart = sunsetTime - 60 * 60 * 1000;
+    const sunsetEnd = sunsetTime + 60 * 60 * 1000;
+    if (currentTime >= sunriseStart && currentTime < sunriseEnd) {
+      const progress = (currentTime - sunriseStart) / (sunriseEnd - sunriseStart);
+      return { type: "sunrise", progress };
+    }
+    if (currentTime >= sunriseEnd && currentTime < sunsetStart) {
+      const progress = (currentTime - sunriseEnd) / (sunsetStart - sunriseEnd);
+      return { type: "day", progress };
+    }
+    if (currentTime >= sunsetStart && currentTime < sunsetEnd) {
+      const progress = (currentTime - sunsetStart) / (sunsetEnd - sunsetStart);
+      return { type: "sunset", progress };
+    }
+    return { type: "night", progress: 0 };
+  }
+  return getTimeOfDay();
+}
+
+// src/animations/base.ts
+class BaseAnimation {
+  ctx;
+  constructor(ctx) {
+    this.ctx = ctx;
+  }
+  drawCloud(x, y, size, opacity) {
+    const savedShadowBlur = this.ctx.shadowBlur;
+    const savedShadowColor = this.ctx.shadowColor;
+    const savedGlobalAlpha = this.ctx.globalAlpha;
+    this.ctx.shadowBlur = size * 0.25;
+    this.ctx.shadowColor = `rgba(255, 255, 255, ${opacity * 0.4})`;
+    this.ctx.globalAlpha = opacity * 0.85;
+    this.ctx.fillStyle = "rgba(255, 255, 255, 1)";
+    const parts = [
+      { x, y, r: size * 0.4 },
+      { x: x + size * 0.35, y, r: size * 0.5 },
+      { x: x + size * 0.65, y, r: size * 0.48 },
+      { x: x + size * 0.92, y, r: size * 0.38 },
+      { x: x + size * 0.18, y: y - size * 0.28, r: size * 0.38 },
+      { x: x + size * 0.52, y: y - size * 0.32, r: size * 0.42 },
+      { x: x + size * 0.78, y: y - size * 0.28, r: size * 0.38 },
+      { x: x + size * 0.32, y: y - size * 0.42, r: size * 0.32 },
+      { x: x + size * 0.62, y: y - size * 0.48, r: size * 0.36 },
+      { x: x + size * 0.82, y: y - size * 0.42, r: size * 0.32 }
+    ];
+    parts.forEach((part) => {
+      this.ctx.beginPath();
+      this.ctx.arc(part.x, part.y, part.r, 0, Math.PI * 2);
+      this.ctx.fill();
+    });
+    this.ctx.shadowBlur = savedShadowBlur;
+    this.ctx.shadowColor = savedShadowColor;
+    this.ctx.globalAlpha = savedGlobalAlpha;
+  }
+  drawClouds(time, width, height, density = 0.5) {
+    const cloudCount = Math.max(2, Math.floor(width / 150 * density));
+    for (let i = 0;i < cloudCount; i++) {
+      const baseX = (time * 3 + i * 150) % (width + 200) - 100;
+      const baseY = height * (0.2 + i % 3 * 0.15) + Math.sin(time * 0.2 + i) * 8;
+      const size = 40 + i % 3 * 15;
+      const opacity = 0.6 + i % 2 * 0.2;
+      this.drawCloud(baseX, baseY, size, opacity);
+    }
+  }
+}
+
+// src/animations/sunny.ts
+class SunnyAnimation extends BaseAnimation {
+  draw(time, width, height, timeOfDay) {
+    const currentTime = Date.now() * 0.001;
+    const sunPos = getSunPosition(timeOfDay, width, height);
+    const sunX = sunPos.x;
+    const sunY = sunPos.y;
+    if (timeOfDay.type === "day" || timeOfDay.type === "sunrise" || timeOfDay.type === "sunset") {
+      this.drawSun(sunX, sunY, currentTime);
+      if (timeOfDay.type === "sunrise" || timeOfDay.type === "sunset") {
+        this.drawHorizonReflection(sunX, sunY, height, currentTime);
+      }
+    } else if (timeOfDay.type === "night") {
+      this.drawNightSky(width, height, currentTime);
+    }
+    this.drawClouds(currentTime, width, height, 0.3);
+  }
+  drawSun(sunX, sunY, time) {
+    const sunRadius = 48 + Math.sin(time * 0.15) * 1.5;
+    const outerHalo = this.ctx.createRadialGradient(sunX, sunY, sunRadius * 0.3, sunX, sunY, sunRadius * 3.5);
+    outerHalo.addColorStop(0, "rgba(255, 248, 230, 0.25)");
+    outerHalo.addColorStop(0.15, "rgba(255, 240, 200, 0.2)");
+    outerHalo.addColorStop(0.3, "rgba(255, 230, 170, 0.15)");
+    outerHalo.addColorStop(0.5, "rgba(255, 220, 140, 0.1)");
+    outerHalo.addColorStop(0.7, "rgba(255, 210, 120, 0.06)");
+    outerHalo.addColorStop(0.85, "rgba(255, 200, 100, 0.03)");
+    outerHalo.addColorStop(1, "rgba(255, 190, 90, 0)");
+    this.ctx.fillStyle = outerHalo;
+    this.ctx.beginPath();
+    this.ctx.arc(sunX, sunY, sunRadius * 3.5, 0, Math.PI * 2);
+    this.ctx.fill();
+    const midHalo = this.ctx.createRadialGradient(sunX, sunY, sunRadius * 0.5, sunX, sunY, sunRadius * 2.2);
+    midHalo.addColorStop(0, "rgba(255, 250, 220, 0.35)");
+    midHalo.addColorStop(0.3, "rgba(255, 240, 190, 0.25)");
+    midHalo.addColorStop(0.6, "rgba(255, 230, 160, 0.15)");
+    midHalo.addColorStop(0.85, "rgba(255, 220, 140, 0.08)");
+    midHalo.addColorStop(1, "rgba(255, 210, 120, 0)");
+    this.ctx.fillStyle = midHalo;
+    this.ctx.beginPath();
+    this.ctx.arc(sunX, sunY, sunRadius * 2.2, 0, Math.PI * 2);
+    this.ctx.fill();
+    const innerHalo = this.ctx.createRadialGradient(sunX, sunY, sunRadius * 0.6, sunX, sunY, sunRadius * 1.6);
+    innerHalo.addColorStop(0, "rgba(255, 252, 240, 0.5)");
+    innerHalo.addColorStop(0.4, "rgba(255, 245, 210, 0.35)");
+    innerHalo.addColorStop(0.7, "rgba(255, 235, 180, 0.2)");
+    innerHalo.addColorStop(1, "rgba(255, 225, 150, 0)");
+    this.ctx.fillStyle = innerHalo;
+    this.ctx.beginPath();
+    this.ctx.arc(sunX, sunY, sunRadius * 1.6, 0, Math.PI * 2);
+    this.ctx.fill();
+    const sunGradient = this.ctx.createRadialGradient(sunX - sunRadius * 0.1, sunY - sunRadius * 0.1, 0, sunX, sunY, sunRadius);
+    sunGradient.addColorStop(0, "#FFFEF5");
+    sunGradient.addColorStop(0.15, "#FFF9E6");
+    sunGradient.addColorStop(0.3, "#FFF4D6");
+    sunGradient.addColorStop(0.5, "#FFEDC0");
+    sunGradient.addColorStop(0.7, "#FFE4A8");
+    sunGradient.addColorStop(0.85, "#FFDC95");
+    sunGradient.addColorStop(1, "#FFD37F");
+    this.ctx.fillStyle = sunGradient;
+    this.ctx.beginPath();
+    this.ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
+    this.ctx.fill();
+  }
+  drawHorizonReflection(sunX, sunY, height, time) {
+    const sunRadius = 48 + Math.sin(time * 0.15) * 1.5;
+    const horizonY = height * 0.85;
+    if (sunY >= horizonY - 50) {
+      const reflectionAlpha = Math.max(0, (horizonY - sunY) / 50) * 0.3;
+      this.ctx.fillStyle = `rgba(255, 140, 0, ${reflectionAlpha})`;
+      this.ctx.beginPath();
+      this.ctx.ellipse(sunX, horizonY, sunRadius * 1.5, sunRadius * 0.5, 0, 0, Math.PI * 2);
+      this.ctx.fill();
+    }
+  }
+  drawNightSky(width, height, time) {
+    this.ctx.fillStyle = "#FFFFFF";
+    for (let i = 0;i < 20; i++) {
+      const x = (width * 0.2 + i * 47) % width;
+      const y = (height * 0.2 + i * 23) % (height * 0.6);
+      const twinkle = Math.sin(time * 0.8 + i) * 0.5 + 0.5;
+      this.ctx.globalAlpha = twinkle * 0.8;
+      this.ctx.beginPath();
+      this.ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+      this.ctx.fill();
+    }
+    const moonX = width * 0.75;
+    const moonY = height * 0.3;
+    this.ctx.globalAlpha = 0.9;
+    this.ctx.fillStyle = "#F0F0F0";
+    this.ctx.beginPath();
+    this.ctx.arc(moonX, moonY, 25, 0, Math.PI * 2);
+    this.ctx.fill();
+    this.ctx.fillStyle = "#1a1a2e";
+    this.ctx.beginPath();
+    this.ctx.arc(moonX - 8, moonY - 5, 22, 0, Math.PI * 2);
+    this.ctx.fill();
+    this.ctx.globalAlpha = 1;
+  }
+}
+
+// src/animations/rainy.ts
+class RainyAnimation extends BaseAnimation {
+  rainDrops = [];
+  lastTime = 0;
+  draw(time, width, height, timeOfDay, heavy = false) {
+    const currentTime = Date.now() * 0.001;
+    this.drawClouds(currentTime, width, height, heavy ? 1 : 0.8);
+    this.drawRain(width, height, heavy);
+  }
+  drawRain(width, height, heavy) {
+    const dropCount = heavy ? 130 : 90;
+    if (this.rainDrops.length !== dropCount) {
+      this.rainDrops = [];
+      for (let i = 0;i < dropCount; i++) {
+        this.rainDrops.push({
+          x: Math.random() * width,
+          y: Math.random() * height - Math.random() * 200,
+          speed: heavy ? 80 + Math.random() * 100 : 60 + Math.random() * 80,
+          windOffset: (Math.random() - 0.5) * 30,
+          width: heavy ? 1.2 + Math.random() * 1 : 0.8 + Math.random() * 0.7,
+          length: heavy ? 8 + Math.random() * 10 : 6 + Math.random() * 8,
+          alpha: heavy ? 0.75 + Math.random() * 0.15 : 0.65 + Math.random() * 0.2,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    const currentTime = Date.now() * 0.001;
+    const deltaTime = this.lastTime > 0 ? Math.min(currentTime - this.lastTime, 0.1) : 1 / 60;
+    this.lastTime = currentTime;
+    const currentAnimTime = currentTime;
+    for (let i = 0;i < this.rainDrops.length; i++) {
+      const drop = this.rainDrops[i];
+      drop.y += drop.speed * deltaTime;
+      if (drop.y > height + 50) {
+        drop.y = -50 - Math.random() * 100;
+        drop.x = Math.random() * width;
+      }
+      const wind = drop.windOffset * (1 + Math.sin(currentAnimTime * 0.5 + drop.phase) * 0.2);
+      const dropX = drop.x + wind;
+      if (dropX < -10) {
+        drop.x = width + 10;
+      } else if (dropX > width + 10) {
+        drop.x = -10;
+      }
+      this.drawRainDrop(dropX, drop.y, drop);
+    }
+  }
+  drawRainDrop(dropX, dropY, drop) {
+    this.ctx.save();
+    this.ctx.globalAlpha = drop.alpha;
+    const topY = dropY - drop.length * 0.5;
+    const bottomY = dropY + drop.length * 0.5;
+    const fillAlpha = drop.alpha;
+    const strokeAlpha = drop.alpha * 0.5;
+    this.ctx.fillStyle = "rgba(220, 240, 255, " + fillAlpha + ")";
+    this.ctx.strokeStyle = "rgba(240, 250, 255, " + strokeAlpha + ")";
+    this.ctx.lineWidth = 0.4;
+    this.ctx.beginPath();
+    this.ctx.moveTo(dropX, topY);
+    this.ctx.quadraticCurveTo(dropX - drop.width * 0.3, dropY, dropX - drop.width, bottomY - drop.width * 0.3);
+    this.ctx.arc(dropX, bottomY, drop.width, Math.PI, 0, false);
+    this.ctx.quadraticCurveTo(dropX + drop.width * 0.3, dropY, dropX, topY);
+    this.ctx.closePath();
+    this.ctx.fill();
+    this.ctx.stroke();
+    this.ctx.restore();
+  }
+}
+
+// src/animations/snowy.ts
+class SnowyAnimation extends BaseAnimation {
+  snowflakes = [];
+  lastTime = 0;
+  draw(time, width, height, _timeOfDay) {
+    const currentTime = Date.now() * 0.001;
+    this.drawClouds(currentTime, width, height, 0.7);
+    this.drawSnowflakes(width, height);
+  }
+  drawSnowflakes(width, height) {
+    const snowflakeCount = Math.floor(width * height / 5000);
+    const targetCount = Math.max(30, Math.min(snowflakeCount, 80));
+    if (this.snowflakes.length !== targetCount) {
+      this.snowflakes = [];
+      for (let i = 0;i < targetCount; i++) {
+        this.snowflakes.push({
+          x: Math.random() * width,
+          y: Math.random() * height - Math.random() * 100,
+          speedY: 15 + Math.random() * 10,
+          speedX: (Math.random() - 0.5) * 8,
+          size: 1.5 + Math.random() * 1.5,
+          alpha: 0.6 + Math.random() * 0.3,
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() - 0.5) * 0.3,
+          swayPhase: Math.random() * Math.PI * 2,
+          swaySpeed: 0.5 + Math.random() * 0.5
+        });
+      }
+    }
+    const currentTime = Date.now() * 0.001;
+    const deltaTime = this.lastTime > 0 ? Math.min(currentTime - this.lastTime, 0.1) : 1 / 60;
+    this.lastTime = currentTime;
+    const currentAnimTime = currentTime;
+    this.ctx.lineCap = "round";
+    for (let i = 0;i < this.snowflakes.length; i++) {
+      const flake = this.snowflakes[i];
+      const sway = Math.sin(currentAnimTime * flake.swaySpeed + flake.swayPhase) * 2;
+      flake.y += flake.speedY * deltaTime;
+      flake.x += (flake.speedX + sway) * deltaTime;
+      flake.rotation += flake.rotationSpeed * deltaTime;
+      if (flake.y > height + 20) {
+        flake.y = -20 - Math.random() * 50;
+        flake.x = Math.random() * width;
+      }
+      if (flake.x < -10) {
+        flake.x = width + 10;
+      } else if (flake.x > width + 10) {
+        flake.x = -10;
+      }
+      this.drawSnowflake(flake.x, flake.y, flake.size, flake.alpha, flake.rotation);
+    }
+  }
+  drawSnowflake(x, y, size, alpha, rotation) {
+    this.ctx.save();
+    this.ctx.translate(x, y);
+    this.ctx.rotate(rotation);
+    this.ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+    this.ctx.lineWidth = 1;
+    this.ctx.beginPath();
+    for (let j = 0;j < 6; j++) {
+      const angle = Math.PI / 3 * j;
+      const cos = Math.cos(angle);
+      const sin = Math.sin(angle);
+      this.ctx.moveTo(0, 0);
+      this.ctx.lineTo(sin * size * 2.5, cos * size * 2.5);
+      const branch1X = sin * size * 1.5 + cos * size * 0.5;
+      const branch1Y = cos * size * 1.5 - sin * size * 0.5;
+      const branch1EndX = sin * size * 1.8 + cos * size * 1.2;
+      const branch1EndY = cos * size * 1.8 - sin * size * 1.2;
+      this.ctx.moveTo(branch1X, branch1Y);
+      this.ctx.lineTo(branch1EndX, branch1EndY);
+      const branch2X = sin * size * 1.5 - cos * size * 0.5;
+      const branch2Y = cos * size * 1.5 + sin * size * 0.5;
+      const branch2EndX = sin * size * 1.8 - cos * size * 1.2;
+      const branch2EndY = cos * size * 1.8 + sin * size * 1.2;
+      this.ctx.moveTo(branch2X, branch2Y);
+      this.ctx.lineTo(branch2EndX, branch2EndY);
+    }
+    this.ctx.stroke();
+    this.ctx.restore();
+  }
+}
+
+// src/animations/cloudy.ts
+class CloudyAnimation extends BaseAnimation {
+  draw(time, width, height, _timeOfDay) {
+    const currentTime = Date.now() * 0.001;
+    this.drawClouds(currentTime, width, height, 0.7);
+  }
+}
+
+// src/animations/foggy.ts
+class FoggyAnimation extends BaseAnimation {
+  draw(time, width, height, _timeOfDay) {
+    const currentTime = Date.now() * 0.0003;
+    this.ctx.fillStyle = "rgba(200, 200, 200, 0.4)";
+    for (let i = 0;i < 3; i++) {
+      const y = height * (0.4 + i * 0.2);
+      const offset = Math.sin(currentTime + i) * 20;
+      this.ctx.beginPath();
+      this.ctx.moveTo(0, y);
+      for (let x = 0;x <= width; x += 5) {
+        const wave = Math.sin((x / width + currentTime) * Math.PI * 4 + i) * 15;
+        this.ctx.lineTo(x, y + wave + offset);
+      }
+      this.ctx.lineTo(width, height);
+      this.ctx.lineTo(0, height);
+      this.ctx.closePath();
+      this.ctx.fill();
+    }
+  }
+}
+
+// src/animations/hail.ts
+class HailAnimation extends BaseAnimation {
+  hailStones = [];
+  draw(time, width, height, _timeOfDay) {
+    const currentTime = Date.now() * 0.001;
+    this.drawClouds(currentTime, width, height, 1);
+    this.drawHailStones(width, height);
+  }
+  drawHailStones(width, height) {
+    const stoneCount = 60;
+    if (this.hailStones.length !== stoneCount) {
+      this.hailStones = [];
+      for (let i = 0;i < stoneCount; i++) {
+        this.hailStones.push({
+          startX: Math.random() * width,
+          startY: Math.random() * (height + 150) - 75,
+          speed: 120 + Math.random() * 80,
+          windOffset: (Math.random() - 0.5) * 20,
+          size: 2 + Math.random() * 3,
+          alpha: 0.8 + Math.random() * 0.15,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    const time = Date.now() * 0.002;
+    this.ctx.fillStyle = "rgba(240, 250, 255, 1)";
+    this.ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
+    this.ctx.lineWidth = 0.5;
+    for (let i = 0;i < this.hailStones.length; i++) {
+      const hail = this.hailStones[i];
+      const hailY = (hail.startY + time * hail.speed) % (height + 150);
+      if (hailY > height + 30) {
+        hail.startY = -30 - Math.random() * 30;
+        hail.startX = Math.random() * width;
+      }
+      const wind = hail.windOffset * (1 + Math.sin(time * 0.6 + hail.phase) * 0.15);
+      const hailX = (hail.startX + wind + time * 20 % width) % width;
+      if (hailX < -5) {
+        hail.startX = width + 5;
+      } else if (hailX > width + 5) {
+        hail.startX = -5;
+      }
+      this.drawHailStone(hailX, hailY, hail);
+    }
+  }
+  drawHailStone(hailX, hailY, hail) {
+    this.ctx.save();
+    this.ctx.globalAlpha = hail.alpha;
+    this.ctx.beginPath();
+    this.ctx.ellipse(hailX, hailY, hail.size, hail.size * 0.9, 0, 0, Math.PI * 2);
+    this.ctx.fill();
+    this.ctx.stroke();
+    this.ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+    this.ctx.beginPath();
+    this.ctx.ellipse(hailX - hail.size * 0.3, hailY - hail.size * 0.3, hail.size * 0.3, hail.size * 0.25, 0, 0, Math.PI * 2);
+    this.ctx.fill();
+    this.ctx.fillStyle = "rgba(240, 250, 255, 1)";
+    this.ctx.restore();
+  }
+}
+
+// src/animations/thunderstorm.ts
+class ThunderstormAnimation extends BaseAnimation {
+  rainyAnimation;
+  constructor(ctx) {
+    super(ctx);
+    this.rainyAnimation = new RainyAnimation(ctx);
+  }
+  draw(time, width, height, timeOfDay, withRain = true) {
+    const currentTime = Date.now() * 0.001;
+    this.drawClouds(currentTime, width, height, 1);
+    if (withRain) {
+      this.rainyAnimation.draw(time, width, height, timeOfDay, false);
+    }
+    this.drawLightning(width, height, currentTime);
+  }
+  drawLightning(width, height, time) {
+    const flashPattern = Math.sin(time * 2.5) * Math.sin(time * 5.3) * Math.sin(time * 7.1);
+    const flashIntensity = Math.max(0, flashPattern);
+    if (flashIntensity > 0.4) {
+      const normalizedIntensity = (flashIntensity - 0.4) / 0.6;
+      const alpha = normalizedIntensity * 0.6;
+      const fadeAlpha = Math.min(alpha, Math.sin(normalizedIntensity * Math.PI) * 0.6);
+      this.ctx.fillStyle = `rgba(255, 255, 255, ${fadeAlpha})`;
+      this.ctx.fillRect(0, 0, width, height);
+    }
+  }
+}
+
+// src/components/styles.ts
+var cardStyles = css`
   :host {
     display: block;
     --card-width: 100%;
@@ -276,7 +2501,11 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
       right: 16px;
     }
   }
-`,Pt={wind:W`
+`;
+
+// src/icons/svg-icons.ts
+var SVG_ICONS = {
+  wind: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="20" height="20">
       <path fill="none" stroke="currentColor" stroke-dasharray="35 22" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" d="M43.64 20a5 5 0 113.61 8.46h-35.5">
         <animate attributeName="stroke-dashoffset" dur="2s" repeatCount="indefinite" values="-57; 57"/>
@@ -285,49 +2514,54 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="stroke-dashoffset" begin="-1.5s" dur="2s" repeatCount="indefinite" values="-39; 39"/>
       </path>
     </svg>
-  `,humidity:W`
+  `,
+  humidity: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="20" height="20">
       <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M32 17c-6.09 9-10 14.62-10 20.09a10 10 0 0020 0C42 31.62 38.09 26 32 17z"/>
       <path fill="currentColor" opacity="0.8" d="M26.24 30.19a3 3 0 012.12-.69 3 3 0 012.12.69 2.51 2.51 0 01.74 1.92v1.24a2.48 2.48 0 01-.74 1.9 3.05 3.05 0 01-2.12.68 3 3 0 01-2.12-.68 2.48 2.48 0 01-.74-1.9v-1.24a2.51 2.51 0 01.74-1.92zm11-.23a.42.42 0 01-.08.4L29 41.69a1.37 1.37 0 01-.44.44 1.87 1.87 0 01-.72.09h-.67c-.2 0-.33-.06-.38-.18s0-.25.09-.42l8.2-11.35a1 1 0 01.41-.41 2 2 0 01.67-.08h.76q.27 0 .34.22zm-8.9 1.17c-.79 0-1.19.36-1.19 1.07v1c0 .71.4 1.07 1.19 1.07s1.19-.36 1.19-1.07v-1c.02-.71-.38-1.07-1.17-1.07zm5.16 5.63a3 3 0 012.12-.69 3 3 0 012.12.69 2.51 2.51 0 01.74 1.92v1.24a2.48 2.48 0 01-.74 1.9 3 3 0 01-2.12.68 3.05 3.05 0 01-2.12-.68 2.48 2.48 0 01-.74-1.9v-1.24a2.51 2.51 0 01.76-1.92zm2.12.94c-.79 0-1.19.35-1.19 1.07v1c0 .73.4 1.09 1.19 1.09s1.19-.36 1.19-1.09v-1c.02-.72-.38-1.07-1.17-1.07z"/>
     </svg>
-  `,sunrise:W`
+  `,
+  sunrise: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="20" height="20">
       <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 25l-6.34 6.34M14 16v2m18 12a10 10 0 00-10 10m24 0a10 10 0 00-10-10m22 16H6m50.34-16L50 23.66"/>
       <circle cx="32" cy="40" r="5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
       <path fill="none" stroke="currentColor" stroke-dasharray="2 3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M46 40a14 14 0 00-28 0"/>
     </svg>
-  `,sunset:W`
+  `,
+  sunset: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="20" height="20">
       <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 41l-6.34-6.34M14 50v-2m18-12a10 10 0 0110 10m-24 0a10 10 0 0110-10M6 52h52M7.66 42L14 48.34"/>
       <circle cx="32" cy="46" r="5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
       <path fill="none" stroke="currentColor" stroke-dasharray="2 3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M46 46a14 14 0 01-28 0"/>
     </svg>
-  `,windDirection:t=>W`
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="transform: rotate(${t}deg); transform-origin: center;">
-      <path fill="currentColor" d="M12 2L4 20L12 17L20 20L12 2Z"/>
-    </svg>
-  `},Dt={sunny:W`
+  `
+};
+var WEATHER_CONDITION_ICONS = {
+  sunny: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <g>
         <path fill="none" stroke="#f59e0b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" d="M42.5 32A10.5 10.5 0 1132 21.5 10.5 10.5 0 0142.5 32zM32 15.71V9.5m0 45v-6.21m11.52-27.81l4.39-4.39M16.09 47.91l4.39-4.39m0-23l-4.39-4.39m31.82 31.78l-4.39-4.39M15.71 32H9.5m45 0h-6.21"/>
         <animateTransform attributeName="transform" dur="45s" from="0 32 32" repeatCount="indefinite" to="360 32 32" type="rotate"/>
       </g>
     </svg>
-  `,clear:W`
+  `,
+  clear: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <g>
         <path fill="none" stroke="#f59e0b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" d="M42.5 32A10.5 10.5 0 1132 21.5 10.5 10.5 0 0142.5 32zM32 15.71V9.5m0 45v-6.21m11.52-27.81l4.39-4.39M16.09 47.91l4.39-4.39m0-23l-4.39-4.39m31.82 31.78l-4.39-4.39M15.71 32H9.5m45 0h-6.21"/>
         <animateTransform attributeName="transform" dur="45s" from="0 32 32" repeatCount="indefinite" to="360 32 32" type="rotate"/>
       </g>
     </svg>
-  `,"clear-night":W`
+  `,
+  "clear-night": svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <g>
         <path fill="none" stroke="#72b9d5" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M46.66 36.2a16.66 16.66 0 01-16.78-16.55 16.29 16.29 0 01.55-4.15A16.56 16.56 0 1048.5 36.1c-.61.06-1.22.1-1.84.1z"/>
         <animateTransform attributeName="transform" dur="10s" repeatCount="indefinite" type="rotate" values="-5 32 32;15 32 32;-5 32 32"/>
       </g>
     </svg>
-  `,partlycloudy:W`
+  `,
+  partlycloudy: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <defs>
         <clipPath id="partly-cloudy-clip">
@@ -342,7 +2576,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
       </g>
       <path fill="none" stroke="#e5e7eb" stroke-linejoin="round" stroke-width="3" d="M46.5 31.5h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0h28a7 7 0 000-14z"/>
     </svg>
-  `,overcast:W`
+  `,
+  overcast: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <defs>
         <clipPath id="overcast-clip-a">
@@ -371,14 +2606,16 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animateTransform attributeName="transform" dur="7s" repeatCount="indefinite" type="translate" values="-3 0; 3 0; -3 0"/>
       </g>
     </svg>
-  `,cloudy:W`
+  `,
+  cloudy: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <g>
         <path fill="none" stroke="#e5e7eb" stroke-linejoin="round" stroke-width="3" d="M46.5 31.5h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0h28a7 7 0 000-14z"/>
         <animateTransform attributeName="transform" dur="7s" repeatCount="indefinite" type="translate" values="-3 0; 3 0; -3 0"/>
       </g>
     </svg>
-  `,rainy:W`
+  `,
+  rainy: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M43.67 45.5h2.83a7 7 0 000-14h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0"/>
       <g>
@@ -397,7 +2634,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="opacity" begin="-0.2s" dur="0.7s" repeatCount="indefinite" values="0;1;1;0"/>
       </g>
     </svg>
-  `,rain:W`
+  `,
+  rain: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M43.67 45.5h2.83a7 7 0 000-14h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0"/>
       <g>
@@ -416,7 +2654,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="opacity" begin="-0.2s" dur="0.7s" repeatCount="indefinite" values="0;1;1;0"/>
       </g>
     </svg>
-  `,pouring:W`
+  `,
+  pouring: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M43.67 45.5h2.83a7 7 0 000-14h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0"/>
       <g>
@@ -435,7 +2674,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="opacity" begin="-0.2s" dur="0.7s" repeatCount="indefinite" values="0;1;1;0"/>
       </g>
     </svg>
-  `,snowy:W`
+  `,
+  snowy: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M43.67 45.5h2.83a7 7 0 000-14h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0"/>
       <g>
@@ -460,7 +2700,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="opacity" begin="-1s" dur="4s" repeatCount="indefinite" values="0;1;1;1;0"/>
       </g>
     </svg>
-  `,snow:W`
+  `,
+  snow: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M43.67 45.5h2.83a7 7 0 000-14h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0"/>
       <g>
@@ -485,7 +2726,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="opacity" begin="-1s" dur="4s" repeatCount="indefinite" values="0;1;1;1;0"/>
       </g>
     </svg>
-  `,foggy:W`
+  `,
+  foggy: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linejoin="round" stroke-width="3" d="M46.5 31.5h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0h28a7 7 0 000-14z"/>
       <g>
@@ -497,7 +2739,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animateTransform attributeName="transform" begin="-4s" dur="5s" repeatCount="indefinite" type="translate" values="-4 0; 4 0; -4 0"/>
       </g>
     </svg>
-  `,fog:W`
+  `,
+  fog: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linejoin="round" stroke-width="3" d="M46.5 31.5h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0h28a7 7 0 000-14z"/>
       <g>
@@ -509,7 +2752,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animateTransform attributeName="transform" begin="-4s" dur="5s" repeatCount="indefinite" type="translate" values="-4 0; 4 0; -4 0"/>
       </g>
     </svg>
-  `,hail:W`
+  `,
+  hail: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M43.67 45.5h2.83a7 7 0 000-14h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0"/>
       <g>
@@ -528,7 +2772,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="opacity" begin="-0.2s" dur="0.6s" repeatCount="indefinite" values="1;1;0"/>
       </g>
     </svg>
-  `,"snowy-rainy":W`
+  `,
+  "snowy-rainy": svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M43.67 45.5h2.83a7 7 0 000-14h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0"/>
       <g>
@@ -547,7 +2792,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="opacity" begin="-0.2s" dur="0.6s" repeatCount="indefinite" values="1;1;0"/>
       </g>
     </svg>
-  `,lightning:W`
+  `,
+  lightning: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M43.67 45.5h2.83a7 7 0 000-14h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0"/>
       <g>
@@ -570,7 +2816,8 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;1;1;1;1;1;0.1;1;0.1;1;1;0.1;1;0.1;1"/>
       </g>
     </svg>
-  `,"lightning-rainy":W`
+  `,
+  "lightning-rainy": svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path fill="none" stroke="#e5e7eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M43.67 45.5h2.83a7 7 0 000-14h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0"/>
       <g>
@@ -593,102 +2840,611 @@ const t=globalThis,e=t.ShadowRoot&&(void 0===t.ShadyCSS||t.ShadyCSS.nativeShadow
         <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;1;1;1;1;1;0.1;1;0.1;1;1;0.1;1;0.1;1"/>
       </g>
     </svg>
-  `,windy:W`
+  `,
+  windy: svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <g>
         <path fill="none" stroke="#e5e7eb" stroke-linejoin="round" stroke-width="3" d="M46.5 31.5h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0h28a7 7 0 000-14z"/>
         <animateTransform attributeName="transform" dur="7s" repeatCount="indefinite" type="translate" values="-3 0; 3 0; -3 0"/>
       </g>
     </svg>
-  `,"windy-variant":W`
+  `,
+  "windy-variant": svg`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <g>
         <path fill="none" stroke="#e5e7eb" stroke-linejoin="round" stroke-width="3" d="M46.5 31.5h-.32a10.49 10.49 0 00-19.11-8 7 7 0 00-10.57 6 7.21 7.21 0 00.1 1.14A7.5 7.5 0 0018 45.5a4.19 4.19 0 00.5 0v0h28a7 7 0 000-14z"/>
         <animateTransform attributeName="transform" dur="7s" repeatCount="indefinite" type="translate" values="-3 0; 3 0; -3 0"/>
       </g>
     </svg>
-  `};function zt(t,...e){const i=Pt[t];return"function"==typeof i?i(...e):i||""}class Ft extends ot{static get properties(){return{hass:{type:Object},config:{type:Object},currentTime:{type:String}}}static get styles(){return Et}constructor(){super(),this.config={},this.animationFrame=null,this.canvas=null,this.ctx=null,this.canvasWidth=0,this.canvasHeight=0,this.animations={},this.holdTimer=null,this.holdDelay=500,this.currentTime="",this.clockInterval=null}connectedCallback(){super.connectedCallback(),this.updateComplete.then(()=>{setTimeout(()=>{this.setupCanvas(),this.canvas&&this.ctx&&(this.initializeAnimations(),this.startAnimation(),this.setupResizeObserver()),this.setupForecastScroll(),this.startClock()},100)})}disconnectedCallback(){if(super.disconnectedCallback(),this.animationFrame&&(cancelAnimationFrame(this.animationFrame),this.animationFrame=null),this.resizeObserver&&(this.resizeObserver.disconnect(),this.resizeObserver=null),this._wheelHandler&&this.shadowRoot){const t=this.shadowRoot.querySelector(".forecast-scroll");t&&t.removeEventListener("wheel",this._wheelHandler),this._wheelHandler=null}this.clockInterval&&(clearInterval(this.clockInterval),this.clockInterval=null)}updated(t){super.updated(t),(t.has("hass")||t.has("config"))&&(this.canvas&&this.ctx&&this.resizeCanvas(),this.setupForecastScroll())}initializeAnimations(){this.animations={sunny:new $t(this.ctx),rainy:new Ct(this.ctx),snowy:new Mt(this.ctx),cloudy:new St(this.ctx),foggy:new At(this.ctx),hail:new Tt(this.ctx),thunderstorm:new Nt(this.ctx)}}setupResizeObserver(){if(!this.shadowRoot)return;const t=this.shadowRoot.querySelector(".canvas-container");t&&(this.resizeObserver=new ResizeObserver(()=>{this.resizeCanvas()}),this.resizeObserver.observe(t))}setupForecastScroll(){if(!this.shadowRoot)return;const t=this.shadowRoot.querySelector(".forecast-scroll");t&&(this._wheelHandler&&t.removeEventListener("wheel",this._wheelHandler),this._wheelHandler=e=>{0!==e.deltaY&&(e.preventDefault(),t.scrollLeft+=e.deltaY)},t.addEventListener("wheel",this._wheelHandler,{passive:!1}))}resizeCanvas(){if(!this.canvas)return;const t=this.shadowRoot.querySelector(".canvas-container");if(!t)return;const e=t.getBoundingClientRect();if(0===e.width||0===e.height)return;const i=window.devicePixelRatio||2;this.canvas.width=e.width*i,this.canvas.height=e.height*i,this.canvas.style.width="100%",this.canvas.style.height="100%",this.ctx=this.canvas.getContext("2d"),this.ctx.scale(i,i),this.canvasWidth=e.width,this.canvasHeight=e.height,this.initializeAnimations()}setupCanvas(){const t=this.shadowRoot.querySelector(".canvas-container");if(!t)return;const e=t.querySelector("canvas");e&&e.remove(),this.canvas=document.createElement("canvas"),t.appendChild(this.canvas),this.resizeCanvas()}getState(t){if(!this.hass||!t)return null;const e=this.hass.states[t];return e?e.state:null}getAttributes(t){if(!this.hass||!t)return{};const e=this.hass.states[t];return e?e.attributes:{}}getWeatherData(){const t=this.config.entity||"weather.home",e=this.getState(t),i=this.getAttributes(t),s=i.condition||e||"sunny";let n=null;if(this.config.templowAttribute&&null!=i[this.config.templowAttribute])n=i[this.config.templowAttribute];else{for(const t of gt)if(null!=i[t]){n=i[t];break}null==n&&(n=(i.forecast&&i.forecast[0]?i.forecast[0].templow:null)||(i.forecast_hourly&&i.forecast_hourly[0]?i.forecast_hourly[0].native_templow:null))}return{condition:s,temperature:null!=i.temperature?i.temperature:null,apparentTemperature:i.apparent_temperature||null,humidity:null!=i.humidity?i.humidity:null,windSpeed:null!=i.wind_speed?i.wind_speed:null,windGust:i.wind_gust_speed||i.wind_gust||null,windBearing:null!=i.wind_bearing?i.wind_bearing:null,windDirection:i.wind_direction||null,pressure:i.pressure||null,forecast:i.forecast||i.forecast_hourly||[],friendlyName:i.friendly_name||this.translate("weather"),templow:n}}getTodayForecast(){if(!this.hass||!this.config)return[];const t=this.getWeatherData();if(!t.forecast||0===t.forecast.length)return[];const e=new Date,i=new Date(e.getFullYear(),e.getMonth(),e.getDate()),s=new Date(i);s.setDate(s.getDate()+1);return t.forecast.filter(t=>{if(!t.datetime)return!1;const n=new Date(t.datetime),a=new Date(n.getFullYear(),n.getMonth(),n.getDate());return a.getTime()===i.getTime()||a.getTime()===s.getTime()&&n.getHours()<=e.getHours()}).sort((t,e)=>new Date(t.datetime)-new Date(e.datetime)).slice(0,8)}startAnimation(){const t=()=>{this.draw(),this.animationFrame=requestAnimationFrame(t)};t()}draw(){if(!this.ctx||!this.canvas)return;if(!(this.canvasWidth&&this.canvasHeight||(this.resizeCanvas(),this.canvasWidth&&this.canvasHeight)))return;const t=this.canvasWidth,e=this.canvasHeight;this.ctx.clearRect(0,0,t,e);const i=this.getWeatherData(),s=this.hass?.states[this.config.entity],n=xt(s),a=this._testTimeOfDay||kt(n);switch(i.condition.toLowerCase()){case"sunny":case"clear":this.animations.sunny.draw(a,t,e);break;case"clear-night":this.animations.sunny.draw({type:"night",progress:0},t,e);break;case"rainy":case"rain":this.animations.rainy.draw(a,t,e,!1);break;case"pouring":this.animations.rainy.draw(a,t,e,!0);break;case"snowy":case"snow":this.animations.snowy.draw(a,t,e);break;case"snowy-rainy":this.animations.rainy.draw(a,t,e,!1),this.animations.snowy.draw(a,t,e);break;case"hail":this.animations.hail.draw(a,t,e);break;case"foggy":case"fog":this.animations.foggy.draw(a,t,e);break;case"lightning":this.animations.thunderstorm.draw(a,t,e,!1);break;case"lightning-rainy":this.animations.thunderstorm.draw(a,t,e,!0);break;default:this.animations.cloudy.draw(a,t,e)}}renderTodayForecast(){const t=this.getTodayForecast();return 0===t.length?L`<div style="opacity: 0.6; font-size: 14px;">${this.translate("forecast_unavailable")}</div>`:L`
+  `
+};
+function getSVGIcon(name, ...args) {
+  const icon = SVG_ICONS[name];
+  if (typeof icon === "function") {
+    return icon(...args);
+  }
+  return icon || "";
+}
+function getWeatherConditionIcon(condition) {
+  if (!condition)
+    return "";
+  const icon = WEATHER_CONDITION_ICONS[condition.toLowerCase()];
+  return icon || "";
+}
+
+// src/components/card.ts
+class AnimatedWeatherCard extends LitElement {
+  animationFrame = null;
+  canvas = null;
+  ctx = null;
+  canvasWidth = 0;
+  canvasHeight = 0;
+  animations = {};
+  holdTimer = null;
+  holdDelay = 500;
+  clockInterval = null;
+  resizeObserver = null;
+  _wheelHandler = null;
+  lastTap = null;
+  holdFired = false;
+  _testTimeOfDay;
+  static get styles() {
+    return cardStyles;
+  }
+  constructor() {
+    super();
+    this.currentTime = "";
+    this.config = {};
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this.updateComplete.then(() => {
+      setTimeout(() => {
+        this.setupCanvas();
+        if (this.canvas && this.ctx) {
+          this.initializeAnimations();
+          this.startAnimation();
+          this.setupResizeObserver();
+        }
+        this.setupForecastScroll();
+        this.startClock();
+      }, 100);
+    });
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+      this.animationFrame = null;
+    }
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
+    }
+    if (this._wheelHandler && this.shadowRoot) {
+      const forecastScroll = this.shadowRoot.querySelector(".forecast-scroll");
+      if (forecastScroll) {
+        forecastScroll.removeEventListener("wheel", this._wheelHandler);
+      }
+      this._wheelHandler = null;
+    }
+    if (this.clockInterval) {
+      clearInterval(this.clockInterval);
+      this.clockInterval = null;
+    }
+  }
+  updated(changedProperties) {
+    super.updated(changedProperties);
+    if (changedProperties.has("hass") || changedProperties.has("config")) {
+      if (this.canvas && this.ctx) {
+        this.resizeCanvas();
+      }
+      this.setupForecastScroll();
+    }
+  }
+  initializeAnimations() {
+    if (!this.ctx)
+      return;
+    this.animations = {
+      sunny: new SunnyAnimation(this.ctx),
+      rainy: new RainyAnimation(this.ctx),
+      snowy: new SnowyAnimation(this.ctx),
+      cloudy: new CloudyAnimation(this.ctx),
+      foggy: new FoggyAnimation(this.ctx),
+      hail: new HailAnimation(this.ctx),
+      thunderstorm: new ThunderstormAnimation(this.ctx)
+    };
+  }
+  setupResizeObserver() {
+    if (!this.shadowRoot)
+      return;
+    const container = this.shadowRoot.querySelector(".canvas-container");
+    if (!container)
+      return;
+    this.resizeObserver = new ResizeObserver(() => {
+      this.resizeCanvas();
+    });
+    this.resizeObserver.observe(container);
+  }
+  setupForecastScroll() {
+    if (!this.shadowRoot)
+      return;
+    const forecastScroll = this.shadowRoot.querySelector(".forecast-scroll");
+    if (!forecastScroll)
+      return;
+    if (this._wheelHandler) {
+      forecastScroll.removeEventListener("wheel", this._wheelHandler);
+    }
+    this._wheelHandler = (e) => {
+      const wheelEvent = e;
+      if (wheelEvent.deltaY !== 0) {
+        e.preventDefault();
+        forecastScroll.scrollLeft += wheelEvent.deltaY;
+      }
+    };
+    forecastScroll.addEventListener("wheel", this._wheelHandler, { passive: false });
+  }
+  resizeCanvas() {
+    if (!this.canvas || !this.shadowRoot)
+      return;
+    const container = this.shadowRoot.querySelector(".canvas-container");
+    if (!container)
+      return;
+    const rect = container.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0)
+      return;
+    const dpr = window.devicePixelRatio || 2;
+    this.canvas.width = rect.width * dpr;
+    this.canvas.height = rect.height * dpr;
+    this.canvas.style.width = "100%";
+    this.canvas.style.height = "100%";
+    this.ctx = this.canvas.getContext("2d");
+    if (this.ctx) {
+      this.ctx.scale(dpr, dpr);
+    }
+    this.canvasWidth = rect.width;
+    this.canvasHeight = rect.height;
+    this.initializeAnimations();
+  }
+  setupCanvas() {
+    if (!this.shadowRoot)
+      return;
+    const container = this.shadowRoot.querySelector(".canvas-container");
+    if (!container)
+      return;
+    const oldCanvas = container.querySelector("canvas");
+    if (oldCanvas) {
+      oldCanvas.remove();
+    }
+    this.canvas = document.createElement("canvas");
+    container.appendChild(this.canvas);
+    this.resizeCanvas();
+  }
+  getState(entityId) {
+    if (!this.hass || !entityId)
+      return null;
+    const entity = this.hass.states[entityId];
+    return entity ? entity.state : null;
+  }
+  getAttributes(entityId) {
+    if (!this.hass || !entityId)
+      return {};
+    const entity = this.hass.states[entityId];
+    return entity ? entity.attributes : {};
+  }
+  getWeatherData() {
+    const entityId = this.config.entity || "weather.home";
+    const state3 = this.getState(entityId);
+    const attrs = this.getAttributes(entityId);
+    const condition = attrs.condition || state3 || "sunny";
+    let templow = null;
+    if (this.config.templowAttribute && attrs[this.config.templowAttribute] != null) {
+      templow = attrs[this.config.templowAttribute];
+    } else {
+      for (const attrName of TEMPLOW_ATTRIBUTES) {
+        if (attrs[attrName] != null) {
+          templow = attrs[attrName];
+          break;
+        }
+      }
+      if (templow == null) {
+        templow = (attrs.forecast && attrs.forecast[0] ? attrs.forecast[0].templow : null) || (attrs.forecast_hourly && attrs.forecast_hourly[0] ? attrs.forecast_hourly[0].native_templow : null);
+      }
+    }
+    return {
+      condition,
+      temperature: attrs.temperature != null ? attrs.temperature : null,
+      apparentTemperature: attrs.apparent_temperature || null,
+      humidity: attrs.humidity != null ? attrs.humidity : null,
+      windSpeed: attrs.wind_speed != null ? attrs.wind_speed : null,
+      windGust: attrs.wind_gust_speed || attrs.wind_gust || null,
+      windBearing: attrs.wind_bearing != null ? attrs.wind_bearing : null,
+      windDirection: attrs.wind_direction || null,
+      pressure: attrs.pressure || null,
+      forecast: attrs.forecast || attrs.forecast_hourly || [],
+      friendlyName: attrs.friendly_name || this.translateKey("weather"),
+      templow
+    };
+  }
+  getTodayForecast() {
+    if (!this.hass || !this.config)
+      return [];
+    const weather = this.getWeatherData();
+    if (!weather.forecast || weather.forecast.length === 0)
+      return [];
+    const now = new Date;
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const todayForecast = weather.forecast.filter((item) => {
+      if (!item.datetime)
+        return false;
+      const itemDate = new Date(item.datetime);
+      const itemDay = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate());
+      return itemDay.getTime() === today.getTime() || itemDay.getTime() === tomorrow.getTime() && itemDate.getHours() <= now.getHours();
+    });
+    return todayForecast.sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime()).slice(0, 8);
+  }
+  startAnimation() {
+    const animate = () => {
+      this.draw();
+      this.animationFrame = requestAnimationFrame(animate);
+    };
+    animate();
+  }
+  draw() {
+    if (!this.ctx || !this.canvas)
+      return;
+    if (!this.canvasWidth || !this.canvasHeight) {
+      this.resizeCanvas();
+      if (!this.canvasWidth || !this.canvasHeight)
+        return;
+    }
+    const width = this.canvasWidth;
+    const height = this.canvasHeight;
+    this.ctx.clearRect(0, 0, width, height);
+    const weather = this.getWeatherData();
+    const weatherState = this.hass?.states[this.config.entity];
+    const sunData = getSunriseSunsetData(weatherState || {}, this.config.sunriseEntity, this.config.sunsetEntity, this.hass);
+    const timeOfDay = this._testTimeOfDay || getTimeOfDayWithSunData(sunData);
+    const condition = weather.condition.toLowerCase();
+    switch (condition) {
+      case "sunny":
+      case "clear":
+        this.animations.sunny?.draw(Date.now(), width, height, timeOfDay);
+        break;
+      case "clear-night":
+        this.animations.sunny?.draw(Date.now(), width, height, { type: "night", progress: 0 });
+        break;
+      case "rainy":
+      case "rain":
+        this.animations.rainy?.draw(Date.now(), width, height, timeOfDay, false);
+        break;
+      case "pouring":
+        this.animations.rainy?.draw(Date.now(), width, height, timeOfDay, true);
+        break;
+      case "snowy":
+      case "snow":
+        this.animations.snowy?.draw(Date.now(), width, height, timeOfDay);
+        break;
+      case "snowy-rainy":
+        this.animations.rainy?.draw(Date.now(), width, height, timeOfDay, false);
+        this.animations.snowy?.draw(Date.now(), width, height, timeOfDay);
+        break;
+      case "hail":
+        this.animations.hail?.draw(Date.now(), width, height, timeOfDay);
+        break;
+      case "foggy":
+      case "fog":
+        this.animations.foggy?.draw(Date.now(), width, height, timeOfDay);
+        break;
+      case "lightning":
+        this.animations.thunderstorm?.draw(Date.now(), width, height, timeOfDay, false);
+        break;
+      case "lightning-rainy":
+        this.animations.thunderstorm?.draw(Date.now(), width, height, timeOfDay, true);
+        break;
+      case "cloudy":
+      case "partlycloudy":
+      default:
+        this.animations.cloudy?.draw(Date.now(), width, height, timeOfDay);
+        break;
+    }
+  }
+  renderTodayForecast() {
+    const forecast = this.getTodayForecast();
+    if (forecast.length === 0) {
+      return html`<div style="opacity: 0.6; font-size: 14px;">${this.translateKey("forecast_unavailable")}</div>`;
+    }
+    return html`
       <div class="forecast-scroll">
-        ${t.map(t=>{return L`
+        ${forecast.map((item) => html`
           <div class="forecast-item">
-            <div class="forecast-time">${i=t.datetime,i?`${new Date(i).getHours().toString().padStart(2,"0")}:00`:""}</div>
-            <div class="forecast-icon">${e=t.condition,e&&Dt[e.toLowerCase()]||""}</div>
-            <div class="forecast-temp">${Math.round(t.temperature||t.temp||t.native_temperature||0)}°</div>
+            <div class="forecast-time">${formatForecastTime(item.datetime)}</div>
+            <div class="forecast-icon">${getWeatherConditionIcon(item.condition || "sunny")}</div>
+            <div class="forecast-temp">${Math.round(item.temperature || item.temp || item.native_temperature || 0)}°</div>
           </div>
-        `;var e,i})}
+        `)}
       </div>
-    `}getLanguage(){if(this.config.language&&"auto"!==this.config.language)return this.config.language;if(this.hass&&this.hass.language){return"ru"===this.hass.language.split("-")[0]?"ru":"en"}return"en"}getConditionName(t){const e=this.getLanguage();return(ht[e]||ht.en)[t.toLowerCase()]||t}translate(t){const e=this.getLanguage();return(dt[e]||dt.en)[t]||t}convertWindSpeed(t){return null==t?null:"kmh"===this.config.windSpeedUnit?Math.round(3.6*t*10)/10:t}getWindSpeedUnit(){return"kmh"===this.config.windSpeedUnit?this.translate("wind_unit_kmh"):this.translate("wind_unit_ms")}formatCurrentTime(){const t=new Date;return`${String(t.getHours()).padStart(2,"0")}:${String(t.getMinutes()).padStart(2,"0")}`}startClock(){this.config.showClock&&(this.currentTime=this.formatCurrentTime(),this.clockInterval=setInterval(()=>{this.currentTime=this.formatCurrentTime()},1e3))}render(){if(!this.hass)return L`<div>No Home Assistant connection</div>`;const t=this.getWeatherData(),e=xt(this.hass.states[this.config.entity],this.config.sunriseEntity,this.config.sunsetEntity,this.hass),i=this._testTimeOfDay||kt(e),s=`weather-card ${i.type}`,n=this.config.height?`${this.config.height}px`:"200px",a=function(t){if("sunrise"===t.type){const e=t.progress,i={r:26,g:26,b:46},s={r:255,g:160,b:122},n={r:255,g:215,b:0};return{start:{r:Math.round(i.r+(s.r-i.r)*e),g:Math.round(i.g+(s.g-i.g)*e),b:Math.round(i.b+(s.b-i.b)*e)},end:{r:Math.round(i.r+(n.r-i.r)*e),g:Math.round(i.g+(n.g-i.g)*e),b:Math.round(i.b+(n.b-i.b)*e)}}}if("sunset"===t.type){const e=t.progress,i={r:255,g:107,b:107},s={r:255,g:160,b:122},n={r:26,g:26,b:46};return{start:{r:Math.round(i.r+(n.r-i.r)*e),g:Math.round(i.g+(n.g-i.g)*e),b:Math.round(i.b+(n.b-i.b)*e)},end:{r:Math.round(s.r+(n.r-s.r)*e),g:Math.round(s.g+(n.g-s.g)*e),b:Math.round(s.b+(n.b-s.b)*e)}}}return null}(i),r=a?`background: linear-gradient(135deg, rgb(${a.start.r}, ${a.start.g}, ${a.start.b}), rgb(${a.end.r}, ${a.end.g}, ${a.end.b}));`:"",o=`--overlay-opacity: ${void 0!==this.config.overlayOpacity?this.config.overlayOpacity:ft};`;return L`
+    `;
+  }
+  getLanguage() {
+    if (this.config.language && this.config.language !== "auto") {
+      return this.config.language;
+    }
+    if (this.hass && this.hass.language) {
+      const hassLang = this.hass.language.split("-")[0];
+      if (hassLang === "ru")
+        return "ru";
+      return "en";
+    }
+    return "en";
+  }
+  getConditionName(condition) {
+    const lang = this.getLanguage();
+    const names = CONDITION_NAMES[lang] || CONDITION_NAMES.en;
+    return names[condition.toLowerCase()] || condition;
+  }
+  translateKey(key) {
+    const lang = this.getLanguage();
+    const translations = TRANSLATIONS[lang] || TRANSLATIONS.en;
+    return translations[key] || key;
+  }
+  convertWindSpeed(speed) {
+    if (speed == null)
+      return null;
+    if (this.config.windSpeedUnit === "kmh") {
+      return Math.round(speed * 3.6 * 10) / 10;
+    }
+    return speed;
+  }
+  getWindSpeedUnit() {
+    return this.config.windSpeedUnit === "kmh" ? this.translateKey("wind_unit_kmh") : this.translateKey("wind_unit_ms");
+  }
+  formatCurrentTime() {
+    const now = new Date;
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes}`;
+  }
+  startClock() {
+    if (!this.config.showClock)
+      return;
+    this.currentTime = this.formatCurrentTime();
+    this.clockInterval = window.setInterval(() => {
+      this.currentTime = this.formatCurrentTime();
+    }, 1000);
+  }
+  render() {
+    if (!this.hass) {
+      return html`<div>No Home Assistant connection</div>`;
+    }
+    const weather = this.getWeatherData();
+    const weatherState = this.hass.states[this.config.entity];
+    const sunData = getSunriseSunsetData(weatherState, this.config.sunriseEntity, this.config.sunsetEntity, this.hass);
+    const timeOfDay = this._testTimeOfDay || getTimeOfDayWithSunData(sunData);
+    const cardClasses = `weather-card ${timeOfDay.type}`;
+    const minHeight = this.config.height ? `${this.config.height}px` : "200px";
+    const bgGradient = getBackgroundGradient(timeOfDay);
+    const bgStyle = bgGradient ? `background: linear-gradient(135deg, rgb(${bgGradient.start.r}, ${bgGradient.start.g}, ${bgGradient.start.b}), rgb(${bgGradient.end.r}, ${bgGradient.end.g}, ${bgGradient.end.b}));` : "";
+    const overlayOpacity = this.config.overlayOpacity !== undefined ? this.config.overlayOpacity : DEFAULT_CONFIG.overlayOpacity;
+    const overlayStyle = `--overlay-opacity: ${overlayOpacity};`;
+    return html`
       <ha-card
         @click=${this.handleTap}
         @pointerdown=${this.handlePointerDown}
         @pointerup=${this.handlePointerUp}
         @pointercancel=${this.handlePointerUp}
       >
-        <div class="${s}" style="min-height: ${n}; ${r}; ${o} cursor: pointer;">
+        <div class="${cardClasses}" style="min-height: ${minHeight}; ${bgStyle}; ${overlayStyle} cursor: pointer;">
           <div class="canvas-container"></div>
           <div class="content">
-            ${void 0!==this.config.name?L`
+            ${this.config.name !== undefined ? html`
               <div class="header">
-                <div class="location">${this.config.name||t.friendlyName}</div>
+                <div class="location">${this.config.name || weather.friendlyName}</div>
               </div>
-            `:""}
+            ` : ""}
             <div>
-              <div class="condition">${this.getConditionName(t.condition)}</div>
-              <div class="temperature">${null!=t.temperature?Math.round(t.temperature)+"°":this.translate("no_data")}</div>
-              ${this.config.showMinTemp&&t.templow?L`
+              <div class="condition">${this.getConditionName(weather.condition)}</div>
+              <div class="temperature">${weather.temperature != null ? Math.round(weather.temperature) + "°" : this.translateKey("no_data")}</div>
+              ${this.config.showMinTemp && weather.templow ? html`
                 <div class="temp-range">
-                  <span class="temp-min">↓ ${Math.round(t.templow)}°</span>
+                  <span class="temp-min">↓ ${Math.round(weather.templow)}°</span>
                 </div>
-              `:""}
-              ${this.config.showFeelsLike&&t.apparentTemperature?L`
-                <div class="feels-like">${this.translate("feels_like")} ${Math.round(t.apparentTemperature)}°</div>
-              `:""}
+              ` : ""}
+              ${this.config.showFeelsLike && weather.apparentTemperature ? html`
+                <div class="feels-like">${this.translateKey("feels_like")} ${Math.round(weather.apparentTemperature)}°</div>
+              ` : ""}
             </div>
             <div class="details">
               <div class="info-grid">
-                ${this.config.showHumidity&&null!=t.humidity?L`
+                ${this.config.showHumidity && weather.humidity != null ? html`
                   <div class="info-item">
-                    <span class="info-icon">${zt("humidity")}</span>
-                    <span>${t.humidity} %</span>
+                    <span class="info-icon">${getSVGIcon("humidity")}</span>
+                    <span>${weather.humidity} %</span>
                   </div>
-                `:""}
-                ${this.config.showSunriseSunset&&e.hasSunData?L`
+                ` : ""}
+                ${this.config.showSunriseSunset && sunData.hasSunData ? html`
                   <div class="info-item">
-                    <span class="info-icon">${zt("sunrise")}</span>
-                    <span>${bt(e.sunrise)}</span>
+                    <span class="info-icon">${getSVGIcon("sunrise")}</span>
+                    <span>${formatTime(sunData.sunrise)}</span>
                   </div>
-                `:""}
-                ${this.config.showWind&&null!=t.windSpeed?L`
-                  ${this.config.showWindDirection&&null!=t.windBearing?L`
+                ` : ""}
+                ${this.config.showWind && weather.windSpeed != null ? html`
+                  ${this.config.showWindDirection && weather.windBearing != null ? html`
                     <div class="info-item">
-                      <span class="info-icon">${zt("windDirection",t.windBearing)}</span>
-                      <span>${this.convertWindSpeed(t.windSpeed)} ${this.getWindSpeedUnit()}${this.config.showWindGust&&t.windGust?` / ${this.convertWindSpeed(t.windGust)} ${this.getWindSpeedUnit()}`:""}</span>
+                      <span class="info-icon">${getSVGIcon("windDirection", weather.windBearing)}</span>
+                      <span>${this.convertWindSpeed(weather.windSpeed)} ${this.getWindSpeedUnit()}${this.config.showWindGust && weather.windGust ? ` / ${this.convertWindSpeed(weather.windGust)} ${this.getWindSpeedUnit()}` : ""}</span>
                     </div>
-                  `:L`
+                  ` : html`
                     <div class="info-item">
-                      <span class="info-icon">${zt("wind")}</span>
-                      <span>${this.convertWindSpeed(t.windSpeed)} ${this.getWindSpeedUnit()}${this.config.showWindGust&&t.windGust?` / ${this.convertWindSpeed(t.windGust)} ${this.getWindSpeedUnit()}`:""}</span>
+                      <span class="info-icon">${getSVGIcon("wind")}</span>
+                      <span>${this.convertWindSpeed(weather.windSpeed)} ${this.getWindSpeedUnit()}${this.config.showWindGust && weather.windGust ? ` / ${this.convertWindSpeed(weather.windGust)} ${this.getWindSpeedUnit()}` : ""}</span>
                     </div>
                   `}
-                `:""}
-                ${this.config.showSunriseSunset&&e.hasSunData?L`
+                ` : ""}
+                ${this.config.showSunriseSunset && sunData.hasSunData ? html`
                   <div class="info-item">
-                    <span class="info-icon">${zt("sunset")}</span>
-                    <span>${bt(e.sunset)}</span>
+                    <span class="info-icon">${getSVGIcon("sunset")}</span>
+                    <span>${formatTime(sunData.sunset)}</span>
                   </div>
-                `:""}
+                ` : ""}
               </div>
             </div>
-            ${this.config.showForecast?L`
+            ${this.config.showForecast ? html`
               <div class="forecast-container">
-                <div class="forecast-title">${this.translate("forecast_title")}</div>
+                <div class="forecast-title">${this.translateKey("forecast_title")}</div>
                 ${this.renderTodayForecast()}
               </div>
-            `:""}
+            ` : ""}
           </div>
-          ${this.config.showClock?L`
+          ${this.config.showClock ? html`
             <div class="clock">${this.currentTime}</div>
-          `:""}
+          ` : ""}
         </div>
       </ha-card>
-    `}setConfig(t){if(!t.entity)throw new Error("Please define a weather entity");this.config={entity:t.entity,icons_path:t.icons_path,name:t.name,height:t.height||vt,showFeelsLike:!1!==t.show_feels_like,showWind:!1!==t.show_wind,showWindGust:!1!==t.show_wind_gust,showWindDirection:!1!==t.show_wind_direction,showHumidity:!1!==t.show_humidity,showMinTemp:!1!==t.show_min_temp,showForecast:!0===t.show_forecast,showSunriseSunset:!1!==t.show_sunrise_sunset,showClock:!0===t.show_clock,overlayOpacity:void 0!==t.overlay_opacity?t.overlay_opacity:ft,language:t.language||wt,windSpeedUnit:t.wind_speed_unit||yt,sunriseEntity:t.sunrise_entity||null,sunsetEntity:t.sunset_entity||null,templowAttribute:t.templow_attribute||null,tapAction:t.tap_action||{action:"more-info"},holdAction:t.hold_action||{action:"none"},doubleTapAction:t.double_tap_action||{action:"none"}}}handleAction(t){if(!t||!this.hass)return;switch(t.action||"more-info"){case"more-info":this.fireEvent("hass-more-info",{entityId:t.entity||this.config.entity});break;case"toggle":this.hass.callService("homeassistant","toggle",{entity_id:t.entity||this.config.entity});break;case"call-service":if(t.service){const[e,i]=t.service.split(".");this.hass.callService(e,i,t.service_data||{})}break;case"navigate":t.navigation_path&&(window.history.pushState(null,"",t.navigation_path),this.fireEvent("location-changed",{replace:!1}));break;case"url":t.url_path&&window.open(t.url_path)}}fireEvent(t,e={}){const i=new CustomEvent(t,{detail:e,bubbles:!0,composed:!0});this.dispatchEvent(i)}handleTap(t){if(!t.target.closest(".forecast-item")&&!t.target.closest(".info-item")){if(this.lastTap&&Date.now()-this.lastTap<300)return this.handleDoubleTap(t),void(this.lastTap=null);this.lastTap=Date.now(),setTimeout(()=>{this.lastTap&&(this.handleAction(this.config.tapAction),this.lastTap=null)},300)}}handlePointerDown(t){this.holdTimer=setTimeout(()=>{this.handleHold(t),this.holdFired=!0},this.holdDelay)}handlePointerUp(t){clearTimeout(this.holdTimer),this.holdFired&&(t.preventDefault(),t.stopPropagation(),this.holdFired=!1)}handleHold(){this.handleAction(this.config.holdAction)}handleDoubleTap(){this.handleAction(this.config.doubleTapAction)}getCardSize(){return 1}}try{customElements.define("dynamic-weather-card",Ft),console.log("%cDynamic Weather Card %c0.3.3","color: #007AFF; font-weight: bold; font-size: 14px;","color: #666; font-size: 12px;","\nДинамическая карточка погоды"),window.customCards=window.customCards||[],window.customCards.push({type:"dynamic-weather-card",name:"Dynamic Weather Card",description:"Динамическая карточка погоды",preview:!0,documentationURL:"https://github.com/teuchezh/dynamic-weather-card"})}catch(t){console.error("❌ Ошибка при регистрации Dynamic Weather Card:",t)}
+    `;
+  }
+  setConfig(config) {
+    if (!config.entity) {
+      throw new Error("Please define a weather entity");
+    }
+    this.config = {
+      type: "custom:animated-weather-card",
+      entity: config.entity,
+      icons_path: config.icons_path,
+      name: config.name,
+      height: config.height || DEFAULT_CONFIG.height,
+      showFeelsLike: config.show_feels_like !== false,
+      showWind: config.show_wind !== false,
+      showWindGust: config.show_wind_gust !== false,
+      showWindDirection: config.show_wind_direction !== false,
+      showHumidity: config.show_humidity !== false,
+      showMinTemp: config.show_min_temp !== false,
+      showForecast: config.show_forecast === true,
+      showSunriseSunset: config.show_sunrise_sunset !== false,
+      showClock: config.show_clock === true,
+      overlayOpacity: config.overlay_opacity !== undefined ? config.overlay_opacity : DEFAULT_CONFIG.overlayOpacity,
+      language: config.language || DEFAULT_CONFIG.language,
+      windSpeedUnit: config.wind_speed_unit || DEFAULT_CONFIG.windSpeedUnit,
+      sunriseEntity: config.sunrise_entity || null,
+      sunsetEntity: config.sunset_entity || null,
+      templowAttribute: config.templow_attribute || null,
+      tapAction: config.tap_action || { action: "more-info" },
+      holdAction: config.hold_action || { action: "none" },
+      doubleTapAction: config.double_tap_action || { action: "none" }
+    };
+  }
+  handleAction(actionConfig) {
+    if (!actionConfig || !this.hass)
+      return;
+    const action = actionConfig.action || "more-info";
+    switch (action) {
+      case "more-info":
+        this.fireEvent("hass-more-info", { entityId: actionConfig.entity || this.config.entity });
+        break;
+      case "toggle":
+        this.hass.callService("homeassistant", "toggle", {
+          entity_id: actionConfig.entity || this.config.entity
+        });
+        break;
+      case "call-service":
+        if (actionConfig.service) {
+          const [domain, service] = actionConfig.service.split(".");
+          this.hass.callService(domain, service, actionConfig.service_data || {});
+        }
+        break;
+      case "navigate":
+        if (actionConfig.navigation_path) {
+          window.history.pushState(null, "", actionConfig.navigation_path);
+          this.fireEvent("location-changed", { replace: false });
+        }
+        break;
+      case "url":
+        if (actionConfig.url_path) {
+          window.open(actionConfig.url_path);
+        }
+        break;
+      case "none":
+      default:
+        break;
+    }
+  }
+  fireEvent(type, detail = {}) {
+    const event = new CustomEvent(type, {
+      detail,
+      bubbles: true,
+      composed: true
+    });
+    this.dispatchEvent(event);
+  }
+  handleTap(e) {
+    if (e.target.closest(".forecast-item") || e.target.closest(".info-item")) {
+      return;
+    }
+    if (this.lastTap && Date.now() - this.lastTap < 300) {
+      this.handleDoubleTap(e);
+      this.lastTap = null;
+      return;
+    }
+    this.lastTap = Date.now();
+    setTimeout(() => {
+      if (this.lastTap) {
+        this.handleAction(this.config.tapAction);
+        this.lastTap = null;
+      }
+    }, 300);
+  }
+  handlePointerDown(e) {
+    this.holdTimer = window.setTimeout(() => {
+      this.handleHold(e);
+      this.holdFired = true;
+    }, this.holdDelay);
+  }
+  handlePointerUp(e) {
+    if (this.holdTimer) {
+      clearTimeout(this.holdTimer);
+    }
+    if (this.holdFired) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.holdFired = false;
+    }
+  }
+  handleHold(_e) {
+    this.handleAction(this.config.holdAction);
+  }
+  handleDoubleTap(_e) {
+    this.handleAction(this.config.doubleTapAction);
+  }
+  getCardSize() {
+    return 1;
+  }
+}
+__legacyDecorateClassTS([
+  property({ type: Object })
+], AnimatedWeatherCard.prototype, "hass", undefined);
+__legacyDecorateClassTS([
+  property({ type: Object })
+], AnimatedWeatherCard.prototype, "config", undefined);
+__legacyDecorateClassTS([
+  state()
+], AnimatedWeatherCard.prototype, "currentTime", undefined);
+
+// src/index.ts
+try {
+  customElements.define("dynamic-weather-card", AnimatedWeatherCard);
+  console.log(`%cDynamic Weather Card %c${VERSION}`, "color: #007AFF; font-weight: bold; font-size: 14px;", "color: #666; font-size: 12px;", `
+Динамическая карточка погоды`);
+  window.customCards = window.customCards || [];
+  const cardRegistration = {
+    type: "dynamic-weather-card",
+    name: "Dynamic Weather Card",
+    description: "Динамическая карточка погоды",
+    preview: true,
+    documentationURL: "https://github.com/teuchezh/dynamic-weather-card"
+  };
+  window.customCards.push(cardRegistration);
+} catch (error) {
+  console.error("❌ Ошибка при регистрации Dynamic Weather Card:", error);
+}

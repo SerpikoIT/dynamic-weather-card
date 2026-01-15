@@ -1,5 +1,6 @@
-import { AnimatedWeatherCard } from './components/card.js';
-import { VERSION } from './constants.js';
+import { AnimatedWeatherCard } from './components/card';
+import { VERSION } from './constants';
+import type { CustomCardRegistration } from './types';
 
 // Register custom elements
 try {
@@ -15,13 +16,14 @@ try {
 
   // Register with Home Assistant
   window.customCards = window.customCards || [];
-  window.customCards.push({
+  const cardRegistration: CustomCardRegistration = {
     type: 'dynamic-weather-card',
     name: 'Dynamic Weather Card',
     description: 'Динамическая карточка погоды',
     preview: true,
     documentationURL: 'https://github.com/teuchezh/dynamic-weather-card'
-  });
+  };
+  window.customCards.push(cardRegistration);
 
 } catch (error) {
   console.error('❌ Ошибка при регистрации Dynamic Weather Card:', error);

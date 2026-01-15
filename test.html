@@ -520,6 +520,17 @@
                     <label class="control-label">Wind Speed (km/h)</label>
                     <input type="number" id="wind-input" value="15" min="0" max="150">
                 </div>
+
+                <div class="control-group">
+                    <label class="control-label">Wind Direction (°)</label>
+                    <input type="number" id="wind-bearing-input" value="200" min="0" max="359">
+                    <div style="margin-top: 8px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+                        <button class="btn btn-preset" onclick="setWindBearing(0)" style="font-size: 11px; padding: 8px;">↑ N</button>
+                        <button class="btn btn-preset" onclick="setWindBearing(90)" style="font-size: 11px; padding: 8px;">→ E</button>
+                        <button class="btn btn-preset" onclick="setWindBearing(180)" style="font-size: 11px; padding: 8px;">↓ S</button>
+                        <button class="btn btn-preset" onclick="setWindBearing(270)" style="font-size: 11px; padding: 8px;">← W</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Time Settings -->
@@ -724,6 +735,7 @@
                 temperature: 'Temperature (°C)',
                 humidity: 'Humidity (%)',
                 windSpeed: 'Wind Speed (km/h)',
+                windBearing: 'Wind Direction (°)',
                 timeOfDay: '🕐 Time of Day',
                 timeMode: 'Time Mode',
                 autoTime: '🕐 Auto (Current Time)',
@@ -787,6 +799,7 @@
                 temperature: 'Температура (°C)',
                 humidity: 'Влажность (%)',
                 windSpeed: 'Скорость ветра (км/ч)',
+                windBearing: 'Направление ветра (°)',
                 timeOfDay: '🕐 Время суток',
                 timeMode: 'Режим времени',
                 autoTime: '🕐 Авто (текущее время)',
@@ -873,18 +886,19 @@
             document.querySelectorAll('.control-label')[1].textContent = t('temperature');
             document.querySelectorAll('.control-label')[2].textContent = t('humidity');
             document.querySelectorAll('.control-label')[3].textContent = t('windSpeed');
+            document.querySelectorAll('.control-label')[4].textContent = t('windBearing');
 
             // Time section
             document.querySelectorAll('.section-header')[2].textContent = t('timeOfDay');
-            document.querySelectorAll('.control-label')[4].textContent = t('timeMode');
-            document.querySelectorAll('.control-label')[5].textContent = t('currentTime');
+            document.querySelectorAll('.control-label')[5].textContent = t('timeMode');
+            document.querySelectorAll('.control-label')[6].textContent = t('currentTime');
 
             // Display options section
             document.querySelectorAll('.section-header')[3].textContent = t('displayOptions');
-            document.querySelectorAll('.control-label')[6].textContent = t('cardName');
-            document.querySelectorAll('.control-label')[7].textContent = t('height');
-            document.querySelectorAll('.control-label')[8].textContent = t('overlayOpacity');
-            document.querySelectorAll('.control-label')[9].textContent = t('windSpeedUnit');
+            document.querySelectorAll('.control-label')[7].textContent = t('cardName');
+            document.querySelectorAll('.control-label')[8].textContent = t('height');
+            document.querySelectorAll('.control-label')[9].textContent = t('overlayOpacity');
+            document.querySelectorAll('.control-label')[10].textContent = t('windSpeedUnit');
 
             // Wind speed unit options
             const windSpeedUnitSelect = document.getElementById('wind-speed-unit-select');
@@ -957,21 +971,21 @@
         ];
 
         const DEMO_SEQUENCE = [
-            { condition: 'sunny', temp: 25, time: 'day', humidity: 45, wind: 10 },
-            { condition: 'partlycloudy', temp: 22, time: 'day', humidity: 55, wind: 15 },
-            { condition: 'rainy', temp: 15, time: 'day', humidity: 80, wind: 25 },
-            { condition: 'lightning-rainy', temp: 14, time: 'sunset', humidity: 85, wind: 30 },
-            { condition: 'snowy-rainy', temp: 2, time: 'day', humidity: 75, wind: 20 },
-            { condition: 'snowy', temp: -5, time: 'day', humidity: 70, wind: 15 },
-            { condition: 'foggy', temp: 8, time: 'sunrise', humidity: 90, wind: 5 },
-            { condition: 'clear-night', temp: 12, time: 'night', humidity: 60, wind: 8 }
+            { condition: 'sunny', temp: 25, time: 'day', humidity: 45, wind: 10, windBearing: 180 },
+            { condition: 'partlycloudy', temp: 22, time: 'day', humidity: 55, wind: 15, windBearing: 225 },
+            { condition: 'rainy', temp: 15, time: 'day', humidity: 80, wind: 25, windBearing: 270 },
+            { condition: 'lightning-rainy', temp: 14, time: 'sunset', humidity: 85, wind: 30, windBearing: 315 },
+            { condition: 'snowy-rainy', temp: 2, time: 'day', humidity: 75, wind: 20, windBearing: 0 },
+            { condition: 'snowy', temp: -5, time: 'day', humidity: 70, wind: 15, windBearing: 45 },
+            { condition: 'foggy', temp: 8, time: 'sunrise', humidity: 90, wind: 5, windBearing: 90 },
+            { condition: 'clear-night', temp: 12, time: 'night', humidity: 60, wind: 8, windBearing: 135 }
         ];
 
         const PRESETS = {
-            sunny: { condition: 'sunny', temp: 25, time: 'day', humidity: 45, wind: 10 },
-            rainy: { condition: 'rainy', temp: 15, time: 'day', humidity: 80, wind: 25 },
-            snowy: { condition: 'snowy', temp: -5, time: 'day', humidity: 70, wind: 15 },
-            night: { condition: 'clear-night', temp: 12, time: 'night', humidity: 60, wind: 8 }
+            sunny: { condition: 'sunny', temp: 25, time: 'day', humidity: 45, wind: 10, windBearing: 180 },
+            rainy: { condition: 'rainy', temp: 15, time: 'day', humidity: 80, wind: 25, windBearing: 270 },
+            snowy: { condition: 'snowy', temp: -5, time: 'day', humidity: 70, wind: 15, windBearing: 0 },
+            night: { condition: 'clear-night', temp: 12, time: 'night', humidity: 60, wind: 8, windBearing: 135 }
         };
 
         function formatTime(minutes) {
@@ -1005,7 +1019,7 @@
             return forecast;
         }
 
-        function createMockHass(condition, temperature, humidity, windSpeed) {
+        function createMockHass(condition, temperature, humidity, windSpeed, windBearing) {
             const now = new Date();
             const sunrise = new Date(now);
             sunrise.setHours(6, 30, 0, 0);
@@ -1021,7 +1035,7 @@
                             temperature: temperature,
                             humidity: humidity,
                             wind_speed: windSpeed,
-                            wind_bearing: 200,
+                            wind_bearing: windBearing,
                             wind_gust_speed: windSpeed * 1.5,
                             apparent_temperature: temperature - 3,
                             templow: temperature - 5,
@@ -1044,6 +1058,7 @@
             document.getElementById('temperature-input').value = preset.temp;
             document.getElementById('humidity-input').value = preset.humidity;
             document.getElementById('wind-input').value = preset.wind;
+            document.getElementById('wind-bearing-input').value = preset.windBearing;
             document.getElementById('time-select').value = preset.time;
 
             updateCard();
@@ -1088,6 +1103,7 @@
             document.getElementById('temperature-input').value = demo.temp;
             document.getElementById('humidity-input').value = demo.humidity;
             document.getElementById('wind-input').value = demo.wind;
+            document.getElementById('wind-bearing-input').value = demo.windBearing;
             document.getElementById('time-select').value = demo.time;
 
             updateCard();
@@ -1101,6 +1117,11 @@
             if (document.getElementById('time-select').value === 'manual') {
                 updateCard();
             }
+        }
+
+        function setWindBearing(degrees) {
+            document.getElementById('wind-bearing-input').value = degrees;
+            updateCard();
         }
 
         function getTimeOfDayFromMinutes(totalMinutes) {
@@ -1160,7 +1181,8 @@
                 card._testTimeOfDay = null;
             }
 
-            mockHass = createMockHass(config.condition, config.temperature, config.humidity, config.windSpeed);
+            const windBearing = parseInt(document.getElementById('wind-bearing-input').value);
+            mockHass = createMockHass(config.condition, config.temperature, config.humidity, config.windSpeed, windBearing);
 
             const cardConfig = {
                 entity: 'weather.test',

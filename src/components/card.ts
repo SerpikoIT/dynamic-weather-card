@@ -16,7 +16,7 @@ import { FoggyAnimation } from '../animations/foggy.js';
 import { HailAnimation } from '../animations/hail.js';
 import { ThunderstormAnimation } from '../animations/thunderstorm.js';
 import { cardStyles } from './styles.js';
-import { getSVGIcon, getWeatherConditionIcon } from '../icons/svg-icons.js';
+import { getSVGIcon, getWeatherConditionIcon, windDirection } from '../icons/svg-icons.js';
 import type {
   HomeAssistant,
   WeatherCardConfig,
@@ -527,7 +527,7 @@ export class AnimatedWeatherCard extends LitElement {
                 ${this.config.showWind && weather.windSpeed != null ? html`
                   ${this.config.showWindDirection && weather.windBearing != null ? html`
                     <div class="info-item">
-                      <span class="info-icon">${getSVGIcon('windDirection', weather.windBearing)}</span>
+                      <span class="info-icon">${windDirection(weather.windBearing)}</span>
                       <span>${this.convertWindSpeed(weather.windSpeed)} ${this.getWindSpeedUnit()}${this.config.showWindGust && weather.windGust ? ` / ${this.convertWindSpeed(weather.windGust)} ${this.getWindSpeedUnit()}` : ''}</span>
                     </div>
                   ` : html`

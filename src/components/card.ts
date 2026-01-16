@@ -349,7 +349,7 @@ export class AnimatedWeatherCard extends LitElement {
       const itemDate = new Date(item.datetime);
       const itemDay = new Date(itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDate());
       return itemDay.getTime() === today.getTime() ||
-             (itemDay.getTime() === tomorrow.getTime() && itemDate.getHours() <= now.getHours());
+        (itemDay.getTime() === tomorrow.getTime() && itemDate.getHours() <= now.getHours());
     });
 
     return todayForecast

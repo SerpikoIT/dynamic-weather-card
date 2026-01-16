@@ -11,7 +11,7 @@ export default {
   output: {
     file: 'dynamic-weather-card.js',
     format: 'es',
-    sourcemap: false
+    sourcemap: false,
   },
   plugins: [
     replace({

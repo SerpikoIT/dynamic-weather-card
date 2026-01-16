@@ -13,8 +13,12 @@ export default [
       sourceType: 'module',
       globals: {
         window: 'readonly',
+        navigator: 'readonly',
         document: 'readonly',
         console: 'readonly',
+        i18next: 'readonly',
+        URL: 'readonly',
+        Event: 'readonly',
         customElements: 'readonly',
         HTMLElement: 'readonly',
         CustomEvent: 'readonly',
@@ -69,5 +73,5 @@ export default [
       'dist/**',
       '*.config.js'
     ]
-  }
+  },
 ];

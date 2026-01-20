@@ -170,6 +170,7 @@ The card automatically changes background and animations based on time of day:
 - French
 - Dutch
 - Spanish
+- Italian
 
 ## Development
 

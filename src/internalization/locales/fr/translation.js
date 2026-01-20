@@ -87,8 +87,9 @@ export default {
       'russian': '🇷🇺 Русский',
       'french': '🇫🇷 Français',
       'german': '🇩🇪 Deutsch',
-      'dutch': '🇳🇱 Nederlands'
-      'italy': '🇮🇹 Italia' 
+      'dutch': '🇳🇱 Nederlands',
+      'italy': '🇮🇹 Italia',
+      'spanish': '🇪🇸 Español'
     }
   }
 };

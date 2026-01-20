@@ -493,8 +493,8 @@
                         <option value="fr" data-i18n="language.french">🇫🇷 Français</option>
                         <option value="de" data-i18n="language.german">🇩🇪 Deutsch</option>
                         <option value="nl" data-i18n="language.dutch">🇳🇱 Nederlands</option>
-
-option value="it" data-i18n="language.italian">🇮🇹 Italiano</option>
+                        <option value="it" data-i18n="language.italian">🇮🇹 Italiano</option>
+                        <option value="es" data-i18n="language.spanish">🇪🇸 Español</option>
                     </select>
                 </div>
             </div>
@@ -674,7 +674,7 @@ option value="it" data-i18n="language.italian">🇮🇹 Italiano</option>
     <script type="module">
         // Detect browser language early
         let currentLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-        currentLang = currentLang.startsWith('ru') ? 'ru' : 'en';
+        currentLang = currentLang.startsWith('ru') ? 'ru' : currentLang.startsWith('es') ? 'es' : 'en';
 
         // Mini translations for error messages
         const errorMessages = {

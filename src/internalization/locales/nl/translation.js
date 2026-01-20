@@ -86,8 +86,9 @@ export default {
       'english': '🇺🇸 English',
       'russian': '🇷🇺 Русский',
       'german': '🇩🇪 Deutsch',
-      'dutch': '🇳🇱 Nederlands'
-      'italy': '🇮🇹 Italia' 
+      'dutch': '🇳🇱 Nederlands',
+      'italy': '🇮🇹 Italia',
+      'spanish': '🇪🇸 Español'
     }
   }
 };

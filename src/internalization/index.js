@@ -4,6 +4,7 @@ import nl from './locales/nl/translation.js';
 import fr from './locales/fr/translation.js';
 import en from './locales/en/translation.js';
 import it from './locales/it/translation.js';
+import es from './locales/es/translation.js';
 
 const translations = {
   en,
@@ -11,7 +12,8 @@ const translations = {
   de,
   nl,
   fr,
-  it
+  it,
+  es
 };
 
 class I18n {

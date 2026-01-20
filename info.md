@@ -45,6 +45,8 @@ show_sunrise_sunset: true
 - German
 - French
 - Dutch
+- Spain
+- Italian
 
 ## Documentation
 
